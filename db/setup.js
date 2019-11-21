@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
-var config = require('../config.js');
+
+if (process.env.heroku === "yes") {
+  var config = process.env;
+} else {
+  var config = require('../config.js');
+}
 
 // MongoDB boilerplate
 mongoose.connect(config.database, { useNewUrlParser: true });
