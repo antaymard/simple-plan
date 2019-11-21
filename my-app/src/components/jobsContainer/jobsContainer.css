@@ -1,0 +1,43 @@
+.subHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.subHeader-filters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+.subHeader-filters a {
+    display: inline-block;
+    margin-right: 80px;
+    font-size: 16px;
+    color: #A8A8A8;
+    font-weight: normal;
+}
+
+.addJob-button {
+    height: 30px;
+    /* background-color: #A1EBB6; */
+    background-color: rgb(154, 231, 176);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: 0.2s;
+}
+.addJob-button:hover {
+    background-color: rgb(101, 231, 138);
+    box-shadow: 0px 4px 15px rgb(101, 231, 138);
+}
+
+.jobsList-section {
+    overflow-y: auto;
+    /* height : 500px; */
+    position: relative;
+}
+.jobsList-section::-webkit-scrollbar {
+    display: none;
+  }

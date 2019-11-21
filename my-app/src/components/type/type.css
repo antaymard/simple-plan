@@ -1,0 +1,45 @@
+.job-type {
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-size: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.job-type.typeColor-selected-learn {
+    background-color: #FF93BC;
+    box-shadow: 0px 4px 15px #FF93BC;
+    color: white;
+}
+.job-type.typeColor-selected-check {
+    background-color: #C7A897;
+    box-shadow: 0px 4px 15px #C7A897;
+    color: white;
+}
+.job-type.typeColor-selected-build {
+    background-color: #66CFEE;
+    box-shadow: 0px 4px 15px #66CFEE;
+    color: white;
+}
+.job-type.typeColor-selected-todo {
+    background-color: #CBCBDB;
+    box-shadow: 0px 4px 15px #CBCBDB;
+    color: white;
+}
+
+.job-type.typeColor-unselected-learn {
+    color: #FF93BC;
+    border: 1px solid #FF93BC;
+}
+.job-type.typeColor-unselected-check {
+    color: #C7A897;
+    border: 1px solid #C7A897;
+}
+.job-type.typeColor-unselected-build {
+    color: #66CFEE;
+    border: 1px solid #66CFEE;
+}
+.job-type.typeColor-unselected-todo {
+    color: #CBCBDB;
+    border: 1px solid #CBCBDB;
+}

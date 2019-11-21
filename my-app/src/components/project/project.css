@@ -1,0 +1,52 @@
+.project-card {
+    border-radius: 25px;
+    padding: 15px 20px;
+    background-size: cover;
+    background-position: center;
+    color : white;
+    font-size: 16px;
+    height: 55px;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.project-card-selected {
+    border: 3px solid white;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    height : 150px;
+}
+
+.project-card .more-button {
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+.project-container-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.project-container-header h1 {
+    font-size: 14px;
+    margin: 0;
+}
+.addProject-button {
+    height: 30px;
+    width: 30px;
+    /* background-color: #A1EBB6; */
+    background-color: transparent;
+    border: 1px solid #A8A8A8;
+    border-radius: 50%;
+    color: #A8A8A8;
+    transition: 0.2s;
+}
+.addProject-button:hover {
+    border: 1px solid rgb(101, 231, 138);
+    background-color: rgb(101, 231, 138);
+    color: white;
+}

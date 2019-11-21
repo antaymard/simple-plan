@@ -1,0 +1,36 @@
+.progressBar {
+    width : 100%;
+    position: relative;
+    margin-top: 40px;
+}
+
+.progress-number {
+    margin: 0px;
+    color: #E5E5E5;
+}
+
+.progressBar-background {
+    height : 5px;
+    width: 100%;
+    background-color: #EFEFEF;
+    position: absolute;
+    border-radius: 30px;
+}
+.progressBar-progress {
+    height : 5px;
+    position: absolute;
+    border-radius: 30px;
+}
+
+.progressColor-learn {
+    background-color: #FF93BC;
+}
+.progressColor-check {
+    background-color: #C7A897;
+}
+.progressColor-build {
+    background-color: #66CFEE;
+}
+.progressColor-todo {
+    background-color: #CBCBDB;
+}

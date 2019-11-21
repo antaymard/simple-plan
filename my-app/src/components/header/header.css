@@ -1,0 +1,29 @@
+.app-header {
+    padding-top: 80px;
+    margin-right: 0px;
+    padding-bottom: 80px;
+  }
+  .app-header img {
+    width: 70px;
+    height: 70px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+  }
+  
+  .app-header-left {
+    padding-left: 80px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .app-header-right {
+    padding-left: 50px;
+  }
+  .app-header-right p {
+    margin: 0;
+  }
+  .app-header-right h1 {
+    font-size : 2rem;
+  }
