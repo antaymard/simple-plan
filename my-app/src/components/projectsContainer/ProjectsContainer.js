@@ -8,14 +8,15 @@ import Project from '../project/Project.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
 import useModal from '../modalPanel/useModal.js';
 import JobProjectForm from '../forms/JobProjectForm.js';
-import useGetJobs from '../hooks/useGetJobs.js';
+import useGetProjects from '../hooks/useGetProjects.js';
 
 
 const ProjectsContainer = () => {
 
     const { isOpen, toggle } = useModal();
-    const [ projectsList, setProjectsList ] = useState([]);
-    const {jobsList, getJobs} = useGetJobs();
+    // const [ projectsList, setProjectsList ] = useState([]);
+    const { _projectsList, getProjects} = useGetProjects();
+    const [ projectsList, setProjectsList ] = useStore('projectsListStore');
     const [ filter, setFilter ] = useStore('jobFilterStore');
 
 
@@ -28,16 +29,8 @@ const ProjectsContainer = () => {
     }
 
     useEffect(() => {
-        axios.get('/api/projects')
-        .then(res => {
-            setProjectsList(res.data);
-        })
+        getProjects();
     }, []) // Comp did mount
-
-    useEffect(() => {
-        getJobs();
-    }, [ filter ])
-
 
     return (
         <>

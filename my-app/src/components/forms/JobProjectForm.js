@@ -5,7 +5,7 @@ import axios from 'axios';
 import Type from '../type/Type.js';
 import SelectMasterProject from './SelectMasterProject.js';
 import useGetJobs from '../hooks/useGetJobs.js';
-
+import useGetProjects from '../hooks/useGetProjects.js';
 
 const JobProjectForm = (props) => {
 
@@ -30,6 +30,7 @@ const JobProjectForm = (props) => {
     const [ formData, setFormData ] = useState(props.data || defaultValues)
     const confirmAction = props.data ? "EDIT" : "NEW";
     const { _jobsList, getJobs } = useGetJobs();
+    const { _projectsList, getProjects } = useGetProjects();
     const [ filter, setFilter ] = useStore('jobFilterStore');
 
 
@@ -56,7 +57,7 @@ const JobProjectForm = (props) => {
             .then(res => {
                 if (res.data === "ok") {
                     props.hide();
-                    getJobs();
+                    props.formType === 'jobs' ? getJobs() : getProjects();
                 }
             }); 
         } 
@@ -65,7 +66,7 @@ const JobProjectForm = (props) => {
             .then(res => {
                 if (res.data === 'ok') {
                     props.hide();
-                    getJobs();
+                    props.formType === 'jobs' ? getJobs() : getProjects();
                 }
             })
         }

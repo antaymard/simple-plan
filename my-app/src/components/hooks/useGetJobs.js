@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import axios from "axios";
 import queryString from 'query-string';
 import { useStore } from 'react-hookstore';
 
 const useGetJobs = () => {
 
-  // const [ jobsList, setJobsList ] = useState([]);
   const [ filter, setFilter ] = useStore('jobFilterStore');
   const [ jobsList, setJobsList ] = useStore('jobsListStore');
 
