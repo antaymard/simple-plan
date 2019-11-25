@@ -4,7 +4,7 @@ import './project.css';
 
 import useModal from '../modalPanel/useModal.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
-import ProjectForm from '../forms/ProjectForm.js';
+import JobProjectForm from '../forms/JobProjectForm.js';
 
 function Project(props) {
 
@@ -33,7 +33,7 @@ function Project(props) {
                 </div>
             </div>
             <ModalPanel isOpen={isOpen}>
-                <ProjectForm hide={toggle} data={props.data}/>
+                <JobProjectForm hide={toggle} data={props.data} formType="project"/>
             </ModalPanel>
         </>
     )

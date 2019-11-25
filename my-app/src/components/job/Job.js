@@ -6,7 +6,7 @@ import ProgressBar from '../progressBar/ProgressBar.js';
 
 import useModal from '../modalPanel/useModal.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
-import JobForm from '../forms/JobForm.js';
+import JobProjectForm from '../forms/JobProjectForm.js';
 
 
 function Job(props) {
@@ -39,7 +39,7 @@ function Job(props) {
                 />
             </div>
             <ModalPanel isOpen={isOpen}>
-                <JobForm hide={toggle} data={props.data}/>
+                <JobProjectForm hide={toggle} data={props.data} formType="job"/>
             </ModalPanel>
         </div >
     )

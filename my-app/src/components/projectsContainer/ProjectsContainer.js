@@ -7,7 +7,7 @@ import "./projectsContainer.css";
 import Project from '../project/Project.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
 import useModal from '../modalPanel/useModal.js';
-import ProjectForm from '../forms/ProjectForm.js';
+import JobProjectForm from '../forms/JobProjectForm.js';
 import useGetJobs from '../hooks/useGetJobs.js';
 
 
@@ -35,7 +35,6 @@ const ProjectsContainer = () => {
     }, []) // Comp did mount
 
     useEffect(() => {
-        console.log("OMG");
         getJobs();
     }, [ filter ])
 
@@ -50,7 +49,7 @@ const ProjectsContainer = () => {
                 {renderProjectsList()}
             </div>
             <ModalPanel isOpen = {isOpen}>
-                <ProjectForm hide={toggle}/>
+                <JobProjectForm hide={toggle} formType="project"/>
             </ModalPanel>
         </>
     )

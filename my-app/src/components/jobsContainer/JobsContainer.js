@@ -5,7 +5,7 @@ import './jobsContainer.css';
 
 import Job from '../job/Job.js';
 import useModal from '../modalPanel/useModal.js';
-import JobForm from '../forms/JobForm.js';
+import JobProjectForm from '../forms/JobProjectForm.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
 import useGetJobs from '../hooks/useGetJobs.js';
 
@@ -45,7 +45,7 @@ const JobsContainer = () => {
                 {renderJobsList()}
             </div>
             <ModalPanel isOpen={isOpen}>
-                <JobForm hide={toggle}/>
+                <JobProjectForm hide={toggle} formType="job"/>
             </ModalPanel>
         </>
     )
