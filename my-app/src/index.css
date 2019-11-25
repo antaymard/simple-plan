@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 html {
+  padding: 0;
 }
 
 body {
@@ -9,7 +10,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height : 100vh;
   /* background: linear-gradient(to bottom right, #F9E3EC 0%, #E9DEF4 50%, #D5D8FF 100%); */
-  background: linear-gradient(to bottom right, #F5D4E2 0%, #BFC4FF 100%);
+  /* background: linear-gradient(to bottom right, #F5D4E2 0%, #BFC4FF 100%); */
+  background: linear-gradient(180deg, #476F94 0%, #3B82C4 100%);
+  overflow: hidden;
 }
 
 .fullHeight {

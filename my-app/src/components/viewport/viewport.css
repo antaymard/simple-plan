@@ -2,7 +2,7 @@
     margin-right: 0;
     position: relative;
     /* 80 -- header -- 80 ++  */
-    height: calc(100vh - 230px);
+    height: calc(100vh - 210px);
 }
 
 .viewport-left {

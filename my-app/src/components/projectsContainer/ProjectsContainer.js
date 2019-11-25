@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useStore } from 'react-hookstore';
 import axios from 'axios';
 
+import "./projectsContainer.css";
+
 import Project from '../project/Project.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
 import useModal from '../modalPanel/useModal.js';
@@ -44,7 +46,9 @@ const ProjectsContainer = () => {
                 <h1>PROJETS</h1>            
                 <button className="addProject-button" onClick={toggle}>+</button>
             </div>
-            {renderProjectsList()}
+            <div className="projectsList-section">
+                {renderProjectsList()}
+            </div>
             <ModalPanel isOpen = {isOpen}>
                 <ProjectForm hide={toggle}/>
             </ModalPanel>

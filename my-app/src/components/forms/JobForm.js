@@ -11,7 +11,7 @@ const JobForm = (props) => {
     let defaultValues = {
         name : "",
         description : "",
-        progress : 50,
+        progress : 0,
         type : "",
         projectId : {},
         schedule : {}

@@ -1,18 +1,18 @@
 .progressBar {
     width : 100%;
     position: relative;
-    margin-top: 40px;
+    margin-top: 10px;
 }
 
 .progress-number {
     margin: 0px;
-    color: #E5E5E5;
+    color: #A8A8A8;
 }
 
 .progressBar-background {
     height : 5px;
     width: 100%;
-    background-color: #EFEFEF;
+    background-color: #E5E5E5;
     position: absolute;
     border-radius: 30px;
 }

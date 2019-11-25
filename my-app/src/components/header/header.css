@@ -1,7 +1,8 @@
 .app-header {
-    padding-top: 80px;
+    margin-top: 80px;
     margin-right: 0px;
-    padding-bottom: 80px;
+    margin-bottom: 60px;
+    color: white;
   }
   .app-header img {
     width: 70px;
@@ -23,7 +24,8 @@
   }
   .app-header-right p {
     margin: 0;
+    font-size: 14px;
   }
   .app-header-right h1 {
-    font-size : 2rem;
+    font-size : 24px;
   }
