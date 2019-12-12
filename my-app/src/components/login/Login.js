@@ -32,8 +32,12 @@ const Login = () => {
             axios.post('/authenticate', loginData)
             .then( res => {
                 console.log(res.data);
-                localStorage.setItem('token', res.data.token);
-                setLogStatus(true);
+                if (res.data.success) {
+                    localStorage.setItem('token', res.data.token);
+                    setLogStatus(true);    
+                } else {
+                    // HANDLE ERROR
+                }
             })
         }
     }
@@ -51,7 +55,7 @@ const Login = () => {
     return (
         <div className="loginDiv">
             { console.log(loginData)}
-            <h1>Bienvenue !</h1>
+            <h1>Gérez vos projets simplement</h1>
             <div className='row'>
                 <div className='col d-flex flex-column'>
                     <h2>Connectez-vous</h2>

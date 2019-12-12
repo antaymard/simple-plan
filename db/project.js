@@ -7,7 +7,12 @@ var projectSchema = new Schema({
   description : { type : String, default : null },
   coverImage : { type : String, default : null},
   createdOn : { type : Date, default : null },
-  // tags
+  resources : [
+    {
+      name : { type : String, default : null },
+      url : { type : String, default : null }
+    }
+  ]
 })
 
 var Project = mongoose.model('Project', projectSchema);
