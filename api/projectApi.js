@@ -7,7 +7,9 @@ module.exports = function(router) {
         res.send("working");
     })
     .post((req, res) => {
+        console.log(req.authToken)
         let p = new Project(req.body);
+        p.createdBy = req.authUser._id;
         p.save((err, done) => {
             if (err) throw err;
             res.send("ok");
@@ -35,7 +37,8 @@ module.exports = function(router) {
 
     router.route('/projects')
     .get((req, res) => {
-        Project.find({}, (err, projects) => {
+        console.log("GET PROJECTS CALLED")
+        Project.find({ createdBy : req.authUser._id }, (err, projects) => {
             if (err) throw err;
             res.json(projects);
         })

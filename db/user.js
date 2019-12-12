@@ -7,9 +7,10 @@ var userSchema = new Schema({
       // createdOn : { type : Date, default : null },
       // expiredOn : { type : Date, default : null }
   },
-  firstName : { type : String, default : null},
+  fName : { type : String, default : null},
+  lName : { type : String, default : null },
   email : String,
-//   imageAddress : { type : String, default : null},
+  profilePicUrl : { type : String, default : null},
   password : String,
 })
 

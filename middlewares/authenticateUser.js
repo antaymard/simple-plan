@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt-nodejs');
-const generateToken = require("../functions/generateToken.js").generateToken;
+const bcrypt = require('bcryptjs');
+const generateToken = require("../functions/generateToken.js");
 
 var User = require('../db/user.js');
 
-exports.authenticateUser = (req, res) => {
+module.exports = function(req, res) {
     console.log('Authenticating User');
 
     var data = req.body;
@@ -12,8 +12,9 @@ exports.authenticateUser = (req, res) => {
 
     // Find the user according to email
     User
-    .findOne({ email : data.email})
+    .findOne({ email : data.email })
     .exec((err, user) => {
+        // If error
         if (err) err => {
             console.error('POST /authenticate ERR');
             console.error(err);
@@ -23,13 +24,13 @@ exports.authenticateUser = (req, res) => {
                 error : err
             })
         }
-        // Si user existe
+        // If user exists
         if (user) {
             // If hashed passwords match
             if (bcrypt.compareSync(data.password, user.password)) {
                 // If no token in DB, create one and send it
                 if (!user.authToken.token) {
-                    let newToken = generatesToken();
+                    let newToken = generateToken();
                     user.authToken.token = newToken;
                     user.save();
                     console.log("token créé et transmis");
@@ -40,7 +41,7 @@ exports.authenticateUser = (req, res) => {
                     });
                 } 
                 // If token exists, send it to client
-                else {
+                else if (user.authToken.token) {
                     res.status(200).json({
                         success : true,
                         message : "Connexion réussie - token déjà existant",

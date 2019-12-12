@@ -16,7 +16,7 @@ const JobProjectForm = (props) => {
             description : "",
             progress : 0,
             type : "",
-            projectId : { _id : ""},
+            projectId : null,
             schedule : {}    
         };
     } else if (props.formType === "project") {
@@ -37,6 +37,9 @@ const JobProjectForm = (props) => {
     useEffect(() => {
         if (confirmAction === "EDIT") { // Edition car possède des datas
             setFormData(props.data);
+            if (props.data.projectId && props.data.projectId._id) {
+                handleProjectChange({ target : { value : props.data.projectId._id }})
+            }
         } else if (confirmAction === "NEW") {
             if (filter.projectId) {
                 handleProjectChange({ target : { value : filter.projectId } })
@@ -50,10 +53,17 @@ const JobProjectForm = (props) => {
         setFormData({ ...formData, ...obj });
     }
 
+    var headers = {
+        "x-access-token" : localStorage.getItem('token')
+    }
+
     const sendFormData = () => {
-        console.log(formData);
-        if( confirmAction === "NEW" ) {
-            axios.post('/api/' + props.formType, formData)
+        console.log(formData)
+        if ( formData.projectId === "" ) {
+            formData.projectId = null;
+        }
+        if( confirmAction === "NEW") {
+            axios.post('/api/' + props.formType, formData, { headers : headers })
             .then(res => {
                 if (res.data === "ok") {
                     props.hide();
@@ -62,7 +72,7 @@ const JobProjectForm = (props) => {
             }); 
         } 
         else if ( confirmAction === "EDIT" ) {
-            axios.put('/api/' + props.formType, formData)
+            axios.put('/api/' + props.formType, formData, { headers : headers })
             .then(res => {
                 if (res.data === 'ok') {
                     props.hide();
@@ -73,7 +83,7 @@ const JobProjectForm = (props) => {
     }
 
     const deleteObj = () => {
-        axios.delete('/api/' + props.formType + '/' + props.data._id, formData)
+        axios.delete('/api/' + props.formType + '/' + props.data._id, { headers : headers })
         .then(res => {
             if (res.data === "ok") {
                 props.hide();

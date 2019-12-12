@@ -1,4 +1,4 @@
-exports.generatesToken = (n = 70) => {
+module.exports = function(n = 70) {
     var token = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   

@@ -9,9 +9,19 @@ const useGetJobs = () => {
 
   function getJobs() {
     console.log('useGetJobs fired');
-    axios.get('/api/jobs?' + queryString.stringify( filter ))
+    let query = {
+      filter : filter,
+      token : localStorage.getItem('token')
+    }
+    console.log(queryString.stringify( filter, localStorage.getItem('token')));
+    axios.get('/api/jobs?' + queryString.stringify( filter ), {
+      headers : {
+        "x-access-token" : localStorage.getItem('token')
+      }
+    })
         .then(res => {
             setJobsList(res.data);
+            console.log(res.data)
         })
   }
 

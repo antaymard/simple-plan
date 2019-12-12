@@ -8,7 +8,11 @@ const useGetProjects = () => {
 
   function getProjects() {
     console.log('useGetJobs fired');
-    axios.get('/api/projects')
+    axios.get('/api/projects', {
+      headers : {
+        "x-access-token" : localStorage.getItem('token')
+      }
+    })
         .then(res => {
             setProjectsList(res.data);
         })

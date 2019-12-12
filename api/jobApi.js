@@ -4,12 +4,12 @@ module.exports = function(router) {
 
     router.route('/job')
     .get((req, res) => {
-        console.log("lol ?")
         res.send('post job is working !');
     })
     .post((req, res) => {
         console.log(req.body);
         var j = new Job(req.body);
+        j.createdBy = req.authUser._id;
         j.save((err, done) => {
             if (err) throw err;
             res.send("ok");
@@ -37,9 +37,14 @@ module.exports = function(router) {
     // Récupère la liste des jobs
     router.route('/jobs')
     .get((req, res) => {
-        console.log(req.query)
+        console.log(req.body)
         let filter = req.query || {};
-        Job.find(filter, (err, jobs) => {
+        Job.find({
+            $and: [
+                filter,
+                { createdBy : req.authUser._id }
+            ]
+        }, (err, jobs) => {
             if (err) throw err;
             res.json(jobs);
         }).populate(' projectId ')

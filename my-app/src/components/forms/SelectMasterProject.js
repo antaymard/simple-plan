@@ -6,7 +6,11 @@ const SelectMasterProject = (props) => {
     const [ projectList, setProjectList ] = useState([]);
     
     useEffect(() => {
-        axios.get('/api/projects')
+        axios.get('/api/projects', {
+            headers : {
+                "x-access-token" : localStorage.getItem('token')
+            }
+        })
         .then(res => {
             setProjectList(res.data);
         })
@@ -22,7 +26,7 @@ const SelectMasterProject = (props) => {
     return (
         <>
             {console.log(props.projectId)}
-            <select onChange={props.handleChange} value={props.projectId._id || props.projectId}>
+            <select onChange={props.handleChange} value={props.projectId}>
                 <option value="">Sélectionner un projet</option>
                 {renderOptions()}
             </select>

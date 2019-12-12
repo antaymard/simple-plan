@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useStore } from 'react-hookstore';
-import axios from 'axios';
 
 import "./projectsContainer.css";
 
@@ -14,7 +13,6 @@ import useGetProjects from '../hooks/useGetProjects.js';
 const ProjectsContainer = () => {
 
     const { isOpen, toggle } = useModal();
-    // const [ projectsList, setProjectsList ] = useState([]);
     const { _projectsList, getProjects} = useGetProjects();
     const [ projectsList, setProjectsList ] = useStore('projectsListStore');
     const [ filter, setFilter ] = useStore('jobFilterStore');

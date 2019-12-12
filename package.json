@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node server.js",
-    "build" : "cd my-app && npm install && npm run build && cd .."
+    "start": "node server.js",
+    "build": "cd my-app && npm install && npm run build && cd .."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "mongoose": "^5.7.11"
   }
