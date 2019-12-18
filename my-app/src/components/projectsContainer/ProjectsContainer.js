@@ -33,8 +33,13 @@ const ProjectsContainer = () => {
     return (
         <>
             <div className="project-container-header">
-                <h1>PROJETS</h1>            
-                <button className="addProject-button" onClick={toggle}>+</button>
+                <div className="project-container-header-section">
+                    <h1>PROJETS ({projectsList.length})</h1>            
+                </div>
+                <div className="project-container-header-section">
+                    <p>Filters</p>
+                    <button className="addProject-button" onClick={toggle}>+  PROJET</button>          
+                </div>
             </div>
             <div className="projectsList-section">
                 {renderProjectsList()}

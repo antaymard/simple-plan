@@ -2,28 +2,27 @@
     border-radius: 8px;
     padding: 5px 10px;
     font-size: 12px;
-    margin-bottom: 12px;
     cursor: pointer;
 }
 
 .job-type.typeColor-selected-learn {
-    background-color: #FF93BC;
-    box-shadow: 0px 4px 15px #FF93BC;
+    background: var(--learnGradient);
+    box-shadow: var(--learnShadow);
     color: white;
 }
 .job-type.typeColor-selected-check {
-    background-color: #C7A897;
-    box-shadow: 0px 4px 15px #C7A897;
+    background: var(--checkGradient);
+    box-shadow: var(--checkShadow);
     color: white;
 }
 .job-type.typeColor-selected-build {
-    background-color: #66CFEE;
-    box-shadow: 0px 4px 15px #66CFEE;
+    background: var(--buildGradient);
+    box-shadow: var(--buildShadow);
     color: white;
 }
 .job-type.typeColor-selected-todo {
-    background-color: #CBCBDB;
-    box-shadow: 0px 4px 15px #CBCBDB;
+    background: var(--todoGradient);
+    box-shadow: var(--todoShadow);
     color: white;
 }
 

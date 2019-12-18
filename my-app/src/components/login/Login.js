@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from "react-hookstore";
+import { toast } from "react-toastify";
 import axios from 'axios';
 
 import './login.css';
@@ -35,10 +36,19 @@ const Login = () => {
                 if (res.data.success) {
                     localStorage.setItem('token', res.data.token);
                     setLogStatus(true);    
+                    toast("Connexion réussie",
+                        { type : toast.TYPE.SUCCESS }
+                    )
                 } else {
-                    // HANDLE ERROR
+                    toast(res.data.message,
+                        { type : toast.TYPE.ERROR }
+                    )
                 }
             })
+        } else {
+            toast('Veuillez remplir tous les champs pour vous connecter',
+                { type : toast.TYPE.WARNING }
+            )
         }
     }
 
@@ -46,8 +56,15 @@ const Login = () => {
         if(!Object.values(signData).some(x => (x === null || x === ''))) {
             axios.post('/signup', signData)
             .then( res => {
-                console.log(res.data);
+                console.log(res.data)
+                if (res.data.success) {
+                    toast(res.data.message, { type : toast.TYPE.SUCCESS})
+                }
             })
+        } else {
+            toast('Veuillez remplir tous les champs pour créer un compte',
+                { type : toast.TYPE.WARNING }
+            )
         }
     }
 

@@ -39,7 +39,10 @@ module.exports = function (req, res) {
                     let _u = new User(data);
                     _u.save((err, done) => {
                         if (err) throw err;
-                        res.send(done);
+                        return res.status(200).json({
+                            success : true,
+                            message : "Votre compte a bien été créé. Veuillez maintenant vous connecter."
+                        });
                     })
                 })
             })

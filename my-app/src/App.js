@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createStore, useStore } from 'react-hookstore';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './App.css';
 
 import Header from './components/header/Header.js';
@@ -11,6 +14,11 @@ createStore('jobsListStore', []);
 createStore('projectsListStore', []);
 createStore('logStatusStore', false);
 
+toast.configure({
+  autoClose : 8000,
+  draggable : false
+});
+
 function App() {
 
   const [ logStatus, setLogStatus ] = useStore('logStatusStore');  
@@ -21,21 +29,12 @@ function App() {
     }
   })
 
-  if (logStatus) {
-    return (
-      <div className="app">
-        <Header/>
-        <Viewport/>
-      </div>
-    );  
-  } 
-  else if (!logStatus) {
-    return (
-      <>
-        <Login/>
-      </>
-    )
-  }
+  return (
+    <div className="app">
+      {logStatus ? <><Header/><Viewport/></> : <Login/>}
+      <ToastContainer/>
+    </div>
+  )
 }
 
 export default App;

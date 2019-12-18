@@ -13,17 +13,19 @@
 
 .modal-card {
     background-color: white;
-    width: 400px;
     margin: auto auto;
     padding: 40px 50px;
     border-radius: 35px;
+    width: 800px;
 }
 
 .modal-card h1 {
     font-size: 16px;
     text-transform: uppercase;
-    font-weight: normal;
+    font-weight: bold;
+    color: var(--blueTheme);
     margin-bottom: 25px;
+
 }
 
 .input-group {
@@ -33,6 +35,8 @@
 }
 .input-group p {
     margin-bottom: 5px;
+    margin-top: 12px;
+    color: var(--greyText);
 }
 .modal-card input[type=text], textarea {
     border-radius: 11px;

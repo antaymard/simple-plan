@@ -9,7 +9,7 @@ function ProgressBar(props) {
             </div>
             <div className="progressBar-background"></div>
             <div 
-                className={"progressBar-progress progressColor-" + props.type}
+                className={"progressBar-progress progressColor-" + props.color}
                 style={{ width : props.progress + "%" }}>    
             </div>
         </div>

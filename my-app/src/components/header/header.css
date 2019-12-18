@@ -2,7 +2,7 @@
     margin-top: 80px;
     margin-right: 0px;
     margin-bottom: 60px;
-    color: white;
+    color: var(--greyText);
   }
   .app-header img {
     width: 70px;

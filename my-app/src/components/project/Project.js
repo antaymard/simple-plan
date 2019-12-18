@@ -19,7 +19,6 @@ function Project(props) {
         setFilter( _filter );
     }
 
-
     return (
         <>
             <div 

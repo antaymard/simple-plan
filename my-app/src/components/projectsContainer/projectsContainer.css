@@ -1,29 +1,37 @@
 .project-container-header {
+    background-color: white;
+    border-radius: 25px;
+    padding-bottom: 0;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+.project-container-header-section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
 }
+
 .project-container-header h1 {
     font-size: 14px;
     margin: 0;
-    color: white;
+    color: var(--greyText);
+    font-weight: bold;
+    margin-bottom: 20px;
 }
+.project-container-header p {
+    margin: 0;
+    color : var(--orangeTheme);
+}
+
 .addProject-button {
-    height: 20px;
-    width: 20px;
-    /* background-color: #A1EBB6; */
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 50%;
     color: white;
-    transition: 0.2s;
-}
-.addProject-button:hover {
-    border: 1px solid rgb(101, 231, 138);
-    background-color: rgb(101, 231, 138);
-    color: white;
+    background: var(--orangeGradient);
+    border: none;
+    border-radius: 25px 0 25px 0;
+    font-size: 14px;
+    padding : 10px 18px;
 }
 
 .projectsList-section {

@@ -1,43 +1,57 @@
-.subHeader {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.jobs-subheader {
+  width: 100%;
+  background-color: white;
+  border-radius: 25px;
+  margin-bottom: 30px;
 }
-.subHeader-filters {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 40px;
+.jobs-subheader .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px 30px 0 30px;
 }
-.subHeader-filters a {
-    display: inline-block;
-    margin-right: 80px;
-    font-size: 16px;
-    color: white;
-    font-weight: normal;
+.jobs-subheader .header h3 {
+  color: var(--blueTheme);
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  margin-right: 5px;
+}
+.jobs-subheader .header span {
+  color: var(--greyText);
+  font-size: 16px;
+}
+.jobs-subheader .body {
+  padding : 0 30px;
 }
 
-.addJob-button {
-    height: 30px;
-    /* background-color: #A1EBB6; */
-    background-color: rgb(154, 231, 176);
-    border: none;
-    border-radius: 12px;
-    color: white;
-    padding-left: 15px;
-    padding-right: 15px;
-    transition: 0.2s;
+.jobs-subheader .footer {
+  padding-left: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
-.addJob-button:hover {
-    background-color: rgb(101, 231, 138);
-    box-shadow: 0px 4px 15px rgb(101, 231, 138);
+.jobs-subheader .footer .addJob-button {
+  color: white;
+  background: var(--orangeGradient);
+  border: none;
+  border-radius: 25px 0 25px 0;
+  font-size: 14px;
+  padding: 10px 18px;
+}
+.jobs-subheader .footer a {
+    color: var(--orangeTheme);
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
 .jobsList-section {
-    overflow-y: auto;
-    /* height : 500px; */
-    position: relative;
+  overflow-y: auto;
+  /* height : 500px; */
+  position: relative;
 }
 .jobsList-section::-webkit-scrollbar {
-    display: none;
-  }
+  display: none;
+}

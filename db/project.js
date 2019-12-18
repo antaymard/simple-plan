@@ -6,7 +6,7 @@ var projectSchema = new Schema({
   name : { type : String, default : null},
   description : { type : String, default : null },
   coverImage : { type : String, default : null},
-  createdOn : { type : Date, default : null },
+  createdOn : { type : Date, default : new Date() },
   resources : [
     {
       name : { type : String, default : null },

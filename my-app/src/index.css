@@ -11,10 +11,29 @@ body {
   height : 100vh;
   /* background: linear-gradient(to bottom right, #F9E3EC 0%, #E9DEF4 50%, #D5D8FF 100%); */
   /* background: linear-gradient(to bottom right, #F5D4E2 0%, #BFC4FF 100%); */
-  background: linear-gradient(180deg, #476F94 0%, #3B82C4 100%);
+  /* background: linear-gradient(180deg, #476F94 0%, #3B82C4 100%); */
+  background-color: var(--backgroundColor);
   overflow: hidden;
 }
 
 .fullHeight {
     height: 100%;
   }
+
+  :root {
+    --learnShadow : 0px 4px 15px #FF93BC;
+    --learnGradient : linear-gradient(to right top, #F16D9F, #FF93BC);
+    --checkShadow : 0px 4px 15px #C7A897;
+    --checkGradient : linear-gradient(to right top, #C58C6D, #C7A897);
+    --buildShadow : 0px 4px 15px #66CFEE;
+    --buildGradient : linear-gradient(to right top, #40B5D7, #66CFEE);
+    --todoShadow : 0px 4px 15px #CBCBDB;
+    --todoGradient : linear-gradient(to right top, #B4B4C0, #CBCBDB);
+    --blueTheme : #2D466A;
+    --orangeGradient : linear-gradient(to right top,  #DD4208, #FC7948);
+    --orangeTheme : #FC7948;
+    --backgroundColor : #F2F3F7;
+    --redGradient : linear-gradient(to right top, #EE7070, #F0A0A0);
+    --greyText : #5E5E5E;
+    --lightGrey: #E5E5E5
+}
