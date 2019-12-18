@@ -65,3 +65,20 @@
     color: #5E5E5E;
     height : auto;
 }
+.job-card .deadline-section {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -20px;
+    margin-top: 15px;
+}
+.job-card .deadline-icon {
+    background : var(--redGradient);
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    text-align: center;
+    margin-right: 10px;
+}
+.job-card .deadline-section span {
+    color: var(--greyText);
+}
