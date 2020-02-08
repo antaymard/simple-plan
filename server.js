@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser  = require('body-parser');
 const path = require('path');
+const axios = require('axios');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -9,7 +10,11 @@ app.use(bodyParser.json());
 // BOOTING
 require('./db/setup.js');
 // Make the server auto ping to avoid heroku idle
-require('heroku-self-ping')('https://simple-plan.herokuapp.com/');
+function selfPing() {
+  axios.get("https://simple-plan.herokuapp.com");
+  console.log("pinging !!");
+}
+setInterval(selfPing, 1000*60*20);
 
 // USER IS LOGGING IN OR CREATE ACCOUNT ============================================
 // Loging In
