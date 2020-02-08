@@ -37,7 +37,8 @@ module.exports = function(router) {
     // Récupère la liste des jobs
     router.route('/jobs')
     .get((req, res) => {
-        console.log(req.body)
+        console.log("JOBS REQUEST")
+        console.log(req.query);
         let filter = req.query || {};
         Job.find({
             $and: [

@@ -9,10 +9,7 @@ const useGetJobs = () => {
 
   function getJobs() {
     console.log('useGetJobs fired');
-    let query = {
-      filter : filter,
-      token : localStorage.getItem('token')
-    }
+    console.log(filter)
     console.log(queryString.stringify( filter, localStorage.getItem('token')));
     axios.get('/api/jobs?' + queryString.stringify( filter ), {
       headers : {

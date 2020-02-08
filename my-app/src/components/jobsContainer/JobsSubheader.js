@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStore } from "react-hookstore";
 import axios from 'axios';
 import Moment from 'react-moment';
+import moment from 'moment';
 
 import JobProjectForm from '../forms/JobProjectForm.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
@@ -15,9 +16,21 @@ const JobsSubheader = () => {
 
     const [ projectInfo, setProjectInfo ] = useState({});
 
-    const editFilter = ( e ) => {
-        let _filter = {};
-        setFilter( _filter );
+    const editFilter = (e) => {
+        switch (e.target.name) {
+            case "all" :
+                setFilter({});
+                break;
+            case 'thisWeek' : 
+                let _filter = filter;
+                _filter.weekNumber = moment().format('W');
+                setFilter( _filter );
+                console.log(filter);
+                break;
+            default : 
+                console.log('no filter action found');
+        }
+        
     }
 
     useEffect(() => {
@@ -32,7 +45,7 @@ const JobsSubheader = () => {
                 setProjectInfo(res.data);
             })    
         }
-    }, [ filter.projectId ])
+    }, [ filter ])
 
     if ( filter.projectId ) {
         return (
@@ -45,7 +58,9 @@ const JobsSubheader = () => {
                     In progress...
                 </div>
                 <div className="footer">
-                    <a href='#' onClick={editFilter}>ALL</a>
+                    <a href='#' name="all" onClick={editFilter}>ALL</a>
+                    <a href="#" name="thisWeek" onClick={editFilter}>THIS WEEK</a>
+                    <a href="#" name="late" onClick={editFilter}>LATE</a>
                     <button className="addJob-button" onClick={toggle}>+ NEW JOB</button> 
                 </div>
                 <ModalPanel isOpen={isOpen}>

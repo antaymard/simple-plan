@@ -78,7 +78,7 @@ const JobProjectForm = (props) => {
                     if (res.data === "ok") {
                         props.hide();
                         props.formType === 'jobs' ? getJobs() : getProjects();
-                        toast('Tâche créée', { type: toast.TYPE.SUCCESS })
+                        toast(props.formType + ' added', { type: toast.TYPE.SUCCESS })
                     } else {
                         toast('Erreur de création de tâche', { type: toast.TYPE.ERROR })
                     }
@@ -171,7 +171,7 @@ const JobProjectForm = (props) => {
                         </div>
                         <div className='input-group'>
                             <p>Description</p>
-                            <textarea maxLength={140} rows={5} name='description' value={formData.description} onChange={handleChange} />
+                            <textarea rows={5} name='description' value={formData.description} onChange={handleChange} />
                         </div>
                         <div className='input-group'>
                             <p>Projet lié</p>

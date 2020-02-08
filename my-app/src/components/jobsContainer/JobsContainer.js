@@ -14,6 +14,7 @@ const JobsContainer = () => {
     const [ filter, setFilter ] = useStore('jobFilterStore');
 
     useEffect(() => {
+        console.log('useEffect omg')
         getJobs();
     }, [ filter ])
 
