@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 
 // BOOTING
 require('./db/setup.js');
+// Make the server auto ping to avoid heroku idle
+require('heroku-self-ping')('https://simple-plan.herokuapp.com/');
 
 // USER IS LOGGING IN OR CREATE ACCOUNT ============================================
 // Loging In
