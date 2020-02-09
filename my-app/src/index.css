@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 
 html {
   padding: 0;
@@ -6,9 +6,9 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   -moz-osx-font-smoothing: grayscale;
-  height : 100vh;
+  height: 100vh;
   /* background: linear-gradient(to bottom right, #F9E3EC 0%, #E9DEF4 50%, #D5D8FF 100%); */
   /* background: linear-gradient(to bottom right, #F5D4E2 0%, #BFC4FF 100%); */
   /* background: linear-gradient(180deg, #476F94 0%, #3B82C4 100%); */
@@ -17,23 +17,24 @@ body {
 }
 
 .fullHeight {
-    height: 100%;
-  }
+  height: 100%;
+}
 
-  :root {
-    --learnShadow : 0px 4px 15px #FF93BC;
-    --learnGradient : linear-gradient(to right top, #F16D9F, #FF93BC);
-    --checkShadow : 0px 4px 15px #C7A897;
-    --checkGradient : linear-gradient(to right top, #C58C6D, #C7A897);
-    --buildShadow : 0px 4px 15px #66CFEE;
-    --buildGradient : linear-gradient(to right top, #40B5D7, #66CFEE);
-    --todoShadow : 0px 4px 15px #CBCBDB;
-    --todoGradient : linear-gradient(to right top, #B4B4C0, #CBCBDB);
-    --blueTheme : #2D466A;
-    --orangeGradient : linear-gradient(to right top,  #DD4208, #FC7948);
-    --orangeTheme : #FC7948;
-    --backgroundColor : #F2F3F7;
-    --redGradient : linear-gradient(to right top, #EE7070, #F0A0A0);
-    --greyText : #5E5E5E;
-    --lightGrey: #E5E5E5
+:root {
+  --learnShadow: 0px 4px 15px #ff93bc;
+  --learnGradient: linear-gradient(to right top, #f16d9f, #ff93bc);
+  --checkShadow: 0px 4px 15px #c7a897;
+  --checkGradient: linear-gradient(to right top, #c58c6d, #c7a897);
+  --buildShadow: 0px 4px 15px #66cfee;
+  --buildGradient: linear-gradient(to right top, #40b5d7, #66cfee);
+  --todoShadow: 0px 4px 15px #cbcbdb;
+  --todoGradient: linear-gradient(to right top, #b4b4c0, #cbcbdb);
+  --blueTheme: #2d466a;
+  --orangeGradient: linear-gradient(to right top, #fd7746, #ff956d);
+  --orangeTheme: #fc7948;
+  --backgroundColor: #f2f3f7;
+  --redGradient: linear-gradient(to right top, #ee7070, #f0a0a0);
+  --greenGradient: linear-gradient(to right top, #3bdd68, #a1ebb6);
+  --greenShadow: 0px 4px 15px #a1ebb6;
+  --greyText: #5e5e5e;
 }
