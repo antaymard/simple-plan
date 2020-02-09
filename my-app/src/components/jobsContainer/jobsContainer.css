@@ -23,7 +23,7 @@
   font-size: 16px;
 }
 .jobs-subheader .body {
-  padding : 0 30px;
+  padding: 0 30px;
 }
 
 .jobs-subheader .footer {
@@ -42,9 +42,9 @@
   padding: 10px 18px;
 }
 .jobs-subheader .footer a {
-    color: var(--orangeTheme);
-    font-size: 16px;
-    margin-bottom: 5px;
+  color: var(--orangeTheme);
+  font-size: 16px;
+  margin-bottom: 5px;
 }
 
 .jobsList-section {
@@ -54,4 +54,9 @@
 }
 .jobsList-section::-webkit-scrollbar {
   display: none;
+}
+.jobsList-section h3 {
+  color: var(--orangeTheme);
+  font-size: 14px;
+  margin-bottom: 20px;
 }

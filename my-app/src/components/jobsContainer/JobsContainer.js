@@ -1,36 +1,55 @@
-import React, { useEffect} from 'react';
-import { useStore } from 'react-hookstore';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getJobs } from '../../actions/jobActions';
+import queryString from 'query-string';
+
 
 import './jobsContainer.css';
 
 import Job from '../job/Job.js';
-import useGetJobs from '../hooks/useGetJobs.js';
 import JobsSubheader from './JobsSubheader.js';
 
 const JobsContainer = () => {
 
-    const { _jobsList, getJobs } = useGetJobs();
-    const [ jobsList, setJobsList ] = useStore('jobsListStore');
-    const [ filter, setFilter ] = useStore('jobFilterStore');
+    const dispatch = useDispatch();
+    const jobs = useSelector(state => state.jobs);
 
     useEffect(() => {
-        console.log('useEffect omg')
-        getJobs();
-    }, [ filter ])
+        let selectedProject = queryString.parse(window.location.search);
+        dispatch(getJobs(selectedProject));
+    }, [window.location.search])
 
-    const renderJobsList = () => {
-        return jobsList.map(function(item, i){
-            return <Job key={i} data={jobsList[i]}/>
-        })
+    const renderJobsList = (option) => {
+        if (option === "inProgress") {
+            return jobs.filter(i => i.isInProgress === true).map(function (item, i) {
+                return <Job key={i} data={item} />
+            })
+        } else {
+            return jobs.filter(i => i.isInProgress === false && i.status === option).map(function (item, i) {
+                return <Job key={i} data={item} />
+            })
+        }
     }
 
     return (
         <>
+            {console.log("re-render JobsContainer")}
             <div className="subHeader">
-                <JobsSubheader/>
+                {/* <JobsSubheader /> */}
             </div>
-            <div className='row jobsList-section'>
-                {renderJobsList()}
+            <div className='jobsList-section'>
+                <h3>En cours</h3>
+                <div className="row">
+                    {renderJobsList("inProgress")}
+                </div>
+                <h3>A faire</h3>
+                <div className="row">
+                    {renderJobsList("active")}
+                </div>
+                <h3>Terminées</h3>
+                <div className="row">
+                    {renderJobsList("completed")}
+                </div>
             </div>
         </>
     )

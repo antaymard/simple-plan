@@ -21,6 +21,7 @@ const DashboardPage = () => {
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
                     <h1>Dashboard</h1>
+                    <h2>Semaine 6</h2>
                     <JobsContainer />
                 </div>
             </div>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProjects } from '../../actions';
+import { getProjects } from '../../actions/projectActions';
 
 import "./projectsContainer.css";
 
@@ -11,7 +10,7 @@ import useModal from '../modalPanel/useModal.js';
 import JobProjectForm from '../forms/JobProjectForm.js';
 
 
-const ProjectsContainer = () => {
+const ProjectsContainer = (props) => {
 
     const { isOpen, toggle } = useModal();
 
@@ -19,6 +18,9 @@ const ProjectsContainer = () => {
     const dispatch = useDispatch();
     const projects = useSelector(state => state.projects)
 
+    useEffect(() => {
+        dispatch(getProjects());
+    }, [])
 
     const renderProjectsList = () => {
         return projects.map(function (item, i) {
@@ -28,22 +30,11 @@ const ProjectsContainer = () => {
         })
     }
 
-    useEffect(() => {
-        axios.get('/api/projects', {
-            headers: {
-                "x-access-token": localStorage.getItem('token')
-            }
-        })
-            .then(res => {
-                dispatch(getProjects(res.data));
-            })
-    }, [])
-
     return (
         <>
             <div className="project-container-header">
                 <div className="project-container-header-section">
-                    <h1>PROJETS ({1})</h1>
+                    <h1>PROJETS ({projects.length})</h1>
                 </div>
                 <div className="project-container-header-section">
                     <p>Filters</p>

@@ -1,35 +1,39 @@
-import React from 'react';
-import { useStore } from 'react-hookstore';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './project.css';
 
 import useModal from '../modalPanel/useModal.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
 import JobProjectForm from '../forms/JobProjectForm.js';
+import queryString from 'query-string';
 
 function Project(props) {
 
     const { isOpen, toggle } = useModal();
-    const [filter, setFilter] = useStore('jobFilterStore');
+    const [selectedProject, setSelectedProject] = useState('');
 
+    // TO REVIEW
+    useEffect(() => {
+        setSelectedProject(queryString.parse(window.location.search).projectId);
+    });
 
-    const addProjectToFilter = (projectId) => {
-        console.log("filter has changed");
-        let _filter = filter;
-        _filter = { projectId: projectId };
-        setFilter(_filter);
+    const formatSelectedProject = (id) => {
+        setSelectedProject(id);
     }
 
     return (
         <>
-            <div
-                className={"project-card " + (filter.projectId == props.data._id ? "project-card-selected" : null)}
-                onClick={() => addProjectToFilter(props.data._id)}
-            >
-                <img src={props.data.coverImage} onClick={toggle}></img>
-                <p>
-                    {props.data.name}
-                </p>
-            </div>
+            <Link to={'/?projectId=' + props.data._id}>
+                <div
+                    className={"project-card " + (props.data._id === selectedProject ? "project-card-selected" : null)}
+                    onClick={() => formatSelectedProject(props.data_id)}
+                >
+                    <img src={props.data.coverImage} onClick={toggle}></img>
+                    <p>
+                        {props.data.name}
+                    </p>
+                </div>
+            </Link>
             <ModalPanel isOpen={isOpen}>
                 <JobProjectForm hide={toggle} data={props.data} formType="project" />
             </ModalPanel>

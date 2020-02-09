@@ -37,4 +37,6 @@ body {
   --greenGradient: linear-gradient(to right top, #3bdd68, #a1ebb6);
   --greenShadow: 0px 4px 15px #a1ebb6;
   --greyText: #5e5e5e;
+  --lightGrey: #c5c5c5;
+  --greenTheme: #3bdd68;
 }

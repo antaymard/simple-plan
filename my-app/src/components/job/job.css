@@ -1,84 +1,111 @@
 .job-card {
-    background-color: white;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 25px 20px;
-    margin-bottom: 30px;
+  background-color: white;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 25px 20px;
+  margin-bottom: 30px;
 }
 
+/* BACKBROUND ANIMATION */
+
+.job-card-inProgress {
+  background-color: rgb(228, 255, 235);
+}
+
+/* END OF BACKGROUND ANIMATION */
+
 .job-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 .job-header .more-button {
-    border: none;
-    background-color: white;
-    color: #C5C5C5;
+  border: none;
+  background-color: transparent;
+  color: var(--lightGrey);
 }
+.job-header .inProgress-button {
+  border: none;
+  background-color: transparent;
+  color: var(--lightGrey);
+  transition: 0.2s;
+}
+.job-header .inProgress-button:hover {
+  color: var(--greenTheme);
+}
+
 .job-header .weekNumberSection {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .weekNumbers {
-    color: white;
-    height: 22px;
-    width: 22px;
-    border-radius: 8px;
-    font-size: 12px;
-    margin-right: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  color: white;
+  height: 22px;
+  width: 22px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .job-header .weekNumbers:first-of-type {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .weekNumbers-now {
-    background: var(--orangeGradient);
-    font-weight: bold;   
+  background: var(--orangeGradient);
+  font-weight: bold;
 }
 .weekNumbers-future {
-    background: var(--lightGrey);
+  background: var(--lightGrey);
 }
 
 .job-card h1 {
-    font-weight: bold;
-    font-size: 14px;
-    color: var(--blueTheme);
-    margin-top: 17px;
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--blueTheme);
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 .job-card h2 {
-    font-weight: normal;
-    font-size: 12px;
-    color: var(--orangeTheme);
-    text-decoration: underline;
+  font-weight: normal;
+  font-size: 12px;
+  color: var(--orangeTheme);
+  text-decoration: underline;
+}
+.job-project a {
+  color: var(--orangeTheme);
+  text-decoration: none;
+  transition: 0.2s;
+}
+.job-project a:hover {
+  color: var(--blueTheme);
 }
 .job-description {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #5E5E5E;
-    height : auto;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #5e5e5e;
+  height: auto;
 }
 .job-card .deadline-section {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: -20px;
-    margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -20px;
+  margin-top: 15px;
 }
 .job-card .deadline-icon {
-    background : var(--redGradient);
-    height: 22px;
-    width: 22px;
-    border-radius: 50%;
-    text-align: center;
-    margin-right: 10px;
+  background: var(--redGradient);
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  text-align: center;
+  margin-right: 10px;
 }
 .job-card .deadline-section span {
-    color: var(--greyText);
+  color: var(--greyText);
 }
