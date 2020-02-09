@@ -6,7 +6,7 @@ import './sidebar.css';
 
 function Sidebar() {
 
-    const [ logStatus, setLogStatus ] = useStore('logStatusStore');
+    const [logStatus, setLogStatus] = useStore('logStatusStore');
 
     const logout = () => {
         localStorage.removeItem('token');
@@ -19,13 +19,12 @@ function Sidebar() {
                 ??
             </div>
             <div className='link-section'>
-                
+
             </div>
-            {/* <Link to='/ptdr'>
-                OMG
-            </Link> */}
+            <Link to='/'>Ho</Link>
+            <Link to='/my-projects'>Pro</Link>
             {/* <button onClick={logout}>DEC</button> */}
-            <img alt="Profile" src='https://image.noelshack.com/fichiers/2019/47/2/1574165544-dsc03730nb.jpg'/>
+            <img alt="Profile" src='https://image.noelshack.com/fichiers/2019/47/2/1574165544-dsc03730nb.jpg' />
         </div>
     )
 };

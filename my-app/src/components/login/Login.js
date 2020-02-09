@@ -7,14 +7,14 @@ import './login.css';
 
 const Login = () => {
 
-    const [ loginData, setLoginData ] = useState({ email : '', password : ""}); 
-    const [ signData, setSignData ] = useState({
-        fName : "",
-        lName : "",
-        email : "",
-        password : ""
-    });   
-    const [ logStatus, setLogStatus ] = useStore('logStatusStore');
+    const [loginData, setLoginData] = useState({ email: '', password: "" });
+    const [signData, setSignData] = useState({
+        fName: "",
+        lName: "",
+        email: "",
+        password: ""
+    });
+    const [logStatus, setLogStatus] = useStore('logStatusStore');
 
     const handleLoginChange = (e) => {
         let obj = loginData;
@@ -29,41 +29,41 @@ const Login = () => {
     }
 
     const login = () => {
-            if(!Object.values(loginData).some(x => (x === null || x === ''))) {
+        if (!Object.values(loginData).some(x => (x === null || x === ''))) {
             axios.post('/authenticate', loginData)
-            .then( res => {
-                console.log(res.data);
-                if (res.data.success) {
-                    localStorage.setItem('token', res.data.token);
-                    setLogStatus(true);    
-                    toast("Connexion réussie",
-                        { type : toast.TYPE.SUCCESS }
-                    )
-                } else {
-                    toast(res.data.message,
-                        { type : toast.TYPE.ERROR }
-                    )
-                }
-            })
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.success) {
+                        localStorage.setItem('token', res.data.token);
+                        setLogStatus(true);
+                        toast("Connexion réussie",
+                            { type: toast.TYPE.SUCCESS }
+                        )
+                    } else {
+                        toast(res.data.message,
+                            { type: toast.TYPE.ERROR }
+                        )
+                    }
+                })
         } else {
             toast('Veuillez remplir tous les champs pour vous connecter',
-                { type : toast.TYPE.WARNING }
+                { type: toast.TYPE.WARNING }
             )
         }
     }
 
     const sign = () => {
-        if(!Object.values(signData).some(x => (x === null || x === ''))) {
+        if (!Object.values(signData).some(x => (x === null || x === ''))) {
             axios.post('/signup', signData)
-            .then( res => {
-                console.log(res.data)
-                if (res.data.success) {
-                    toast(res.data.message, { type : toast.TYPE.SUCCESS})
-                }
-            })
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.success) {
+                        toast(res.data.message, { type: toast.TYPE.SUCCESS })
+                    }
+                })
         } else {
             toast('Veuillez remplir tous les champs pour créer un compte',
-                { type : toast.TYPE.WARNING }
+                { type: toast.TYPE.WARNING }
             )
         }
     }
@@ -71,7 +71,6 @@ const Login = () => {
 
     return (
         <div className="loginDiv">
-            { console.log(loginData)}
             <h1>Gérez vos projets simplement</h1>
             <div className='row'>
                 <div className='col d-flex flex-column'>

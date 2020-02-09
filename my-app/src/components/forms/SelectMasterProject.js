@@ -1,25 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const SelectMasterProject = (props) => {
 
-    const [ projectList, setProjectList ] = useState([]);
-    
-    useEffect(() => {
-        axios.get('/api/projects', {
-            headers : {
-                "x-access-token" : localStorage.getItem('token')
-            }
-        })
-        .then(res => {
-            setProjectList(res.data);
-        })
-        .catch(err => console.log(err))
-    }, [])
+    const projects = useSelector(state => state.projects);
 
     const renderOptions = () => {
-        return projectList.map((item, i) => {
-        return <option key={i} value={item._id}>{item.name}</option>
+        return projects.map((item, i) => {
+            return <option key={i} value={item._id}>{item.name}</option>
         })
     }
 
