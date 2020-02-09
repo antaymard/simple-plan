@@ -2,6 +2,7 @@ import React from 'react';
 import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 import Calendar from 'react-calendar';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
+import { Link } from 'react-router-dom';
 
 
 const DashboardPage = () => {
@@ -20,7 +21,9 @@ const DashboardPage = () => {
                     <ProjectsContainer />
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
-                    <h1>Dashboard</h1>
+                    <Link to="/">
+                        <h1>Dashboard</h1>
+                    </Link>
                     <h2>Semaine 6</h2>
                     <JobsContainer />
                 </div>
