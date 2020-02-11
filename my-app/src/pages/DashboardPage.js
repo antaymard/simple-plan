@@ -3,7 +3,7 @@ import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 import Calendar from 'react-calendar';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
 import { Link } from 'react-router-dom';
-
+import moment from "moment";
 
 const DashboardPage = () => {
     return (
@@ -24,7 +24,7 @@ const DashboardPage = () => {
                     <Link to="/">
                         <h1>Dashboard</h1>
                     </Link>
-                    <h2>Semaine 6</h2>
+                    <h2>Semaine {moment().format('W')}</h2>
                     <JobsContainer />
                 </div>
             </div>

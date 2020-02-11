@@ -1,21 +1,12 @@
-const jobReducer = (state = [], action) => {
-    switch (action.type) {
+const jobReducer = (state = [], { type, payload }) => {
+    switch (type) {
         case "UPDATE_JOBS":
-            return action.payload;
+            return payload;
         case "UPDATE_JOB":
-            let nState = state;
-            // update the object in the array
-            // nState.map((e) => {
-            //     if (e._id === action.payload._id) {
-            //         console.log(e);
-            //         console.log(action.payload)
-            //         e = action.payload;
-            //     }
-            // })
             console.log(state)
-            return state;
+            return payload;
         default:
-            return state;
+            return [];
     }
 }
 

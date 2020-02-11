@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const projectReducer = (state = [], action) => {
-    switch (action.type) {
+const projectReducer = (state = [], { type, payload }) => {
+    switch (type) {
         case "UPDATE_PROJECTS":
-            return action.payload;
+            return payload;
         default:
             return state;
     }

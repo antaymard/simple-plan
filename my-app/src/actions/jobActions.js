@@ -1,18 +1,16 @@
 import axios from "axios";
 import queryString from 'query-string';
 
-// MIDDLEWARE
 export const getJobs = (options) => {
     return (dispatch) => {
         // Local action HERE dispatched
-        console.log(options)
+        // console.log(options)
         axios.get('/api/jobs?' + queryString.stringify(options), {
             headers: {
                 "x-access-token": localStorage.getItem('token')
             }
         })
             .then(res => {
-                console.log(res.data);
                 dispatch({
                     type: "UPDATE_JOBS",
                     payload: res.data
@@ -21,11 +19,14 @@ export const getJobs = (options) => {
     }
 }
 
-export const updateJob = (data) => {
-    return (dispatch) => {
+// Reçoit 
+export const updateJob = (newJobData) => {
+    return (dispatch, getState) => {
+        const { jobs } = getState();
+        console.log(jobs)
         // Local here
         axios.put('/api/job',
-            data,
+            newJobData,
             {
                 headers: {
                     "x-access-token": localStorage.getItem('token')
@@ -34,9 +35,10 @@ export const updateJob = (data) => {
             })
             .then(res => {
                 if (res.data === "ok") {
+                    console.log(res.data)
                     dispatch({
                         type: "UPDATE_JOB",
-                        payload: []
+                        payload: jobs
                     })
                 }
             })

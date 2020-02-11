@@ -2,6 +2,7 @@ import React from 'react';
 import { useStore } from 'react-hookstore';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
+import NowProject from './NowProject'
 
 
 function Sidebar() {
@@ -15,9 +16,7 @@ function Sidebar() {
 
     return (
         <div className="app-sidebar">
-            <div className='workingStatus'>
-                ??
-            </div>
+            <NowProject />
             <div className='link-section'>
 
             </div>

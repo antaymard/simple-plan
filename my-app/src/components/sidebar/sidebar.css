@@ -11,6 +11,7 @@
   padding-bottom: 20px;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 .app-sidebar img {
   width: 40px;
@@ -18,7 +19,10 @@
   border-radius: 50%;
 }
 
-.app-sidebar .workingStatus {
+.app-sidebar .workingSection {
+  position: relative;
+}
+.app-sidebar .workingButton {
   height: 50px;
   width: 50px;
   background: var(--greenGradient);
@@ -27,4 +31,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  border: none;
+  /* z-index: 3; */
+}
+.app-sidebar .workingPopup {
+  background-color: white;
+  position: absolute;
+  height: 190px;
+  width: 400px;
+  top: -10px;
+  left: -10px;
+  /* z-index: 10; */
+  border-radius: 25px;
+  box-shadow: var(--blackShadow);
+  z-index: -1;
 }
