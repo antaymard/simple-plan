@@ -4,6 +4,7 @@ import './job.css';
 
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { updateJob } from '../../actions/jobActions';
 
 import Type from '../type/Type.js';
 import ProgressBar from '../progressBar/ProgressBar.js';
@@ -15,13 +16,10 @@ import JobProjectForm from '../forms/JobProjectForm.js';
 import CurvedArrow from '../icons/CurvedArrow.js';
 import DeadlineFlag from '../icons/DeadlineFlag.js';
 
-import { updateJob } from '../../actions/jobActions';
-
 
 function Job(props) {
 
     const { isOpen, toggle } = useModal();
-
     const dispatch = useDispatch();
 
     const setToActive = () => {

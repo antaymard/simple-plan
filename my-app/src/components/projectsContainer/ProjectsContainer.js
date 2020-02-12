@@ -21,7 +21,7 @@ const ProjectsContainer = (props) => {
 
     useEffect(() => {
         dispatch(getProjects());
-    }, [])
+    }, [filter])
 
     const renderProjectsList = () => {
         if (filter === "all") {
