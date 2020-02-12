@@ -11,11 +11,13 @@ import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 
+const devTools = process.env.NODE_ENV === 'production' ? null : window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_ && window._REDUX_DEVTOOLS_EXTENSION_COMPOSE_();
+
 const store = createStore(
     rootReducer,
     compose(
         applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        devTools
     )
 );
 
