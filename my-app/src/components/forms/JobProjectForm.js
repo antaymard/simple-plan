@@ -58,6 +58,7 @@ const JobProjectForm = (props) => {
     }, [])
 
     const handleChange = (e) => {
+        console.log(e.target.value)
         let obj = formData;
         obj[e.target.name] = e.target.value;
         setFormData({ ...formData, ...obj });
@@ -210,13 +211,24 @@ const JobProjectForm = (props) => {
                 </div>
             </>
         )
-    } else if (props.formType === 'project') {
+    }
+
+    // Project form
+    else if (props.formType === 'project') {
         return (
             <>
                 <h1>{props.data ? "MODIFICATION JOB" : "NOUVEAU JOB"}</h1>
                 <div className='input-group'>
                     <p>Nom</p>
                     <input type='text' name="name" value={formData.name} onChange={handleChange}></input>
+                </div>
+                <div className='input-group'>
+                    <p>Status</p>
+                    <select onChange={handleChange} name="status">
+                        <option value="active">Actif</option>
+                        <option value="completed">Terminé</option>
+                        <option value="stopped">Arrêté</option>
+                    </select>
                 </div>
                 <div className='input-group'>
                     <p>Description</p>

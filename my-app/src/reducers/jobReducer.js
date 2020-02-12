@@ -3,10 +3,16 @@ const jobReducer = (state = [], { type, payload }) => {
         case "UPDATE_JOBS":
             return payload;
         case "UPDATE_JOB":
-            console.log(state)
-            return payload;
+            // update array with new job
+            return state.map(item => {
+                if (item._id === payload._id) {
+                    return payload;
+                } else {
+                    return item;
+                }
+            })
         default:
-            return [];
+            return state;
     }
 }
 

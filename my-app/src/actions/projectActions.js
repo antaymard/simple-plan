@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from "axios";
+import queryString from 'query-string';
 
 // export const getProjects = (payload) => {
 //     console.log(window.location)
@@ -21,7 +22,7 @@ export const getProjects = (options) => {
     return (dispatch) => {
         // Local action HERE dispatched
 
-        axios.get('/api/projects', {
+        axios.get('/api/projects?' + queryString.stringify(options), {
             headers: {
                 "x-access-token": localStorage.getItem('token')
             }

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 // import { useStore } from 'react-hookstore';
 // import { Link } from 'react-router-dom';
 
@@ -7,7 +8,12 @@ import { useSelector } from 'react-redux';
 function NowProject() {
 
     const [display, setDisplay] = useState(false);
-    const jobs = useSelector(state => state.jobs)
+    const jobs = useSelector(state => state.jobs);
+
+    useEffect(() => {
+        // GET IsNow job
+
+    }, [])
 
     const displayPopup = () => {
         if (display) {
@@ -25,7 +31,7 @@ function NowProject() {
             <button className='workingButton'
                 onMouseEnter={() => setDisplay(true)}
 
-            >▷</button>
+            >{jobs.filter(i => i.isNow === true).length}</button>
             {displayPopup()}
         </div>
     )

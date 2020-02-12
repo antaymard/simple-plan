@@ -14,20 +14,21 @@ const JobsContainer = () => {
     const jobs = useSelector(state => state.jobs);
 
     useEffect(() => {
-        console.log("USEEFFECT CALLED")
-        let selectedProject = queryString.parse(window.location.search);
-        dispatch(getJobs(selectedProject));
+
+        let filters = queryString.parse(window.location.search);
+        // let selectedProject = queryString.parse(window.location.search);
+        dispatch(getJobs(filters));
     }, [window.location.search])
 
     const renderJobsList = (option) => {
-        console.log('renderJobsList');
-        let _jobs = jobs;
         if (option === "inProgress") {
-            return _jobs.filter(i => i.isInProgress === true).map(function (item, i) {
-                return <Job key={i} data={item} />
+            return jobs.map((item, i) => {
+                if (item.isInProgress) {
+                    return <Job key={i} data={item} />
+                }
             })
         } else {
-            return _jobs.map(function (item, i) {
+            return jobs.map((item, i) => {
                 if (item.isInProgress === false && item.status === option) {
                     return <Job key={i} data={item} />
                 }
@@ -37,7 +38,6 @@ const JobsContainer = () => {
 
     return (
         <>
-            {console.log(jobs)}
             <div className="subHeader">
                 {/* <JobsSubheader /> */}
             </div>

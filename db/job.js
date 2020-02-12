@@ -12,7 +12,7 @@ var jobSchema = new Schema({
   resLink: [{ type: String, default: null }],
   weekNumber: [{ type: Number, default: null }],
   deadline: { type: Date, default: null },
-  status: { type: String, default: "active" }, // active, completed, abandoned, deleted
+  status: { type: String, default: "active" }, // active, completed, stopped, deleted
   isInProgress: { type: Boolean, default: false },
   isNow: { type: Boolean, default: false }
 })

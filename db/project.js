@@ -13,7 +13,7 @@ var projectSchema = new Schema({
       url: { type: String, default: null }
     }
   ],
-  status: { type: String, default: "active" }
+  status: { type: String, default: "active" } // active, completed, stopped, deleted
 })
 
 var Project = mongoose.model('Project', projectSchema);

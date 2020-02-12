@@ -22,8 +22,8 @@ export const getJobs = (options) => {
 // Reçoit 
 export const updateJob = (newJobData) => {
     return (dispatch, getState) => {
-        const { jobs } = getState();
-        console.log(jobs)
+        // const { jobs } = getState();
+        // console.log(jobs)
         // Local here
         axios.put('/api/job',
             newJobData,
@@ -38,7 +38,7 @@ export const updateJob = (newJobData) => {
                     console.log(res.data)
                     dispatch({
                         type: "UPDATE_JOB",
-                        payload: jobs
+                        payload: newJobData
                     })
                 }
             })

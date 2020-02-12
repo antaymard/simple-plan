@@ -25,6 +25,13 @@
   color: var(--orangeTheme);
 }
 
+.project-container-header-section .filter-button {
+  border: none;
+  font-size: 12px;
+  background-color: transparent;
+  color: var(--orangeTheme);
+}
+
 .addProject-button {
   color: white;
   background: var(--orangeGradient);

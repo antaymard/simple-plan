@@ -3,9 +3,6 @@ var Job = require('../db/job');
 module.exports = function (router) {
 
     router.route('/job')
-        .get((req, res) => {
-            res.send('post job is working !');
-        })
         .post((req, res) => {
             console.log(req.body);
             var j = new Job(req.body);
@@ -25,6 +22,15 @@ module.exports = function (router) {
                 res.status(200).send('ok');
             })
         })
+    // Récupère un jog
+    router.get('/job', (req, res) => {
+        console.log("OMMMGGGGG")
+        console.log(req.query);
+        // Job.find({ _id: req.params.id }, (err, result) => {
+        //     if (err) throw err;
+        //     res.status(200).json(result);
+        // })
+    })
     // Supprime un job
     router.delete('/job/:id', (req, res) => {
         console.log(req.params);
