@@ -24,6 +24,7 @@ const JobsSubheader = () => {
                 In progress...
                 </div>
             <div className="footer">
+                <div></div>
                 <button className="addJob-button" onClick={toggle}>+ NEW JOB</button>
             </div>
             <ModalPanel isOpen={isOpen}>

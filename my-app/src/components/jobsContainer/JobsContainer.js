@@ -39,7 +39,7 @@ const JobsContainer = () => {
     return (
         <>
             <div className="subHeader">
-                {/* <JobsSubheader /> */}
+                <JobsSubheader />
             </div>
             <div className='jobsList-section'>
                 <h3>En cours</h3>
