@@ -8,7 +8,6 @@ import Type from '../type/Type.js';
 import SelectMasterProject from './SelectMasterProject.js';
 import useGetJobs from '../hooks/useGetJobs.js';
 import useGetProjects from '../hooks/useGetProjects.js';
-import { format } from 'path';
 
 const JobProjectForm = (props) => {
 

@@ -22,7 +22,9 @@ module.exports = function (router) {
                 res.status(200).send('ok');
             })
         })
-    // Récupère un jog
+
+    // Récupère un ou plusieurs
+    // Change job/:id
     router.get('/job', (req, res) => {
         console.log("OMMMGGGGG")
         console.log(req.query);
@@ -31,6 +33,7 @@ module.exports = function (router) {
         //     res.status(200).json(result);
         // })
     })
+
     // Supprime un job
     router.delete('/job/:id', (req, res) => {
         console.log(req.params);

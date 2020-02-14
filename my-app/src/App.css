@@ -33,7 +33,7 @@
   text-transform: uppercase;
   margin-bottom: 3px;
 }
-.viewport-right h2 {
+.viewport-right > h2 {
   font-size: 20px;
   color: var(--blueTheme);
   text-transform: uppercase;

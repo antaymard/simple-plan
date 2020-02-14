@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 import Calendar from 'react-calendar';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import moment from "moment";
 
-import useQuery from '../components/hooks/useQuery';
+// import queryString from 'query-string';
+import useQueryString from '../components/hooks/useQueryString';
 
-const DashboardPage = () => {
 
-    const queryParams = useQuery();
-    const [weekNumber, setWeekNumber] = useState(queryParams.get("weekNumber") || moment().format('W'));
+const DashboardPage = (props) => {
 
-    // check https://developer.mozilla.org/fr/docs/Web/API/URLSearchParams
+    // const [value, onSetValue] = useQueryString(7);
+    let { path } = useRouteMatch();
 
     useEffect(() => {
-        console.log("changing");
-        console.log(weekNumber)
-        setWeekNumber(queryParams.get("weekNumber"));
-    }, [window.location.search])
+        // onSetValue("ptdr")
+    }, [])
 
-    const updateQuery = (key, newValue) => {
-        queryParams.set(key, newValue);
-        let newQueryString = queryParams.toString();
-
-        return newQueryString;
-    }
-
+    // const updateQuery = () => {
+    //     let params = queryString.parse(props.location.search);
+    //     return params;
+    // }
 
     return (
         <>
@@ -43,17 +38,17 @@ const DashboardPage = () => {
                     <ProjectsContainer />
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
-                    <Link to="/">
+                    <Link to={path}>
                         <h1>Dashboard</h1>
                     </Link>
                     <h2>
-                        <Link to={"/?" + updateQuery('weekNumber', moment().format("W"))} >
+                        <Link to={path + "?weekNumber=" + moment().format("W")} >
                             Semaine {moment().format('W')}
                         </Link>
-                        <Link to={"/?" + updateQuery('weekNumber', weekNumber - 1)}>
+                        <Link to={path}>
                             🡠
                         </Link>
-                        <Link to={"/?" + updateQuery('weekNumber', Number(weekNumber) + 1)}>
+                        <Link to={path}>
                             🡢
                         </Link>
                     </h2>

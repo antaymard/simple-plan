@@ -54,7 +54,6 @@ const ProjectsContainer = (props) => {
 
     return (
         <>
-            {console.log(filter)}
             <div className="project-container-header">
                 <div className="project-container-header-section">
                     <h1>PROJETS ({projects.length})</h1>
