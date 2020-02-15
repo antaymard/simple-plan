@@ -22,9 +22,22 @@ function Job(props) {
     const { isOpen, toggle } = useModal();
     const dispatch = useDispatch();
 
+
+    // TO MERGE AND ONLY UPDATE ONE PROP
+
     const setToActive = () => {
         let d = props.data;
         d.isInProgress = !d.isInProgress;
+        dispatch(updateJob(d));
+    }
+
+    const changeStatus = (status) => {
+        let d = props.data;
+        if (props.data.status === "completed") {
+            d.status = 'active'
+        } else {
+            d.status = "completed"
+        }
         dispatch(updateJob(d));
     }
 
@@ -68,6 +81,9 @@ function Job(props) {
                 <ProgressBar progress={props.data.progress}
                     color={props.data.type}
                 />
+                <button onClick={() => changeStatus("completed")}>
+                    DONE
+                </button>
             </div>
             <ModalPanel isOpen={isOpen}>
                 <JobProjectForm hide={toggle} data={props.data} formType="job" />

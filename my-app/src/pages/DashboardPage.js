@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 import Calendar from 'react-calendar';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import moment from "moment";
 
 // import queryString from 'query-string';
@@ -11,17 +11,16 @@ import useQueryString from '../components/hooks/useQueryString';
 
 const DashboardPage = (props) => {
 
-    // const [value, onSetValue] = useQueryString(7);
     let { path } = useRouteMatch();
+    const location = useLocation();
+    const [weekNumber, setWeeknumber] = useState(Number(moment().format('W')));
 
     useEffect(() => {
-        // onSetValue("ptdr")
-    }, [])
-
-    // const updateQuery = () => {
-    //     let params = queryString.parse(props.location.search);
-    //     return params;
-    // }
+        const searchParams = new URLSearchParams(location.search);
+        if (searchParams.get('weekNumber')) {
+            setWeeknumber(Number(searchParams.get("weekNumber")))
+        }
+    }, [location])
 
     return (
         <>
@@ -43,12 +42,12 @@ const DashboardPage = (props) => {
                     </Link>
                     <h2>
                         <Link to={path + "?weekNumber=" + moment().format("W")} >
-                            Semaine {moment().format('W')}
+                            Semaine {weekNumber}
                         </Link>
-                        <Link to={path}>
+                        <Link to={path + "?weekNumber=" + (weekNumber - 1)}>
                             🡠
                         </Link>
-                        <Link to={path}>
+                        <Link to={path + "?weekNumber=" + (weekNumber + 1)}>
                             🡢
                         </Link>
                     </h2>
