@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { createStore, useStore } from 'react-hookstore';
 import { ToastContainer, toast } from 'react-toastify';
-import Calendar from 'react-calendar'; // REMOVE
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import './App.css';
 
 import Sidebar from './components/sidebar/Sidebar.js';
 import Login from './components/login/Login.js';
+import DashboardPage from './pages/DashboardPage';
 
-// REMOVE
-import ProjectsContainer from './components/projectsContainer/ProjectsContainer.js';
+import routes from './routes/routes'; // TO REMOVE
 
-import routes from './routes/routes';
+
 
 // TO REMOVE
 createStore('jobFilterStore', {});
@@ -34,33 +33,29 @@ function App() {
     if (localStorage.getItem('token')) {
       setLogStatus(true);
     }
+    console.log(logStatus)
   })
 
   // RENDER THE APP
-  if (logStatus) {
-    return (
-      <div className="app">
-        <Router>
-          <Sidebar />
-          <Switch>
-            {routes.map(route => (
-              <Route key={route.name} {...route} />
-            ))}
-          </Switch>
-        </Router>
-        <ToastContainer />
-      </div>
-    )
-  }
-  // RENDER LOGIN PAGE 
-  else {
-    return (
-      <div className="app">
-        <Login />
-      </div>
-    )
-  }
+  return (
 
+    <div className="app">
+      <Router>
+        <Sidebar />
+        <Switch>
+          <Route path='/' exact>
+            {logStatus ? <Redirect to='/dashboard' /> : <Login />}
+          </Route>
+          <Route path='/dashboard'>
+            <DashboardPage />
+          </Route>
+          <Route path='/login'>
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+  )
 }
 
 export default App;

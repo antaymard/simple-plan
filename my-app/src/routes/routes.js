@@ -1,6 +1,7 @@
+// FILE TO REMOVE
+
 import DashboardPage from '../pages/DashboardPage.js';
 import MyProjectsPage from '../pages/MyProjectsPage';
-
 
 const routes = [
   {
@@ -10,10 +11,14 @@ const routes = [
     component: DashboardPage
   },
   {
-    path: '/my-projects',
-    name: 'My Projects',
-    component: MyProjectsPage,
+    path: "/edit",
+    component: MyProjectsPage
   },
+  // {
+  //   path: '/my-projects',
+  //   name: 'My Projects',
+  //   component: MyProjectsPage,
+  // },
 ];
 
 export default routes;

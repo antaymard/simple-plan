@@ -20,7 +20,7 @@ function Sidebar() {
             <div className='link-section'>
 
             </div>
-            <Link to='/'>Ho</Link>
+            <Link to='/dashboard'>Ho</Link>
             <Link to='/my-projects'>Pro</Link>
             {/* <button onClick={logout}>DEC</button> */}
             <img alt="Profile" src='https://image.noelshack.com/fichiers/2019/47/2/1574165544-dsc03730nb.jpg' />

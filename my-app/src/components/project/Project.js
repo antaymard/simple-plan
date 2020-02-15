@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch, useParams } from 'react-router-dom';
 import './project.css';
 
 import useModal from '../modalPanel/useModal.js';
@@ -9,24 +9,24 @@ import queryString from 'query-string';
 
 function Project(props) {
 
+    const id = useRouteMatch();
+
     const { isOpen, toggle } = useModal();
     const [selectedProject, setSelectedProject] = useState('');
+    const { url } = useRouteMatch();
 
     // TO REVIEW
     useEffect(() => {
+        //console.log(queryString.parse())
         setSelectedProject(queryString.parse(window.location.search).projectId);
     });
 
-    const formatSelectedProject = (id) => {
-        setSelectedProject(id);
-    }
-
     return (
         <>
-            <Link to={'/?projectId=' + props.data._id}>
+            <Link to={url + '/p?projectId=' + props.data._id}>
                 <div
                     className={"project-card " + (props.data._id === selectedProject ? "project-card-selected" : null)}
-                    onClick={() => formatSelectedProject(props.data_id)}
+                    onClick={() => setSelectedProject(props.data_id)}
                 >
                     <img src={props.data.coverImage} onClick={toggle}></img>
                     <p>

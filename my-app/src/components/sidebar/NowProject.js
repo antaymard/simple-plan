@@ -54,7 +54,6 @@ function NowProject() {
             headers: { "x-access-token": localStorage.getItem('token') }
         })
             .then(res => {
-                console.log(res.data)
                 setNowJob(res.data[0]);
             })
             .catch(err => { throw err })

@@ -27,17 +27,28 @@ function Job(props) {
 
     const setToActive = () => {
         let d = props.data;
+        if (d.status !== "active") {
+            d.status = 'active'
+        }
         d.isInProgress = !d.isInProgress;
         dispatch(updateJob(d));
     }
 
     const changeStatus = (status) => {
         let d = props.data;
+        // if completed, turn active
         if (props.data.status === "completed") {
             d.status = 'active'
-        } else {
+        }
+        // if active, turn completed
+        else {
+            // if was in progress, remove it
+            if (d.isInProgress) {
+                d.isInProgress = false;
+            }
             d.status = "completed"
         }
+        console.log(d)
         dispatch(updateJob(d));
     }
 

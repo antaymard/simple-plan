@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getProjects } from '../../actions/projectActions';
 
 import "./projectsContainer.css";
@@ -8,7 +9,6 @@ import Project from '../project/Project.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
 import useModal from '../modalPanel/useModal.js';
 import JobProjectForm from '../forms/JobProjectForm.js';
-
 
 const ProjectsContainer = (props) => {
 
@@ -21,8 +21,9 @@ const ProjectsContainer = (props) => {
 
     useEffect(() => {
         dispatch(getProjects());
-    }, [filter])
+    }, [])
 
+    // Only display filtered items
     const renderProjectsList = () => {
         if (filter === "all") {
             return projects.map((item, i) => {
@@ -41,6 +42,7 @@ const ProjectsContainer = (props) => {
         }
     }
 
+    // Change filter
     const onFilterClick = () => {
         let a = ["active", 'completed', "stopped", "deleted", "all"];
         let i = a.indexOf(filter);
