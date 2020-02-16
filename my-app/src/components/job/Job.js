@@ -78,7 +78,7 @@ function Job(props) {
                 <h1>{props.data.name}</h1>
                 <h2 className="d-flex flex-row job-project">
                     <CurvedArrow />
-                    <Link to={url + '?projectId=' + props.data.projectId._id}>
+                    <Link to={url + '/' + props.data.projectId._id}>
                         <span style={{ marginLeft: "5px" }}>{props.data.projectId ? " " + props.data.projectId.name : <i>Pas de projet</i>}</span>
                     </Link>
                 </h2>

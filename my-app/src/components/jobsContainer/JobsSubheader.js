@@ -23,13 +23,6 @@ const JobsSubheader = () => {
 
     }, [])
 
-    const createNewJob = () => {
-        console.log("creating new job =========");
-
-        dispatch(addBlankJob(queryString.parse(search)))
-
-    }
-
     return (
         <div className="jobs-subheader">
             <div className="header">
