@@ -19,12 +19,12 @@ const JobsContainer = () => {
     const location = useLocation()
 
     useEffect(() => {
-        let filters = queryString.parse(location.search)
+        let filters = queryString.parse(location.search);
+        console.log(filters)
         if (id) {
-            console.log("id is provided");
+            filters.projectId = id;
         }
         dispatch(getJobs(filters));
-        console.log(jobs.length)
     }, [location])
 
     const renderJobsList = (option) => {

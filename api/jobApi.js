@@ -23,15 +23,14 @@ module.exports = function (router) {
             })
         })
 
-    // Récupère un ou plusieurs
-    // Change job/:id
-    router.get('/job', (req, res) => {
+    // Récupère un
+    router.get('/job/:id', (req, res) => {
         console.log("OMMMGGGGG")
-        console.log(req.query);
-        // Job.find({ _id: req.params.id }, (err, result) => {
-        //     if (err) throw err;
-        //     res.status(200).json(result);
-        // })
+        console.log(req.params);
+        Job.find({ _id: req.params.id }, (err, result) => {
+            if (err) throw err;
+            res.status(200).json(result);
+        })
     })
 
     // Supprime un job

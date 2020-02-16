@@ -33,7 +33,7 @@ body {
   --blueTheme: #2d466a;
   --orangeGradient: linear-gradient(to right top, #fd7746, #ff956d);
   --orangeTheme: #fc7948;
-  --backgroundColor: #f2f3f7;
+  --backgroundColor: #f0f1f5;
   --redGradient: linear-gradient(to right top, #ee7070, #f0a0a0);
   --greenGradient: linear-gradient(to right top, #3bdd68, #a1ebb6);
   --greenShadow: 0px 4px 15px #a1ebb6;

@@ -9,7 +9,7 @@ import queryString from 'query-string';
 
 function Project(props) {
 
-    const id = useRouteMatch();
+    const id = useParams();
 
     const { isOpen, toggle } = useModal();
     const [selectedProject, setSelectedProject] = useState('');
@@ -18,14 +18,14 @@ function Project(props) {
     // TO REVIEW
     useEffect(() => {
         //console.log(queryString.parse())
-        setSelectedProject(queryString.parse(window.location.search).projectId);
+        // setSelectedProject(queryString.parse(window.location.search).projectId);
     });
 
     return (
         <>
-            <Link to={url + '/p?projectId=' + props.data._id}>
+            <Link to={'/dashboard/p/' + props.data._id}>
                 <div
-                    className={"project-card " + (props.data._id === selectedProject ? "project-card-selected" : null)}
+                    className={"project-card " + (props.data._id === id ? "project-card-selected" : null)}
                     onClick={() => setSelectedProject(props.data_id)}
                 >
                     <img src={props.data.coverImage} onClick={toggle}></img>

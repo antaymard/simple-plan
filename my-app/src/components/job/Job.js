@@ -2,7 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import './job.css';
 
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateJob } from '../../actions/jobActions';
 
@@ -21,7 +21,7 @@ function Job(props) {
 
     const { isOpen, toggle } = useModal();
     const dispatch = useDispatch();
-
+    const { url } = useRouteMatch();
 
     // TO MERGE AND ONLY UPDATE ONE PROP
 
@@ -46,6 +46,7 @@ function Job(props) {
             if (d.isInProgress) {
                 d.isInProgress = false;
             }
+            d.progress = 100;
             d.status = "completed"
         }
         console.log(d)
@@ -77,7 +78,7 @@ function Job(props) {
                 <h1>{props.data.name}</h1>
                 <h2 className="d-flex flex-row job-project">
                     <CurvedArrow />
-                    <Link to={'/?projectId=' + props.data.projectId._id}>
+                    <Link to={url + '?projectId=' + props.data.projectId._id}>
                         <span style={{ marginLeft: "5px" }}>{props.data.projectId ? " " + props.data.projectId.name : <i>Pas de projet</i>}</span>
                     </Link>
                 </h2>

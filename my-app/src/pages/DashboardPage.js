@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 import Calendar from 'react-calendar';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
-import { Link, useRouteMatch, useLocation, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import moment from "moment";
 
 // import queryString from 'query-string';
@@ -37,7 +37,7 @@ const DashboardPage = (props) => {
                     <ProjectsContainer />
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
-                    <Link to={url}>
+                    <Link to={'/dashboard/p'}>
                         <h1>Dashboard</h1>
                     </Link>
                     <h2>

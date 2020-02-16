@@ -5,15 +5,15 @@ var User = require('../db/user.js');
 //   next();
 // }
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
 
   console.log("UserFromToken middleware called");
-  
+
   let token = req.body.token || req.params.token || req.query.token || req.headers['x-access-token'];
 
   if (token) {
     User
-      .findOne({ "authToken.token" : token })
+      .findOne({ "authToken.token": token })
       .select(" -password ")
       .exec((err, user) => {
         // Error
@@ -21,14 +21,18 @@ module.exports = function(req, res, next) {
           console.error("APIROUTE MIDDLEWARE ERR");
           console.error(err);
           return res.status(500).json({
-            success : false,
-            message : "apiRoutes MIDDLEWARE error",
-            error : err
+            success: false,
+            message: "apiRoutes MIDDLEWARE error",
+            error: err
           })
         }
         // Token est ok
         if (user) {
           console.log('MIDDLEWARE - token validated');
+          console.log('=== QUERY')
+          console.log(res.query);
+          console.log('=== PARAMS')
+          console.log(req.params)
           req.authUser = user; // injecter les infos de l'user, pas seulement l'id
           next();
         }
@@ -37,8 +41,8 @@ module.exports = function(req, res, next) {
           console.log("MIDDLEWARE - Token matches no user");
           req.authUser = null;
           return res.status(401).json({
-            success : false,
-            message : "Bad connexion token"
+            success: false,
+            message: "Bad connexion token"
           })
           // next(); // nexter vraiment ? pas de stop ici ?
         }
@@ -48,8 +52,8 @@ module.exports = function(req, res, next) {
     req.authUser = null;
     // next(); // nexter vraiment ? pas de stop ici ?
     return res.status(403).send({
-			success: false,
-			message: 'No token provided.'
-		});
-	}
+      success: false,
+      message: 'No token provided.'
+    });
+  }
 };

@@ -10,8 +10,6 @@ import Sidebar from './components/sidebar/Sidebar.js';
 import Login from './components/login/Login.js';
 import DashboardPage from './pages/DashboardPage';
 
-import routes from './routes/routes'; // TO REMOVE
-
 
 
 // TO REMOVE
@@ -40,13 +38,20 @@ function App() {
   return (
 
     <div className="app">
+      {/* MAIN ROUTER */}
       <Router>
         <Sidebar />
         <Switch>
-          <Route path='/' exact>
-            {logStatus ? <Redirect to='/dashboard' /> : <Login />}
+          <Route exact path='/'>
+            {logStatus ? <Redirect to='/dashboard/p' /> : <Login />}
           </Route>
-          <Route path='/dashboard'>
+          <Route exact path='/dashboard'>
+            <Redirect to='/dashboard/p' />
+          </Route>
+          <Route exact path='/dashboard/p'>
+            <DashboardPage />
+          </Route>
+          <Route path="/dashboard/p/:id">
             <DashboardPage />
           </Route>
           <Route path='/login'>

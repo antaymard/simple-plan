@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { addBlankJob } from '../../actions/jobActions';
 
 import JobProjectForm from '../forms/JobProjectForm.js';
 import ModalPanel from '../modalPanel/ModalPanel.js';
@@ -9,11 +14,21 @@ import useModal from '../modalPanel/useModal.js';
 const JobsSubheader = () => {
 
     const { isOpen, toggle } = useModal();
+    const { search } = useLocation();
+    const jobs = useSelector(state => state.jobs)
+    const dispatch = useDispatch();
 
     useEffect(() => {
         // on init, get project infos
 
     }, [])
+
+    const createNewJob = () => {
+        console.log("creating new job =========");
+
+        dispatch(addBlankJob(queryString.parse(search)))
+
+    }
 
     return (
         <div className="jobs-subheader">
@@ -25,7 +40,7 @@ const JobsSubheader = () => {
                 </div>
             <div className="footer">
                 <div></div>
-                <button className="addJob-button" onClick={toggle}>+ NEW JOB</button>
+                <button className="addJob-button" onClick={createNewJob}>+ NEW JOB</button>
             </div>
             <ModalPanel isOpen={isOpen}>
                 <JobProjectForm hide={toggle} formType="job" />
