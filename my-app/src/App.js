@@ -42,20 +42,23 @@ function App() {
       <Router>
         <Sidebar />
         <Switch>
-          <Route exact path='/'>
-            {logStatus ? <Redirect to='/dashboard/p' /> : <Login />}
-          </Route>
-          <Route exact path='/dashboard'>
-            <Redirect to='/dashboard/p' />
-          </Route>
-          <Route exact path='/dashboard/p'>
+          <Route path='/dashboard/p'>
             <DashboardPage />
           </Route>
           <Route path="/dashboard/p/:id">
             <DashboardPage />
           </Route>
+          <Route path='/dashboard/j'>
+            <DashboardPage />
+          </Route>
+          <Route path="/dashboard/j/:id">
+            <DashboardPage />
+          </Route>
           <Route path='/login'>
             <Login />
+          </Route>
+          <Route path='/'>
+            {logStatus ? <Redirect to='/dashboard/p/' /> : <Login />}
           </Route>
         </Switch>
       </Router>

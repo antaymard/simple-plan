@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 import Calendar from 'react-calendar';
-import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
-import { Link, useRouteMatch, useLocation, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation, BrowserRouter as Router, Route, Switch, useParams } from 'react-router-dom';
 import moment from "moment";
 
 // import queryString from 'query-string';
 import useQueryString from '../components/hooks/useQueryString';
-
+import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
+import Edit from '../components/edit/JobEdit.js';
+import JobsContainer from '../components/jobsContainer/JobsContainer.js';
 
 const DashboardPage = (props) => {
 
@@ -51,7 +51,17 @@ const DashboardPage = (props) => {
                             🡢
                         </Link>
                     </h2>
-                    <JobsContainer />
+                    <Switch>
+                        {/* <Route path="/j/:id">
+                            <Edit />
+                        </Route>
+                        <Route path="/j">
+                            <Edit />
+                        </Route> */}
+                        <Route path="">
+                            <JobsContainer />
+                        </Route>
+                    </Switch>
                 </div>
             </div>
         </>

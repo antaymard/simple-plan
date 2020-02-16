@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -40,7 +40,8 @@ const JobsSubheader = () => {
                 </div>
             <div className="footer">
                 <div></div>
-                <button className="addJob-button" onClick={createNewJob}>+ NEW JOB</button>
+                <button className="addJob-button" onClick={toggle}>+ NEW JOB</button>
+                {/* <Link to='/dashboard/j' className="addJob-button">OMG</Link> */}
             </div>
             <ModalPanel isOpen={isOpen}>
                 <JobProjectForm hide={toggle} formType="job" />

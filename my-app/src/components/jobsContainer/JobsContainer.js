@@ -15,12 +15,15 @@ const JobsContainer = () => {
     const jobs = useSelector(state => state.jobs);
     const [showCompleted, setShowCompleted] = useState(false);
 
-    const { id } = useParams();
     const location = useLocation()
 
     useEffect(() => {
         let filters = queryString.parse(location.search);
         console.log(filters)
+        let id = location.pathname;
+        id = id.split('/');
+        let index = id.indexOf('p');
+        id = id[index + 1];
         if (id) {
             filters.projectId = id;
         }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useRouteMatch, useParams } from 'react-router-dom';
+import { Link, useRouteMatch, useParams, useLocation } from 'react-router-dom';
 import './project.css';
 
 import useModal from '../modalPanel/useModal.js';
@@ -9,24 +9,27 @@ import queryString from 'query-string';
 
 function Project(props) {
 
-    const id = useParams();
+    const { id } = useParams();
+    const [selectedProjectId, setSelectedProjectId] = useState();
 
     const { isOpen, toggle } = useModal();
-    const [selectedProject, setSelectedProject] = useState('');
-    const { url } = useRouteMatch();
+    let location = useLocation();
 
-    // TO REVIEW
+
+    // PASSER EN HOOK
     useEffect(() => {
-        //console.log(queryString.parse())
-        // setSelectedProject(queryString.parse(window.location.search).projectId);
-    });
+        let selected = location.pathname;
+        selected = selected.split('/');
+        let index = selected.indexOf('p');
+        selected = selected[index + 1];
+        setSelectedProjectId(selected);
+    }, [location]);
 
     return (
         <>
             <Link to={'/dashboard/p/' + props.data._id}>
                 <div
-                    className={"project-card " + (props.data._id === id ? "project-card-selected" : null)}
-                    onClick={() => setSelectedProject(props.data_id)}
+                    className={"project-card " + (props.data._id === selectedProjectId ? "project-card-selected" : null)}
                 >
                     <img src={props.data.coverImage} onClick={toggle}></img>
                     <p>

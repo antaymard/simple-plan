@@ -1,44 +1,45 @@
 .job-type {
-    border-radius: 8px;
-    padding: 5px 10px;
-    font-size: 12px;
-    cursor: pointer;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: white;
 }
 
 .job-type.typeColor-selected-learn {
-    background: var(--learnGradient);
-    box-shadow: var(--learnShadow);
-    color: white;
+  background: var(--learnGradient);
+  box-shadow: var(--learnShadow);
+  color: white;
 }
 .job-type.typeColor-selected-check {
-    background: var(--checkGradient);
-    box-shadow: var(--checkShadow);
-    color: white;
+  background: var(--checkGradient);
+  box-shadow: var(--checkShadow);
+  color: white;
 }
 .job-type.typeColor-selected-build {
-    background: var(--buildGradient);
-    box-shadow: var(--buildShadow);
-    color: white;
+  background: var(--buildGradient);
+  box-shadow: var(--buildShadow);
+  color: white;
 }
 .job-type.typeColor-selected-todo {
-    background: var(--todoGradient);
-    box-shadow: var(--todoShadow);
-    color: white;
+  background: var(--todoGradient);
+  box-shadow: var(--todoShadow);
+  color: white;
 }
 
 .job-type.typeColor-unselected-learn {
-    color: #FF93BC;
-    border: 1px solid #FF93BC;
+  color: #ff93bc;
+  border: 1px solid #ff93bc;
 }
 .job-type.typeColor-unselected-check {
-    color: #C7A897;
-    border: 1px solid #C7A897;
+  color: #c7a897;
+  border: 1px solid #c7a897;
 }
 .job-type.typeColor-unselected-build {
-    color: #66CFEE;
-    border: 1px solid #66CFEE;
+  color: #66cfee;
+  border: 1px solid #66cfee;
 }
 .job-type.typeColor-unselected-todo {
-    color: #CBCBDB;
-    border: 1px solid #CBCBDB;
+  color: #cbcbdb;
+  border: 1px solid #cbcbdb;
 }
