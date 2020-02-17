@@ -41,13 +41,13 @@ const DashboardPage = (props) => {
                         <h1>Dashboard</h1>
                     </Link>
                     <h2>
-                        <Link to={url + "?weekNumber=" + moment().format("W")} >
+                        <Link to={"?weekNumber=" + moment().format("W")} >
                             Semaine {weekNumber}
                         </Link>
-                        <Link to={url + "?weekNumber=" + (weekNumber - 1)}>
+                        <Link to={"?weekNumber=" + (weekNumber - 1)}>
                             🡠
                         </Link>
-                        <Link to={url + "?weekNumber=" + (weekNumber + 1)}>
+                        <Link to={"?weekNumber=" + (weekNumber + 1)}>
                             🡢
                         </Link>
                     </h2>
