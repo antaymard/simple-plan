@@ -50,6 +50,7 @@
 
 .jobsList-section {
   overflow-y: auto;
+  overflow-x: hidden;
   /* height : 500px; */
   position: relative;
 }
