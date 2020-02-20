@@ -74,7 +74,7 @@ function Job(props) {
                         >
                             {props.data.isInProgress ? '◼' : '▶️'}
                         </button>
-                        <button className="more-button" onClick={toggle}>•••</button>
+                        {/* <button className="more-button" onClick={toggle}>•••</button> */}
                     </div>
                 </div>
                 <Link
@@ -91,7 +91,8 @@ function Job(props) {
                         <span style={{ marginLeft: "5px" }}>{props.data.projectId ? " " + props.data.projectId.name : <i>Pas de projet</i>}</span>
                     </Link>
                 </h2>
-                <p className="job-description">                                           {props.data.description}
+                <p className="job-description">
+                    {props.data.description}
                 </p>
                 {props.data.deadline ? <div className="deadline-section">
                     <div className="deadline-icon">

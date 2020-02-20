@@ -1,6 +1,9 @@
 import axios from "axios";
 import queryString from 'query-string';
-import { ObjectId } from 'bson';
+
+let headers = {
+    "x-access-token": localStorage.getItem('token')
+};
 
 // merge les deux avec action local TODO
 
@@ -11,9 +14,7 @@ export const getJobs = (options) => {
         console.log("UPDATE JOBS ACTION FIRED - options are : ")
         console.log(options)
         axios.get('/api/jobs?' + queryString.stringify(options), {
-            headers: {
-                "x-access-token": localStorage.getItem('token')
-            }
+            headers: headers
         })
             .then(res => {
                 dispatch({
@@ -35,9 +36,7 @@ export const updateJob = (newData) => {
         axios.put('/api/job',
             newData,
             {
-                headers: {
-                    "x-access-token": localStorage.getItem('token')
-                },
+                headers: headers,
 
             })
             .then(res => {
@@ -53,13 +52,13 @@ export const updateJob = (newData) => {
 }
 
 export const newJob = (newJobData) => {
+    console.log("NEW JOB FIRED");
+    console.log(newJobData)
     return (dispatch) => {
         axios.post('/api/job',
             newJobData,
             {
-                headers: {
-                    "x-access-token": localStorage.getItem('token')
-                }
+                headers: headers
             })
             .then(res => {
                 console.log(res.data)
@@ -71,33 +70,51 @@ export const newJob = (newJobData) => {
     }
 }
 
-export const addBlankJob = (tempData) => {
+export const deleteJob = (jobId) => {
     return (dispatch) => {
-        console.log(tempData);
-        // create id
-        let id = new ObjectId();
-        tempData._id = id.toHexString();
-        tempData = {
-            createdOn: "2020-01-02T14:48:10.935Z",
-            name: "OMG",
-            description: "",
-            projectId: {
-                _id: 2
-            },
-            progress: 0,
-            type: "build",
-            resLink: [],
-            weekNumber: [],
-            deadline: "2020-02-20T23:00:00.000Z",
-            status: "active",
-            isInProgress: true,
-            isNow: false
-        }
-        // push in the array
-        console.log(tempData)
-        dispatch({
-            type: "ADD_JOB",
-            payload: tempData,
+        axios.delete('/api/job/' + jobId,
+            { headers: headers }
+        ).then(res => {
+            if (res.data === "ok") {
+                dispatch({
+                    type: 'REMOVE_JOB',
+                    payload: {
+                        idToRemove: jobId
+                    }
+                })
+            }
         })
     }
 }
+
+// TO REMOVE
+// export const addBlankJob = (tempData) => {
+//     return (dispatch) => {
+//         console.log(tempData);
+//         // create id
+//         let id = new ObjectId();
+//         tempData._id = id.toHexString();
+//         tempData = {
+//             createdOn: "2020-01-02T14:48:10.935Z",
+//             name: "OMG",
+//             description: "",
+//             projectId: {
+//                 _id: 2
+//             },
+//             progress: 0,
+//             type: "build",
+//             resLink: [],
+//             weekNumber: [],
+//             deadline: "2020-02-20T23:00:00.000Z",
+//             status: "active",
+//             isInProgress: true,
+//             isNow: false
+//         }
+//         // push in the array
+//         console.log(tempData)
+//         dispatch({
+//             type: "ADD_JOB",
+//             payload: tempData,
+//         })
+//     }
+// }

@@ -5,7 +5,7 @@
   flex-direction: column;
   padding: 50px;
   box-shadow: var(--blackShadow);
-  min-width: 900px;
+  min-width: 1100px;
   min-height: 75vh;
 }
 .edit-section-header {
@@ -23,7 +23,7 @@
 }
 
 .edit-section-content input[name="name"],
-.edit-section-content h1 {
+.edit-section-content h1#name {
   margin-top: 30px;
   font-size: 18px;
   color: var(--blueTheme);
@@ -47,13 +47,13 @@ h1#name.is-empty {
 h1#name.is-empty::after {
   content: "Click to add a title";
 }
-p#description.is-empty {
+#description.is-empty {
   background-color: white;
-  min-height: 60px;
+  min-height: 110px;
   color: var(--lightGrey);
   font-weight: normal;
 }
-p#description.is-empty::after {
+#description.is-empty::after {
   content: "Click to add a description";
   padding-left: 15px;
 }
@@ -65,7 +65,20 @@ p#description.is-empty::after {
 }
 .edit-label-name {
   color: var(--blueTheme);
-  font-size: 12px;
-  margin-top: 20px;
+  font-size: 13px;
+  margin-top: 25px;
   margin-bottom: 5px;
+}
+
+select[name="projectId"] {
+  color: var(--orangeTheme);
+  padding: 5px 10px 5px 35px;
+  border-radius: 5px;
+  border: none;
+  background: url("../../res/bottom-arrow.png") no-repeat 15px #fff;
+  background-size: 10px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* background-image: url(...); Add custom arrow */
 }

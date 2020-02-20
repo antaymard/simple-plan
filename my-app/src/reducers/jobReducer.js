@@ -6,6 +6,8 @@ const jobReducer = (state = [], { type, payload }) => {
             let _state = state.slice();
             _state.splice(0, 0, payload)
             return _state
+        case "REMOVE_JOB":
+            return state.filter(i => i._id !== payload.idToRemove);
         case "UPDATE_JOBS":
             return payload;
         case "UPDATE_JOB":

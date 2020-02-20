@@ -9,9 +9,17 @@ const Modal = (props) => {
     let { id } = useParams(); // object id. Get the data from the redux store
 
     let back = e => {
-        e.stopPropagation();
         history.goBack();
     }
+
+    const children = React.Children.map(props.children, (child, index) => {
+        return React.cloneElement(child, {
+            // index,
+            // isActive: index === this.state.activeIndex,
+            close: () => back()
+        });
+    });
+
 
     return (
         <div
@@ -19,7 +27,7 @@ const Modal = (props) => {
         // onClick={back}
         >
             <div className='modal-container'>
-                {props.children}
+                {children}
             </div>
         </div>
     )

@@ -41,6 +41,7 @@
   border-radius: 25px 0 25px 0;
   font-size: 14px;
   padding: 10px 18px;
+  margin: 0;
 }
 .jobs-subheader .footer a {
   color: var(--orangeTheme);

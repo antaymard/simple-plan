@@ -9,4 +9,9 @@
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(2px);
+  z-index: 1;
+}
+
+.modal-container {
+  z-index: 99;
 }
