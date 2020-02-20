@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
-import { Link, useRouteMatch, useLocation, BrowserRouter as Router, Route, Switch, useParams } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import moment from "moment";
 
 // import queryString from 'query-string';
@@ -51,17 +51,7 @@ const DashboardPage = (props) => {
                             🡢
                         </Link>
                     </h2>
-                    <Switch>
-                        {/* <Route path="/j/:id">
-                            <Edit />
-                        </Route>
-                        <Route path="/j">
-                            <Edit />
-                        </Route> */}
-                        <Route path="">
-                            <JobsContainer />
-                        </Route>
-                    </Switch>
+                    <JobsContainer />
                 </div>
             </div>
         </>

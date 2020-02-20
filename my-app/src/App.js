@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { createStore, useStore } from 'react-hookstore';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from 'react-router-dom';
 
 import './App.css';
 
 import Sidebar from './components/sidebar/Sidebar.js';
 import Login from './components/login/Login.js';
 import DashboardPage from './pages/DashboardPage';
-
-
+import Modal from './components/modal/Modal.js';
+import JobEdit from './components/edit/JobEdit.js'
 
 // TO REMOVE
 createStore('jobFilterStore', {});
@@ -26,6 +26,8 @@ toast.configure({
 function App() {
 
   const [logStatus, setLogStatus] = useStore('logStatusStore');
+  let location = useLocation();
+  let background = location.state && location.state.background;
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -39,29 +41,31 @@ function App() {
 
     <div className="app">
       {/* MAIN ROUTER */}
-      <Router>
-        <Sidebar />
-        <Switch>
-          <Route path='/dashboard/p'>
+      <Sidebar />
+      <Switch location={background || location}>
+        <Route path='/dashboard/p'>
+          <DashboardPage />
+        </Route>
+        {/* <Route path="/dashboard/p/:id">
             <DashboardPage />
-          </Route>
-          <Route path="/dashboard/p/:id">
+          </Route> */}
+        <Route path='/dashboard/j'>
+          {/* TODO : Add job view full screen */}
+          <p>LOL</p>
+        </Route>
+        {/* <Route path="/dashboard/j/:id">
             <DashboardPage />
-          </Route>
-          <Route path='/dashboard/j'>
-            <DashboardPage />
-          </Route>
-          <Route path="/dashboard/j/:id">
-            <DashboardPage />
-          </Route>
-          <Route path='/login'>
-            <Login />
-          </Route>
-          <Route path='/'>
-            {logStatus ? <Redirect to='/dashboard/p/' /> : <Login />}
-          </Route>
-        </Switch>
-      </Router>
+          </Route> */}
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/'>
+          {logStatus ? <Redirect to='/dashboard/p/' /> : <Login />}
+        </Route>
+      </Switch>
+      {background && <Route path='/dashboard/j/:id' children={
+        <Modal children={<JobEdit />} />
+      } />}
     </div>
   )
 }

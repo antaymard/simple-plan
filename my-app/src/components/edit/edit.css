@@ -1,31 +1,71 @@
-.edit-panel {
+.edit-section {
   border-radius: 15px;
   background-color: var(--backgroundColor);
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 50px;
   box-shadow: var(--blackShadow);
+  min-width: 900px;
+  min-height: 75vh;
 }
-.edit-panel-header {
+.edit-section-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+.edit-section-header .job-type {
+  margin-right: 20px;
+}
 
-.edit-panel-content > * {
+.edit-section-content > * {
   display: flex;
   flex-direction: column;
 }
-.edit-panel-content p {
+
+.edit-section-content input[name="name"],
+.edit-section-content h1 {
+  margin-top: 30px;
+  font-size: 18px;
+  color: var(--blueTheme);
+  font-weight: bold;
+  margin-bottom: 0;
+  height: 30px;
+}
+.edit-section-content textarea[name="description"],
+.edit-section-content p#description {
+  margin-top: 5px;
+  font-size: 16px;
+  color: black;
+  border-radius: 5px;
+}
+p#description {
+  padding: 10px 0;
+}
+h1#name.is-empty {
+  color: var(--lightGrey);
+}
+h1#name.is-empty::after {
+  content: "Click to add a title";
+}
+p#description.is-empty {
+  background-color: white;
+  min-height: 60px;
+  color: var(--lightGrey);
+  font-weight: normal;
+}
+p#description.is-empty::after {
+  content: "Click to add a description";
+  padding-left: 15px;
+}
+
+.edit-section-content textarea[name="description"] {
+  background-color: white;
+  min-height: 100px;
+  padding: 10px 15px;
+}
+.edit-label-name {
   color: var(--blueTheme);
   font-size: 12px;
   margin-top: 20px;
   margin-bottom: 5px;
-}
-.edit-panel-content input[name="name"],
-.edit-panel-content h1 {
-  margin-top: 30px;
-  font-size: 18px;
-  color: var(--blueTheme);
-  margin-bottom: 0;
 }
