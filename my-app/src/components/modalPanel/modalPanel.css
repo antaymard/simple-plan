@@ -1,4 +1,4 @@
-.modal-background {
+/* .modal-background {
     backdrop-filter: blur(7px);
     position: fixed;
     top: 0;
@@ -9,83 +9,81 @@
     flex-direction: column;
     justify-content: space-between;
     background: rgba(99, 99, 99, 0.37);
-}
+} */
 
 .modal-card {
-    background-color: white;
-    margin: auto auto;
-    padding: 40px 50px;
-    border-radius: 35px;
-    width: 800px;
+  background-color: white;
+  margin: auto auto;
+  padding: 40px 50px;
+  border-radius: 35px;
+  width: 800px;
 }
 
 .modal-card h1 {
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: var(--blueTheme);
-    margin-bottom: 25px;
-
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--blueTheme);
+  margin-bottom: 25px;
 }
 
 .input-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 .input-group p {
-    margin-bottom: 5px;
-    margin-top: 12px;
-    color: var(--greyText);
+  margin-bottom: 5px;
+  margin-top: 12px;
+  color: var(--greyText);
 }
-.modal-card input[type=text], textarea {
-    border-radius: 11px;
-    background-color: #F4F4FF;
-    border: 0px solid white;
-    padding: 5px 15px;
+.modal-card input[type="text"],
+textarea {
+  border-radius: 11px;
+  background-color: #f4f4ff;
+  border: 0px solid white;
+  padding: 5px 15px;
 }
 .modal-card select {
-    border-radius: 11px;
-    background-color: #F4F4FF;
-    border: 0px solid white;
-    padding: 5px 15px;
+  border-radius: 11px;
+  background-color: #f4f4ff;
+  border: 0px solid white;
+  padding: 5px 15px;
 }
-
 
 /* modal footer with button  */
 .formButton-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: -70px;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: -70px;
+  margin-top: 50px;
 }
 .formButton-section button {
-    border-radius: 50%;
-    color: white;
-    border: none;
-    width: 70px;
-    height: 70px;
-    font-size: 22px;
+  border-radius: 50%;
+  color: white;
+  border: none;
+  width: 70px;
+  height: 70px;
+  font-size: 22px;
 }
 .formButton-cancel {
-    background: #CBCBDB;
-    box-shadow: 0px 4px 15px #CBCBDB;
+  background: #cbcbdb;
+  box-shadow: 0px 4px 15px #cbcbdb;
 }
 .formButton-delete {
-    background: #F0A0A0;
-    box-shadow: 0px 4px 15px #F0A0A0;
+  background: #f0a0a0;
+  box-shadow: 0px 4px 15px #f0a0a0;
 }
 .formButton-confirm {
-    background-color: #A1EBB6;
-    box-shadow: 0px 4px 15px #A1EBB6;
+  background-color: #a1ebb6;
+  box-shadow: 0px 4px 15px #a1ebb6;
 }
 
 /* To fix  */
-.rightPanel-card input[type=range] {
-    -webkit-appearance: none;
+.rightPanel-card input[type="range"] {
+  -webkit-appearance: none;
 }
-.rightPanel-card input[type=range]::-ms-fill-lower {
-    background: #A1EBB6;
+.rightPanel-card input[type="range"]::-ms-fill-lower {
+  background: #a1ebb6;
 }
-

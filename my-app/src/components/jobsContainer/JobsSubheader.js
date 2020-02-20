@@ -17,6 +17,7 @@ const JobsSubheader = () => {
     const { search } = useLocation();
     const jobs = useSelector(state => state.jobs)
     const dispatch = useDispatch();
+    let location = useLocation();
 
     useEffect(() => {
         // on init, get project infos
@@ -33,8 +34,17 @@ const JobsSubheader = () => {
                 </div>
             <div className="footer">
                 <div></div>
-                <button className="addJob-button" onClick={toggle}>+ NEW JOB</button>
+                {/* <button className="addJob-button" onClick={toggle}>+ NEW JOB</button> */}
                 {/* <Link to='/dashboard/j' className="addJob-button">OMG</Link> */}
+                <Link
+                    className="addJob-button"
+                    // key={props.data.name}
+                    to={{
+                        pathname: "/dashboard/j/new",
+                        state: { background: location }
+                    }}>
+                    + NEW JOB
+                </Link>
             </div>
             <ModalPanel isOpen={isOpen}>
                 <JobProjectForm hide={toggle} formType="job" />

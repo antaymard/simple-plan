@@ -2,7 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import './job.css';
 
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateJob } from '../../actions/jobActions';
 
@@ -22,6 +22,8 @@ function Job(props) {
     const { isOpen, toggle } = useModal();
     const dispatch = useDispatch();
     const { url } = useRouteMatch();
+
+    let location = useLocation();
 
     // TO MERGE AND ONLY UPDATE ONE PROP
 
@@ -72,17 +74,25 @@ function Job(props) {
                         >
                             {props.data.isInProgress ? '◼' : '▶️'}
                         </button>
-                        <button className="more-button" onClick={toggle}>•••</button>
+                        {/* <button className="more-button" onClick={toggle}>•••</button> */}
                     </div>
                 </div>
-                <h1>{props.data.name}</h1>
+                <Link
+                    key={props.data.name}
+                    to={{
+                        pathname: "/dashboard/j/" + props.data._id,
+                        state: { background: location }
+                    }}>
+                    <h1>{props.data.name}</h1>
+                </Link>
                 <h2 className="d-flex flex-row job-project">
                     <CurvedArrow />
                     <Link to={url + '/' + props.data.projectId._id}>
                         <span style={{ marginLeft: "5px" }}>{props.data.projectId ? " " + props.data.projectId.name : <i>Pas de projet</i>}</span>
                     </Link>
                 </h2>
-                <p className="job-description">                                           {props.data.description}
+                <p className="job-description">
+                    {props.data.description}
                 </p>
                 {props.data.deadline ? <div className="deadline-section">
                     <div className="deadline-icon">

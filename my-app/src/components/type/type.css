@@ -3,7 +3,10 @@
   padding: 5px 10px;
   font-size: 12px;
   cursor: pointer;
-  background-color: white;
+  /* background-color: white; */
+}
+.job-type.big {
+  font-size: 16px;
 }
 
 .job-type.typeColor-selected-learn {

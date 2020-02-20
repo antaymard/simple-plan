@@ -20,6 +20,8 @@ const JobsContainer = () => {
     useEffect(() => {
         let filters = queryString.parse(location.search);
         console.log(filters)
+
+        // Get project Id from URL  TODO => turn into hooks
         let id = location.pathname;
         id = id.split('/');
         let index = id.indexOf('p');
@@ -27,6 +29,7 @@ const JobsContainer = () => {
         if (id) {
             filters.projectId = id;
         }
+
         dispatch(getJobs(filters));
     }, [location])
 
