@@ -4,6 +4,9 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ObjectId } from 'bson';
 import queryString from 'query-string';
+import Calendar from 'react-calendar';
+import WeekNumber from '../job/WeekNumbers.js';
+import Moment from 'react-moment';
 
 import './edit.css';
 import { updateJob, newJob, deleteJob } from '../../actions/jobActions';
@@ -16,10 +19,12 @@ const Edit = (props) => {
         name: "",
         description: "",
         projectId: "",
-        progress: 0
+        progress: 0,
+        weekNumber: []
     });
     const [nameIsInput, setNameIsInput] = useState(false);
     const [descIsInput, setDescIsInput] = useState(false);
+    const [confirmDeletePop, setConfirmDeletePopup] = useState(false);
     const [id, setId] = useState('');
     const location = useLocation();
 
@@ -97,6 +102,25 @@ const Edit = (props) => {
         props.close();
     }
 
+    // CALENDAR
+    const changeDeadline = (val) => {
+        setFormData({ ...formData, deadline: val.toISOString() })
+    }
+
+    const changeWeekNumber = (val) => {
+        // si déjà dans array, le retire, sinon l'ajoute !
+        let _weeknb = formData.weekNumber;
+        if (_weeknb.indexOf(val) > -1) {
+            _weeknb = _weeknb.filter((e) => e !== val);
+        } else {
+            _weeknb.push(val);
+        }
+        _weeknb.sort((a, b) => a - b)
+        setFormData({ ...formData, weekNumber: _weeknb })
+    }
+
+
+
     return (
         < div className="edit-section" >
             {console.log(formData)}
@@ -119,7 +143,7 @@ const Edit = (props) => {
                 <button className="close-panel-button" onClick={props.close}>✕</button>
             </div>
             <div className="row edit-section-content">
-                <div className="col-7 edit-left-section">
+                <div className="col-8 edit-left-section">
 
                     {/* NAME INPUT */}
                     {nameIsInput ?
@@ -169,12 +193,11 @@ const Edit = (props) => {
                             <div onClick={() => setDescIsInput(true)}>
                                 <ReactMarkdown
                                     source={formData.description}
-                                    className={"description" + (formData.description ? null : "is-empty")}
+                                    className={"description markdown-edit" + (formData.description ? "" : " is-empty")}
                                 />
                             </div> :
-
-                            <p id="description" onClick={() => setDescIsInput(true)}
-                                className={formData.description ? null : "is-empty"}>
+                            <p onClick={() => setDescIsInput(true)}
+                                className={"description" + (formData.description ? "" : " is-empty")}>
                                 {formData.description}
                             </p>
                     }
@@ -183,16 +206,62 @@ const Edit = (props) => {
                     {/* PROGRESSBAR */}
                     <p className="edit-label-name">Avancement</p>
                     <input type="range" min={0} max={100} step={1} name="progress" value={formData.progress} onChange={handleChange}></input>
-                </div>
-                <div className='col-5 edit-right-section'>
-                    <p className='edit-label-name'>Ressources</p>
-                    <button onClick={deleteThisJob}>DELETE JOB</button>
-                </div>
-            </div>
-            <div className="edit-section-footer">
-                <button onClick={submitFormData}>OK</button>
-            </div>
 
+
+                    <button className="save-job-button" onClick={submitFormData}>SAVE</button>
+                </div>
+
+                {/* RIGHT SECTION */}
+                <div className='col-4 edit-right-section'>
+
+                    {/* CALENDAR */}
+                    <p className='edit-label-name'>Calendrier</p>
+                    <Calendar
+                        value={new Date()}
+                        formatShortWeekday={(locale, value) => ['D', 'L', 'M', 'M', 'J', 'V', 'S'][value.getDay()]}
+                        formatMonth={(local, value) => ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jui', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'][value.getMonth()]}
+                        next2Label={null}
+                        prev2Label={null}
+                        showWeekNumbers
+                        onClickWeekNumber={changeWeekNumber}
+                        onChange={changeDeadline}
+                    />
+                    <div className="sub-calendar-section">
+                        <p>Semaines</p>
+                        <div className="d-flex align-items-center justify-content-between">
+                            {
+                                formData.weekNumber.length > 0 ? <WeekNumber weeknb={formData.weekNumber} /> :
+                                    <p><i>Pas de semaine allouée</i></p>
+                            }
+                            <button onClick={() => setFormData({ ...formData, weekNumber: [] })}>✕</button>
+                        </div>
+                    </div>
+                    <div className="sub-calendar-section">
+                        <p>Deadline</p>
+                        <div className="d-flex align-items-center justify-content-between">
+
+                            {
+                                formData.deadline ?
+                                    <Moment format="DD/MM/YYYY">
+                                        {formData.deadline}
+                                    </Moment> :
+                                    <p><i>Pas de deadline</i></p>
+                            }
+                            <button onClick={() => setFormData({ ...formData, deadline: null })}>✕</button>
+                        </div>
+                    </div>
+                    <div style={{ position: "relative", width: "100%" }}>
+                        <button className="delete-job-button" style={{ marginTop: "50px" }} onClick={() => setConfirmDeletePopup(true)}>Delete Job</button>
+                        {confirmDeletePop ? <div className="confirm-delete-popup">
+                            <div className="d-flex align-items-center justify-content-between" style={{ marginBottom: "7px" }}>
+                                <p>Are you sure ?</p>
+                                <button onClick={() => setConfirmDeletePopup(false)}>X</button>
+                            </div>
+                            <button className="delete-job-button" onClick={deleteThisJob}>Yes delete this job</button>
+                        </div> : null}
+                    </div>
+                </div>
+            </div>
         </div >
     )
 }

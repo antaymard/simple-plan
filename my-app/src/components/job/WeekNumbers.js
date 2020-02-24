@@ -15,12 +15,12 @@ const WeekNumbers = (props) => {
             })
         }
         else return null;
-    } 
+    }
 
     return (
-        <>
+        <div className="d-flex flex-row">
             {renderWeekNumbers()}
-        </>
+        </div>
     )
 
 }

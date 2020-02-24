@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import moment from "moment";
+import '../myCalendar.css';
 
 // import queryString from 'query-string';
 import useQueryString from '../components/hooks/useQueryString';

@@ -49,48 +49,36 @@ const JobsContainer = () => {
         }
     }
 
-    if (jobs.length > 0) {
-        return (
-            <>
-                <div className="subHeader">
-                    <JobsSubheader />
+    return (
+        <>
+            <div className="subHeader">
+                <JobsSubheader />
+            </div>
+            <div className='jobsList-section'>
+                <h3>En cours</h3>
+                <div className="row">
+                    {jobs.map(function (item, i) {
+                        if (item.isInProgress) {
+                            return <Job key={i} data={item} />
+                        }
+                    })}
                 </div>
-                <div className='jobsList-section'>
-                    <h3>En cours</h3>
-                    <div className="row">
-                        {jobs.map(function (item, i) {
-                            if (item.isInProgress) {
-                                return <Job key={i} data={item} />
-                            }
-                        })}
-                    </div>
-                    <h3>A faire</h3>
-                    <div className="row">
-                        {renderJobsList("active")}
-                    </div>
-                    <h3 onClick={() => setShowCompleted(!showCompleted)} style={{ cursor: 'pointer' }}>
-                        Terminées ({jobs.filter(i => i.status === "completed").length})
+                <h3>A faire</h3>
+                <div className="row">
+                    {renderJobsList("active")}
+                </div>
+                <h3 onClick={() => setShowCompleted(!showCompleted)} style={{ cursor: 'pointer' }}>
+                    Terminées ({jobs.filter(i => i.status === "completed").length})
                     </h3>
-                    {
-                        showCompleted ?
-                            <div className="row">
-                                {renderJobsList("completed")}
-                            </div> : null
-                    }
-                </div>
-            </>
-        )
-    } else {
-        return (
-            <>
-                <img src={nothingImage} style={{
-                    borderRadius: "50%",
-                    height: "auto",
-                    objectFit: "cover",
-                }} />
-            </>
-        )
-    }
+                {
+                    showCompleted ?
+                        <div className="row">
+                            {renderJobsList("completed")}
+                        </div> : null
+                }
+            </div>
+        </>
+    )
 };
 
 export default JobsContainer;

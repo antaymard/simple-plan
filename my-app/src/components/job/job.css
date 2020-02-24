@@ -92,11 +92,12 @@
   color: #5e5e5e;
   height: auto;
 }
-.job-card .deadline-section {
+.job-card > .deadline-section {
   display: flex;
   flex-direction: row;
   margin-bottom: -20px;
   margin-top: 15px;
+  background-color: transparent;
 }
 .job-card .deadline-icon {
   background: var(--redGradient);

@@ -35,10 +35,12 @@ body {
   --orangeTheme: #fc7948;
   --backgroundColor: #f0f1f5;
   --redGradient: linear-gradient(to right top, #ee7070, #f0a0a0);
+  --redShadow: 0px 4px 15px #f0a0a0;
   --greenGradient: linear-gradient(to right top, #3bdd68, #a1ebb6);
   --greenShadow: 0px 4px 15px #a1ebb6;
   --greyText: #5e5e5e;
   --lightGrey: #c5c5c5;
   --greenTheme: #3bdd68;
   --blackShadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+  --lighterGrey: #f0f0f0;
 }
