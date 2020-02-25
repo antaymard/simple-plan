@@ -5,11 +5,10 @@
   flex-direction: column;
   padding: 50px;
   box-shadow: var(--blackShadow);
-  min-width: 900px;
-  min-height: 75vh;
-}
-.edit-left-section {
-  padding-right: 60px;
+  width: 80vw;
+  max-width: 1300px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 /* HEADER */
@@ -33,9 +32,21 @@
   transition: 0.2s;
 }
 
+.edit-section-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .edit-section-content > * {
   display: flex;
   flex-direction: column;
+}
+
+.edit-left-section {
+  padding-right: 60px;
+  width: 100%;
 }
 
 .edit-section-content input[name="name"],
@@ -46,6 +57,12 @@
   font-weight: bold;
   margin-bottom: 0;
   height: 30px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+input[name="name"] {
+  padding-left: 7px;
 }
 .edit-section-content textarea[name="description"],
 .edit-section-content p#description {
@@ -53,6 +70,7 @@
   font-size: 16px;
   color: black;
   border-radius: 5px;
+  outline: none;
 }
 
 /* NAME */

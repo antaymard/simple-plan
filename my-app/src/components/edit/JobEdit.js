@@ -7,6 +7,7 @@ import queryString from 'query-string';
 import Calendar from 'react-calendar';
 import WeekNumber from '../job/WeekNumbers.js';
 import Moment from 'react-moment';
+import TextareaAutosize from 'react-autosize-textarea';
 
 import './edit.css';
 import { updateJob, newJob, deleteJob } from '../../actions/jobActions';
@@ -142,8 +143,8 @@ const Edit = (props) => {
                 </div>
                 <button className="close-panel-button" onClick={props.close}>✕</button>
             </div>
-            <div className="row edit-section-content">
-                <div className="col-8 edit-left-section">
+            <div className="edit-section-content">
+                <div className="edit-left-section">
 
                     {/* NAME INPUT */}
                     {nameIsInput ?
@@ -179,7 +180,7 @@ const Edit = (props) => {
                     <p className="edit-label-name">Description</p>
                     {descIsInput ?
                         <>
-                            <textarea
+                            <TextareaAutosize
                                 autoFocus
                                 rows={5}
                                 name='description'
@@ -187,7 +188,7 @@ const Edit = (props) => {
                                 onChange={handleChange}
                                 onBlur={() => setDescIsInput(false)} >
 
-                            </textarea>
+                            </TextareaAutosize>
                         </> :
                         formData.description ?
                             <div onClick={() => setDescIsInput(true)}>
@@ -212,7 +213,7 @@ const Edit = (props) => {
                 </div>
 
                 {/* RIGHT SECTION */}
-                <div className='col-4 edit-right-section'>
+                <div className='edit-right-section'>
 
                     {/* CALENDAR */}
                     <p className='edit-label-name'>Calendrier</p>
