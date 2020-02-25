@@ -48,6 +48,9 @@
   padding-right: 60px;
   width: 100%;
 }
+.edit-right-section {
+  width: 300px;
+}
 
 .edit-section-content input[name="name"],
 .edit-section-content h1#name {
@@ -133,6 +136,7 @@ h4 {
 .edit-section-content .react-calendar {
   margin-bottom: 5px;
   border-radius: 3px;
+  padding-bottom: 13px;
 }
 .sub-calendar-section {
   background-color: white;
