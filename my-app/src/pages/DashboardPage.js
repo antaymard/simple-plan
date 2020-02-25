@@ -5,10 +5,9 @@ import moment from "moment";
 import '../myCalendar.css';
 
 // import queryString from 'query-string';
-import useQueryString from '../components/hooks/useQueryString';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
-import Edit from '../components/edit/JobEdit.js';
 import JobsContainer from '../components/jobsContainer/JobsContainer.js';
+import JobsSubheader from '../components/jobsContainer/JobsSubheader.js';
 
 const DashboardPage = (props) => {
 
@@ -38,20 +37,27 @@ const DashboardPage = (props) => {
                     <ProjectsContainer />
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
-                    <Link to={'/dashboard/p'}>
-                        <h1>Dashboard</h1>
-                    </Link>
-                    <h2>
-                        <Link to={"?weekNumber=" + moment().format("W")} >
-                            Semaine {weekNumber}
+                    <div className="viewport-right-header">
+                        <div>
+                            <Link to={'/dashboard/p'}>
+                                <h1>Dashboard</h1>
+                            </Link>
+                            <h2>
+                                <Link to={"?weekNumber=" + moment().format("W")} >
+                                    Semaine {weekNumber}
+                                </Link>
+                                <Link to={"?weekNumber=" + (weekNumber - 1)}>
+                                    🡠
                         </Link>
-                        <Link to={"?weekNumber=" + (weekNumber - 1)}>
-                            🡠
+                                <Link to={"?weekNumber=" + (weekNumber + 1)}>
+                                    🡢
                         </Link>
-                        <Link to={"?weekNumber=" + (weekNumber + 1)}>
-                            🡢
-                        </Link>
-                    </h2>
+                            </h2>
+                        </div>
+                        <div>
+                            <JobsSubheader />
+                        </div>
+                    </div>
                     <JobsContainer />
                 </div>
             </div>

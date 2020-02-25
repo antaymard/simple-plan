@@ -9,7 +9,7 @@
   margin-right: 0;
   position: relative;
   height: calc(100vh);
-  padding-top: 60px;
+  padding-top: 40px;
   /* z-index: 0; */
 }
 
@@ -27,15 +27,22 @@
   padding-right: 150px;
   /* z-index: -1; */
 }
-.viewport-right h1 {
+.viewport-right-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.viewport-right-header h1 {
   font-size: 30px;
   color: var(--blueTheme);
   text-transform: uppercase;
-  margin-bottom: -7px;
+  margin-bottom: -30px;
 }
-.viewport-right > h2 > a {
+.viewport-right-header h2,
+.viewport-right-header a {
   font-size: 20px;
   color: var(--blueTheme);
   text-transform: uppercase;
   margin-right: 10px;
+  margin-bottom: 30px;
 }
