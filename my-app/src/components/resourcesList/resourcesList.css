@@ -12,7 +12,6 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  border-bottom: 1px solid black;
 }
 .resources-item img {
   height: 30px;
@@ -46,11 +45,26 @@
 
 .resources-item-edit-popup {
   position: absolute;
-  width: 100px;
-  height: 60px;
-  background-color: red;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: var(--blackShadow);
   right: 0;
-  top: -50px;
+  top: -110px;
+  padding : 10px 15px;
+  height: 120px;
+}
+.resources-item-edit-popup input {
+  width: 100%;
+  outline: none;
+}
+.resources-item-edit-popup input:last-of-type {
+  margin-top: 5px;
+}
+.resources-item-edit-popup button {
+  float: right;
+  margin-top: 5px;
+  background: var(--greenGradient);
+  color: white;
 }
 
 .resources-footer {

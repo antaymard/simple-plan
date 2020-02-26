@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './resourcesList.css';
+import { PromiseProvider } from 'mongoose';
 
 let resources = [
     {
@@ -82,7 +83,7 @@ const ResourceItem = (props) => {
                     </button>
                     {
                         editPopupIsOpen ? (
-                            <EditPopup/>
+                            <EditPopup itemData={props.item}/>
                         ) : null
                     }
         </div>
@@ -90,11 +91,25 @@ const ResourceItem = (props) => {
 }
 
 // Edit panel
-const EditPopup = () => {
+const EditPopup = (props) => {
+
+    const [ itemData, setItemData ] = useState(props.itemData);
+
+    const onChange = (e) => {
+        setItemData({
+            ...itemData, [e.target.name] : e.target.value
+        });
+        console.log(itemData)
+    }
 
     return (
         <div className="resources-item-edit-popup">
-           LOLILOL
+           <input name='name' placeholder="Nom" onChange={onChange} value={itemData.name}>
+           </input>
+           <input name='url' placeholder="url" onChange={onChange} value={itemData.url}>
+           </input>
+           <button>OK</button>
+           <button>X</button>
         </div>
     )
 }

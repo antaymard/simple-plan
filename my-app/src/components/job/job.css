@@ -11,7 +11,7 @@
 /* BACKBROUND ANIMATION */
 
 .job-card-inProgress {
-  background: linear-gradient(to right, #f5fff8 30%, #c2f5d1);
+  box-shadow: var(--blackShadow);
 }
 
 /* END OF BACKGROUND ANIMATION */
