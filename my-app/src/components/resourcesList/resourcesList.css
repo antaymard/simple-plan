@@ -12,8 +12,23 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
+  border-bottom: 1px solid black;
 }
+.resources-item img {
+  height: 30px;
+}
+.resources-item button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.resources-item button:hover {
+  background-color: var(--lighterGrey);
+}
+
 .resources-item-text {
+  padding-left: 7px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

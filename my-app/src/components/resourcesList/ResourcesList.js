@@ -3,58 +3,43 @@ import { Link } from 'react-router-dom';
 
 import './resourcesList.css';
 
+let resources = [
+    {
+        isFavorite: false,
+        url: "www.google.com",
+        name: "Notes du projet",
+        service: "notion"
+    },
+    {
+        isFavorite: true,
+        url: "www.pubmed.com",
+        name: "Publication IA",
+        service: "other"
+    },
+    {
+        isFavorite: false,
+        url: "www.figma.com",
+        name: "Design",
+        service: "figma"
+    }
+];
+let logoArray = [
+    'https://logo.clearbit.com/amenitiz.io',
+    "https://logo.clearbit.com/notion.so",
+    'https://logo.clearbit.com/figma.com',
+    "https://logo.clearbit.com/gdrivedl.xyz"
+];
 
 const ResourcesList = (props) => {
 
-    let resources = [
-        {
-            isFavorite: false,
-            url: "www.google.com",
-            name: "Notes du projet",
-            service: "notion"
-        },
-        {
-            isFavorite: true,
-            url: "www.pubmed.com",
-            name: "Publication IA",
-            service: "other"
-        },
-        {
-            isFavorite: false,
-            url: "www.figma.com",
-            name: "Design",
-            service: "figma"
-        }
-    ]
 
-
-    const [editPopupIsOpen, setEditPopupIsOpen] = useState(true);
+    // Array containing every service's logo using clearbit.com/logo
 
     const renderList = (parent) => {
         // Render project resources or job resources
         return resources.map((item, i) => {
             return (
-                <div className="resources-item">
-                    <div>
-                        {/* img */}
-                        <div className="resources-item-text">
-                            <Link to={item.url} target='_blank'>
-                                <h4>{item.name}</h4>
-                                <p>{item.url}</p>
-                            </Link>
-                        </div>
-                    </div>
-                    <button onClick={() => setEditPopupIsOpen(!editPopupIsOpen)}>
-                        ...
-                    </button>
-                    {
-                        editPopupIsOpen ? (
-                            <div className="resources-item-edit-popup">
-                                LOLILOL
-                            </div>
-                        ) : null
-                    }
-                </div>
+                <ResourceItem item={item}/>
             )
         })
     }
@@ -72,6 +57,44 @@ const ResourcesList = (props) => {
                     Add new
                 </button>
             </div>
+        </div>
+    )
+}
+
+// Individual item
+const ResourceItem = (props) => {
+
+    const [editPopupIsOpen, setEditPopupIsOpen] = useState(false);
+
+    return (
+        <div className="resources-item">
+                    <div className="d-flex flex-row">
+                        <img src={logoArray[1]}/>
+                        <div className="resources-item-text">
+                            <Link to={props.item.url} target='_blank'>
+                                <h4>{props.item.name}</h4>
+                                <p>{props.item.url}</p>
+                            </Link>
+                        </div>
+                    </div>
+                    <button onClick={() => setEditPopupIsOpen(!editPopupIsOpen)}>
+                        ...
+                    </button>
+                    {
+                        editPopupIsOpen ? (
+                            <EditPopup/>
+                        ) : null
+                    }
+        </div>
+    )
+}
+
+// Edit panel
+const EditPopup = () => {
+
+    return (
+        <div className="resources-item-edit-popup">
+           LOLILOL
         </div>
     )
 }
