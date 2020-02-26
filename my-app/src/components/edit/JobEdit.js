@@ -13,6 +13,7 @@ import './edit.css';
 import { updateJob, newJob, deleteJob } from '../../actions/jobActions';
 
 import Type from '../type/Type.js';
+import ResourcesList from '../resourcesList/ResourcesList.js';
 
 const Edit = (props) => {
 
@@ -251,6 +252,8 @@ const Edit = (props) => {
                             <button onClick={() => setFormData({ ...formData, deadline: null })}>✕</button>
                         </div>
                     </div>
+                    <p className="edit-label-name">Ressources du projet</p>
+                    <ResourcesList />
                     <div style={{ position: "relative", width: "100%" }}>
                         <button className="delete-job-button" style={{ marginTop: "50px" }} onClick={() => setConfirmDeletePopup(true)}>Delete Job</button>
                         {confirmDeletePop ? <div className="confirm-delete-popup">
