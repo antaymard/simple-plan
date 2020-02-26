@@ -37,7 +37,6 @@ const Edit = (props) => {
 
     // Handle form changes and update the state
     const handleChange = (e) => {
-        console.log(e.target.value)
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
     const handleTypeChange = (type) => {
@@ -86,7 +85,6 @@ const Edit = (props) => {
 
     const submitFormData = () => {
         // action call here
-        console.log("posting formData");
         if (id === 'new') {
             setFormData({
                 ...formData,
@@ -121,6 +119,12 @@ const Edit = (props) => {
         setFormData({ ...formData, weekNumber: _weeknb })
     }
 
+    const getResourcesChange = (d) => {
+        setFormData({
+            ...formData, resources: d
+        })
+    }
+
 
 
     return (
@@ -150,6 +154,7 @@ const Edit = (props) => {
                     {/* NAME INPUT */}
                     {nameIsInput ?
                         <input autoFocus
+                            id="jobNameInput"
                             onBlur={() => setNameIsInput(false)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
@@ -252,8 +257,12 @@ const Edit = (props) => {
                             <button onClick={() => setFormData({ ...formData, deadline: null })}>✕</button>
                         </div>
                     </div>
+
+                    {/* Resources list */}
                     <p className="edit-label-name">Ressources du projet</p>
-                    <ResourcesList />
+                    {/* {console.log(formData.resources)} */}
+                    {/* <ResourcesList sendChange={getResourcesChange} resourcesArray={formData.resources} /> */}
+
                     <div style={{ position: "relative", width: "100%" }}>
                         <button className="delete-job-button" style={{ marginTop: "50px" }} onClick={() => setConfirmDeletePopup(true)}>Delete Job</button>
                         {confirmDeletePop ? <div className="confirm-delete-popup">

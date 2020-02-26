@@ -1,52 +1,103 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import './resourcesList.css';
-import { PromiseProvider } from 'mongoose';
-
-let resources = [
-    {
-        isFavorite: false,
-        url: "www.google.com",
-        name: "Notes du projet",
-        service: "notion"
-    },
-    {
-        isFavorite: true,
-        url: "www.pubmed.com",
-        name: "Publication IA",
-        service: "other"
-    },
-    {
-        isFavorite: false,
-        url: "www.figma.com",
-        name: "Design",
-        service: "figma"
-    }
-];
-let logoArray = [
-    'https://logo.clearbit.com/amenitiz.io',
-    "https://logo.clearbit.com/notion.so",
-    'https://logo.clearbit.com/figma.com',
-    "https://logo.clearbit.com/gdrivedl.xyz"
-];
 
 const ResourcesList = (props) => {
 
+    const [resources, setResources] = useState([]);
+    const [isEdit, setIsEdit] = useState([]);
+
+    useEffect(() => {
+        console.log(props.resourcesArray)
+        // setResources(props.resources);
+        // setIsEdit(() => props.resources.map(i => false));
+    }, [])
 
     // Array containing every service's logo using clearbit.com/logo
 
-    const renderList = (parent) => {
-        // Render project resources or job resources
+    const onChange = (e, id) => {
+        let val = e.target.value;
+        let na = e.target.name;
+        let _resources = props.resources.map((item, i) => {
+            if (i === id) {
+                return { ...item, [e.target.name]: e.target.value }
+            }
+            else return item
+        });
+        setResources(_resources);
+    };
+
+    const addItem = () => {
+        if (resources[resources.length - 1].name === "") {
+            setIsEdit({ ...isEdit, [isEdit.length - 1]: true });
+        } else {
+            // add a state
+            let _isEdit = [...isEdit];
+            _isEdit.push(true);
+            console.log(_isEdit)
+            setIsEdit(_isEdit)
+
+            // add an item
+            let _resources = [...resources];
+            _resources.push({
+                name: "",
+                url: '',
+                service: "",
+                isFavorite: false
+            });
+            setResources(_resources);
+        }
+    };
+
+    const turnToEdit = (id) => {
+        let _isEdit = [...isEdit];
+        _isEdit[id] = !_isEdit[id];
+        setIsEdit(_isEdit);
+    };
+
+    const onSubmit = () => {
+        // Should send back the array of resources
+        props.sendChange(resources);
+    };
+
+    const renderList = () => {
+        // Render resource Item list
         return resources.map((item, i) => {
             return (
-                <ResourceItem item={item}/>
+
+                // This is a resource Item
+                <div className="resources-item">
+                    <div className="d-flex flex-row">
+                        <img src="https://logo.clearbit.com/figma.com" />
+                        <div className="resources-item-text">
+                            {isEdit[i] ? <input name='name' placeholder="Nom" onChange={e => onChange(e, i)} value={item.name} /> : <Link to={item.url} target='_blank'><h4> {item.name}</h4></Link>}
+                            {isEdit[i] ? <input name='url' placeholder="url" onChange={onChange} value={item.url} /> : <Link to={item.url} target='_blank'><p>{item.url}</p></Link>}
+                        </div>
+                    </div>
+                    <button onClick={() => turnToEdit(i)}>...</button>
+                </div >
             )
         })
-    }
+    };
+
+    const updateResourcesArray = (d, id) => {
+        console.log("THIS IS UPDATE RES");
+        console.log(d);
+
+        let _a = resources.map((item, i) => {
+            if (i === id) {
+                return d
+            }
+            else return item
+        });
+        // Send the data to parent => jobEdit.js
+        props.getChange(_a);
+    };
 
     return (
         <div className="resources-section">
+            {console.log(props)}
             <div className='resources-content'>
                 {renderList()}
             </div>
@@ -54,62 +105,10 @@ const ResourcesList = (props) => {
                 <div className='d-flex flex-row'>
                     Ouvrir tout
                 </div>
-                <button>
+                <button onClick={addItem}>
                     Add new
                 </button>
             </div>
-        </div>
-    )
-}
-
-// Individual item
-const ResourceItem = (props) => {
-
-    const [editPopupIsOpen, setEditPopupIsOpen] = useState(false);
-
-    return (
-        <div className="resources-item">
-                    <div className="d-flex flex-row">
-                        <img src={logoArray[1]}/>
-                        <div className="resources-item-text">
-                            <Link to={props.item.url} target='_blank'>
-                                <h4>{props.item.name}</h4>
-                                <p>{props.item.url}</p>
-                            </Link>
-                        </div>
-                    </div>
-                    <button onClick={() => setEditPopupIsOpen(!editPopupIsOpen)}>
-                        ...
-                    </button>
-                    {
-                        editPopupIsOpen ? (
-                            <EditPopup itemData={props.item}/>
-                        ) : null
-                    }
-        </div>
-    )
-}
-
-// Edit panel
-const EditPopup = (props) => {
-
-    const [ itemData, setItemData ] = useState(props.itemData);
-
-    const onChange = (e) => {
-        setItemData({
-            ...itemData, [e.target.name] : e.target.value
-        });
-        console.log(itemData)
-    }
-
-    return (
-        <div className="resources-item-edit-popup">
-           <input name='name' placeholder="Nom" onChange={onChange} value={itemData.name}>
-           </input>
-           <input name='url' placeholder="url" onChange={onChange} value={itemData.url}>
-           </input>
-           <button>OK</button>
-           <button>X</button>
         </div>
     )
 }
