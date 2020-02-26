@@ -10,6 +10,12 @@ var jobSchema = new Schema({
   progress: { type: Number, min: 0, max: 100, default: 0 },
   type: { type: String, default: "learn" },
   resLink: [{ type: String, default: null }],
+  resources: [{
+    isFavorite: Boolean,
+    url: String,
+    name: String,
+    service: String
+  }],
   weekNumber: [{ type: Number, default: null }],
   deadline: { type: Date, default: null },
   status: { type: String, default: "active" }, // active, completed, stopped, deleted

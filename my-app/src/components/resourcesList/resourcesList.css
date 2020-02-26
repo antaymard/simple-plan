@@ -1,0 +1,78 @@
+.resources-section {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0px 10px;
+}
+
+.resources-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.resources-item img {
+  height: 30px;
+}
+.resources-item button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+.resources-item button:hover {
+  background-color: var(--lighterGrey);
+}
+
+.resources-item-text {
+  padding-left: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.resources-item-text h4 {
+  font-size: 14px;
+  margin: 0;
+  color: var(--blueTheme);
+  font-weight: 400;
+}
+.resources-item-text p {
+  font-size: 10px;
+  color: var(--ligthGrey);
+}
+
+.resources-item-edit-popup {
+  position: absolute;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: var(--blackShadow);
+  right: 0;
+  top: -110px;
+  padding: 10px 15px;
+  height: 120px;
+}
+.resources-item-edit-popup input {
+  width: 100%;
+  outline: none;
+  padding-left: 5px;
+  border: 1px solid var(--lightGrey);
+  border-radius: 5px;
+}
+.resources-item-edit-popup input:last-of-type {
+  margin-top: 5px;
+}
+.resources-item-edit-popup button {
+  float: right;
+  margin-top: 5px;
+  background: var(--greenGradient);
+  color: white;
+}
+
+.resources-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

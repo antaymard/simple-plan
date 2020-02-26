@@ -1,5 +1,5 @@
 .edit-section {
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: var(--backgroundColor);
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
   width: 300px;
 }
 
-.edit-section-content input[name="name"],
+.edit-section-content input#jobNameInput,
 .edit-section-content h1#name {
   margin-top: 30px;
   font-size: 18px;
@@ -69,11 +69,13 @@ input[name="name"] {
 }
 .edit-section-content textarea[name="description"],
 .edit-section-content p#description {
-  margin-top: 5px;
   font-size: 16px;
   color: black;
   border-radius: 5px;
   outline: none;
+  background-color: white;
+  min-height: 100px;
+  padding: 10px 15px;
 }
 
 /* NAME */
@@ -91,18 +93,13 @@ h1#name.is-empty::after {
 }
 .description.is-empty {
   background-color: white;
-  min-height: 110px;
+  min-height: 140px;
   color: var(--lightGrey);
   font-weight: normal;
 }
 .description.is-empty::after {
   content: "Click to add a description";
   padding-left: 15px;
-}
-.edit-section-content textarea[name="description"] {
-  background-color: white;
-  min-height: 100px;
-  padding: 10px 15px;
 }
 
 /* MARKDOWN */
@@ -113,15 +110,15 @@ h4 {
   font-weight: bold;
 }
 .markdown-edit > h1 {
-  font-size: 24px;
-  color: var(--orangeTheme);
+  font-size: 22px;
+  color: var(--greyText);
 }
 .markdown-edit > h2 {
-  font-size: 22px;
+  font-size: 20px;
   color: var(--blueTheme);
 }
 .markdown-edit > h3 {
-  font-size: 20px;
+  font-size: 28px;
 }
 .markdown-edit > h4 {
   font-size: 16px;
@@ -137,6 +134,7 @@ h4 {
   margin-bottom: 5px;
   border-radius: 3px;
   padding-bottom: 13px;
+  min-height: 225px;
 }
 .sub-calendar-section {
   background-color: white;

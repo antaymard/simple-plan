@@ -1,6 +1,6 @@
 .job-card {
   background-color: white;
-  border-radius: 25px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,7 +11,7 @@
 /* BACKBROUND ANIMATION */
 
 .job-card-inProgress {
-  background: linear-gradient(to right, #f5fff8 30%, #c2f5d1);
+  box-shadow: var(--blackShadow);
 }
 
 /* END OF BACKGROUND ANIMATION */
