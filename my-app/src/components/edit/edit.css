@@ -1,5 +1,5 @@
 .edit-section {
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: var(--backgroundColor);
   display: flex;
   flex-direction: column;

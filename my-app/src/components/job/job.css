@@ -1,6 +1,6 @@
 .job-card {
   background-color: white;
-  border-radius: 25px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
