@@ -38,26 +38,22 @@ const DashboardPage = (props) => {
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
                     <div className="viewport-right-header">
-                        <div>
-                            <Link to={'/dashboard/p'}>
-                                <h1>Dashboard</h1>
+                        <Link to={'/dashboard/p'}>
+                            <h1>Dashboard</h1>
+                        </Link>
+                        <h2>
+                            <Link to={"?weekNumber=" + moment().format("W")} >
+                                Semaine {weekNumber}
                             </Link>
-                            <h2>
-                                <Link to={"?weekNumber=" + moment().format("W")} >
-                                    Semaine {weekNumber}
-                                </Link>
-                                <Link to={"?weekNumber=" + (weekNumber - 1)}>
-                                    🡠
+                            <Link to={"?weekNumber=" + (weekNumber - 1)}>
+                                🡠
                         </Link>
-                                <Link to={"?weekNumber=" + (weekNumber + 1)}>
-                                    🡢
+                            <Link to={"?weekNumber=" + (weekNumber + 1)}>
+                                🡢
                         </Link>
-                            </h2>
-                        </div>
-                        <div>
-                            <JobsSubheader />
-                        </div>
+                        </h2>
                     </div>
+                    <JobsSubheader />
                     <JobsContainer />
                 </div>
             </div>

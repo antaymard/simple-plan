@@ -1,4 +1,4 @@
-.jobs-subheader {
+/* .jobs-subheader {
   width: 100%;
   background-color: white;
   border-radius: 25px;
@@ -48,7 +48,7 @@
   color: var(--orangeTheme);
   font-size: 16px;
   margin-bottom: 5px;
-}
+} */
 
 .jobsList-section {
   overflow-y: auto;

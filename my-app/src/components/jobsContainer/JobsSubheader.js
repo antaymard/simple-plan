@@ -1,46 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import './jobsSubheader.css';
 
 const JobsSubheader = () => {
 
     let location = useLocation();
+    const projects = useSelector(state => state.projects);
+    const [selectedProject, setSelectedProject] = useState('');
+
 
     useEffect(() => {
-        // on init, get project infos
+        // Get project Id from URL  TODO => turn into hooks
+        let id = location.pathname;
+        id = id.split('/');
+        let index = id.indexOf('p');
+        id = id[index + 1];
+        console.log(projects)
+        console.log(id);
+        // setSelectedProject(projects.filter(i => i._id === id))
 
-    }, [])
+    }, [location])
 
-    // return (
-    //     <div className="jobs-subheader">
-    //         <div className="header">
-    //             <h3>In progress</h3>
-    //         </div>
-    //         <div className='body'>
-    //             In progress...
-    //             </div>
-    //         <div className="footer">
-    //             <div></div>
-    //             <Link
-    //                 className="addJob-button"
-    //                 to={{
-    //                     pathname: "/dashboard/j/new",
-    //                     state: { background: location }
-    //                 }}>
-    //                 + NEW JOB
-    //             </Link>
-    //         </div>
-    //     </div>
-    // )
 
     return (
-        <Link
-            className="addJob-button"
-            to={{
-                pathname: "/dashboard/j/new",
-                state: { background: location }
-            }}>
-            + NEW JOB
-        </Link>
+
+        <div className="jobs-subheader-container">
+            {selectedProject}
+        </div>
     )
 }
 

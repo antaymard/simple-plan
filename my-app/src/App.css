@@ -28,11 +28,6 @@
   padding-right: 200px;
   /* z-index: -1; */
 }
-.viewport-right-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .viewport-right-header h1 {
   font-size: 30px;
   color: var(--blueTheme);
@@ -45,7 +40,8 @@
   color: var(--blueTheme);
   text-transform: uppercase;
   margin-right: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  font-weight: normal;
 }
 
 @media screen and (max-width: 1800px) {
