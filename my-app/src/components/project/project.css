@@ -1,5 +1,5 @@
 .project-card {
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: white;
   font-size: 14px;
   font-weight: normal;
@@ -27,7 +27,7 @@
 
 .project-card img {
   height: 40px;
-  border-radius: 15px 0 0 15px;
+  border-radius: 5px 0 0 5px;
   width: 40px;
   object-fit: cover;
   margin-right: 10px;

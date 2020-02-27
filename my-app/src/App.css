@@ -1,8 +1,8 @@
 .app {
-  max-width: 90%;
   margin: auto;
   height: 100vh;
   /* z-index: -5; */
+  padding: 0 40px 0 40px;
 }
 
 .viewport {
@@ -10,13 +10,14 @@
   position: relative;
   height: calc(100vh);
   padding-top: 40px;
+  padding-left: 90px;
   /* z-index: 0; */
 }
 
 .viewport-left {
   display: flex;
   flex-direction: column;
-  padding-left: 80px;
+  padding-right: 70px;
   /* z-index: -1; */
 }
 
@@ -24,7 +25,7 @@
   padding-left: 50px;
   display: flex;
   flex-direction: column;
-  padding-right: 150px;
+  padding-right: 200px;
   /* z-index: -1; */
 }
 .viewport-right-header {
@@ -45,4 +46,21 @@
   text-transform: uppercase;
   margin-right: 10px;
   margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1800px) {
+  .viewport-right {
+    padding-right: 10px;
+  }
+  .viewport-left {
+    padding-right: 10px;
+  }
+}
+@media screen and (max-width: 1300px) {
+  .viewport-right {
+    padding-right: 10px;
+  }
+  .viewport-left {
+    padding-right: 0px;
+  }
 }
