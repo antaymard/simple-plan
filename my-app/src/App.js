@@ -28,6 +28,7 @@ function App() {
   const [logStatus, setLogStatus] = useStore('logStatusStore');
   let location = useLocation();
   let background = location.state && location.state.background;
+  let projectId = location.state && location.state.projectId;
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -64,7 +65,7 @@ function App() {
         </Route>
       </Switch>
       {background && <Route path='/dashboard/j/:id' children={
-        <Modal children={<JobEdit />} />
+        <Modal children={<JobEdit selectedProject={projectId} />} />
       } />}
     </div>
   )
