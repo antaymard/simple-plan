@@ -47,7 +47,7 @@ const DashboardPage = (props) => {
                 <div className='col-10 viewport-right fullHeight'>
                     <div className="viewport-right-header">
                         <div className="d-flex flex-column">
-                            <Link to={'/dashboard/p/'}>
+                            <Link to={'/dashboard'}>
                                 <h1>Dashboard</h1>
                             </Link>
                             <h2>
