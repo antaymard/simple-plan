@@ -14,6 +14,7 @@ const JobsContainer = () => {
     const dispatch = useDispatch();
     const jobs = useSelector(state => state.jobs);
     const [showCompleted, setShowCompleted] = useState(false);
+    const [selectedProjectId, setSelectedProjectId] = useState();
 
     const location = useLocation()
 
@@ -28,6 +29,7 @@ const JobsContainer = () => {
         id = id[index + 1];
         if (id) {
             filters.projectId = id;
+            setSelectedProjectId(id);
         }
 
         dispatch(getJobs(filters));
@@ -51,9 +53,7 @@ const JobsContainer = () => {
 
     return (
         <>
-            {/* <div className="subHeader">
-                <JobsSubheader />
-            </div> */}
+            <JobsSubheader selectedProjectId={selectedProjectId} />
             <div className='jobsList-section'>
                 <h3>En cours</h3>
                 <div className="row">

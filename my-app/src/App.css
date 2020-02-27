@@ -28,11 +28,16 @@
   padding-right: 200px;
   /* z-index: -1; */
 }
+.viewport-right-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .viewport-right-header h1 {
   font-size: 30px;
   color: var(--blueTheme);
   text-transform: uppercase;
-  margin-bottom: -30px;
+  margin-bottom: -20px;
 }
 .viewport-right-header h2,
 .viewport-right-header a {
@@ -42,6 +47,20 @@
   margin-right: 10px;
   margin-bottom: 25px;
   font-weight: normal;
+}
+
+.viewport-right-header #add-job-button {
+  margin-right: 10px;
+  background: var(--orangeGradient);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 }
 
 @media screen and (max-width: 1800px) {

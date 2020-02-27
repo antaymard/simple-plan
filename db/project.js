@@ -13,6 +13,7 @@ var projectSchema = new Schema({
       url: { type: String, default: null }
     }
   ],
+  deadline: { type: Date, default: null },
   status: { type: String, default: "active" } // active, completed, stopped, deleted
 })
 

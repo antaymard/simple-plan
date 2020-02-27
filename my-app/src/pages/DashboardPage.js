@@ -7,18 +7,26 @@ import '../myCalendar.css';
 // import queryString from 'query-string';
 import ProjectsContainer from '../components/projectsContainer/ProjectsContainer.js';
 import JobsContainer from '../components/jobsContainer/JobsContainer.js';
-import JobsSubheader from '../components/jobsContainer/JobsSubheader.js';
+// import JobsSubheader from '../components/jobsContainer/JobsSubheader.js';
 
 const DashboardPage = (props) => {
 
-    let { path, url } = useRouteMatch();
     const location = useLocation();
     const [weekNumber, setWeeknumber] = useState(Number(moment().format('W')));
+    const [selectedProjectId, setSelectedProjectId] = useState();
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         if (searchParams.get('weekNumber')) {
             setWeeknumber(Number(searchParams.get("weekNumber")))
+        }
+
+        let id = location.pathname;
+        id = id.split('/');
+        let index = id.indexOf('p');
+        id = id[index + 1];
+        if (id) {
+            setSelectedProjectId(id);
         }
     }, [location])
 
@@ -38,22 +46,34 @@ const DashboardPage = (props) => {
                 </div>
                 <div className='col-10 viewport-right fullHeight'>
                     <div className="viewport-right-header">
-                        <Link to={'/dashboard/p'}>
-                            <h1>Dashboard</h1>
-                        </Link>
-                        <h2>
-                            <Link to={"?weekNumber=" + moment().format("W")} >
-                                Semaine {weekNumber}
+                        <div className="d-flex flex-column">
+                            <Link to={'/dashboard/p'}>
+                                <h1>Dashboard</h1>
                             </Link>
-                            <Link to={"?weekNumber=" + (weekNumber - 1)}>
-                                🡠
+                            <h2>
+                                <Link to={"?weekNumber=" + moment().format("W")} >
+                                    Semaine {weekNumber}
+                                </Link>
+                                <Link to={"?weekNumber=" + (weekNumber - 1)}>
+                                    🡠
                         </Link>
-                            <Link to={"?weekNumber=" + (weekNumber + 1)}>
-                                🡢
+                                <Link to={"?weekNumber=" + (weekNumber + 1)}>
+                                    🡢
                         </Link>
-                        </h2>
+                            </h2>
+                        </div>
+                        {selectedProjectId ? null :
+                            <Link
+                                key={1}
+                                id="add-job-button"
+                                to={{
+                                    pathname: "/dashboard/j/new",
+                                    state: { background: location }
+                                }}>
+                                + new job
+                        </Link>
+                        }
                     </div>
-                    <JobsSubheader />
                     <JobsContainer />
                 </div>
             </div>

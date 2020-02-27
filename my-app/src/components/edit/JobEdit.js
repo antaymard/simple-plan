@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { ObjectId } from 'bson';
 import queryString from 'query-string';
@@ -64,12 +64,12 @@ const Edit = (props) => {
     // onMount
     useEffect(() => {
         // If a project was open, set it as default in masterProject select
-        let query = queryString.parse(location.search);
-        if (query.projectId) {
+        console.log(props.selectedProject) // Got through the router state from the +new job link/button
+        if (props.selectedProject) {
             setFormData({
-                ...formData, projectId: query.projectId
+                ...formData, projectId: props.selectedProject
             })
-        };
+        }
 
         // Get job id from URL
         let id = location.pathname;
@@ -176,7 +176,7 @@ const Edit = (props) => {
 
                     {/* MASTER PROJECT SELECTION */}
                     <p className="edit-label-name">Projet</p>
-                    <select onChange={handleChange} name="projectId" value={formData.projectId && formData.projectId._id}>
+                    <select onChange={handleChange} name="projectId" value={typeof formData.projectId === 'string' ? formData.projectId : formData.projectId._id ? formData.projectId._id : null}>
                         <option value="">Sélectionner un projet</option>
                         {renderOptions()}
                     </select>
