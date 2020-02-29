@@ -75,7 +75,7 @@ input[name="name"] {
   outline: none;
   background-color: white;
   min-height: 100px;
-  padding: 10px 15px;
+  padding: 10px 15px 15px 40px;
 }
 
 /* NAME */

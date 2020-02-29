@@ -188,7 +188,6 @@ const Edit = (props) => {
                         <>
                             <TextareaAutosize
                                 autoFocus
-                                rows={5}
                                 name='description'
                                 value={formData.description}
                                 onChange={handleChange}
