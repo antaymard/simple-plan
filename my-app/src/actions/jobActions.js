@@ -17,6 +17,7 @@ export const getJobs = (options) => {
             headers: headers
         })
             .then(res => {
+                console.log(res.data)
                 dispatch({
                     type: "UPDATE_JOBS",
                     payload: res.data

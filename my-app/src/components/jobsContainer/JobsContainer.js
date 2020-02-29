@@ -55,7 +55,7 @@ const JobsContainer = () => {
         <>
             <JobsSubheader selectedProjectId={selectedProjectId} />
             <div className='jobsList-section'>
-                <h3>En cours</h3>
+                <h3>En cours ({jobs.filter(i => i.isInProgress).length})</h3>
                 <div className="row">
                     {jobs.map(function (item, i) {
                         if (item.isInProgress) {
@@ -63,7 +63,7 @@ const JobsContainer = () => {
                         }
                     })}
                 </div>
-                <h3>A faire</h3>
+                <h3>A faire ({jobs.filter(i => i.status === "active").length})</h3>
                 <div className="row">
                     {renderJobsList("active")}
                 </div>

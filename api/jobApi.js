@@ -23,7 +23,7 @@ module.exports = function (router) {
             })
         })
 
-    // Récupère un
+    // Récupère un job
     router.get('/job/:id', (req, res) => {
         console.log("OMMMGGGGG")
         console.log(req.params);
@@ -49,14 +49,30 @@ module.exports = function (router) {
             console.log("JOBS REQUEST")
             console.log(req.query);
             let filter = req.query || {};
+
+            // By default, don't get the jobs from non actiove projects TODO
+            let populateOption = {
+                path: 'projectId',
+                // match: { "status": { $eq: "active" } },
+            }
+
+            // If wants to get a specific project (even inactive) don't filter jobs by active project
+            // if (filter.projectId) {
+            //     populateOption = { path: 'projectId' };
+            // }
+
             Job.find({
-                $and: [
-                    filter,
-                    { createdBy: req.authUser._id }
-                ]
-            }, (err, jobs) => {
-                if (err) throw err;
-                res.json(jobs);
-            }).populate(' projectId ')
+                $and: [filter, { createdBy: req.authUser._id }]
+            })
+                .populate(populateOption)
+                .exec((err, jobs) => {
+                    if (err) throw err;
+
+                    // IF no project is selcted, only send jobs from active projects
+                    if (!filter.projectId) {
+                        jobs = jobs.filter(j => j.projectId.status === "active");
+                    }
+                    res.json(jobs);
+                })
         })
 }
