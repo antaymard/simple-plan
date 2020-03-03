@@ -17,10 +17,14 @@ module.exports = function (router) {
             let jobId = req.body._id;
             let data = req.body;
             delete data._id;
-            Job.findByIdAndUpdate(jobId, data, (err, done) => {
-                if (err) throw err;
-                res.status(200).send('ok');
-            })
+            console.log("UPDATING JOB")
+            console.log(req.body)
+            Job.findByIdAndUpdate(jobId, data, { upsert: true, new: true, setDefaultsOnInsert: true },
+                (err, done) => {
+                    if (err) throw err;
+                    console.log(done);
+                    res.status(200).send('ok');
+                })
         })
 
     // Récupère un job

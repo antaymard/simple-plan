@@ -75,7 +75,8 @@ input[name="name"] {
   outline: none;
   background-color: white;
   min-height: 100px;
-  padding: 10px 15px 15px 40px;
+  padding: 20px 15px 90px 15px;
+  width: 100%;
 }
 
 /* NAME */
@@ -112,13 +113,20 @@ h4 {
 .markdown-edit > h1 {
   font-size: 22px;
   color: var(--greyText);
+  font-size: 24px;
+  color: var(--blueTheme);
 }
 .markdown-edit > h2 {
+  color: var(--greyText);
   font-size: 20px;
   color: var(--blueTheme);
+  padding-left: 10px;
 }
 .markdown-edit > h3 {
   font-size: 28px;
+  color: #b1b1b1;
+  font-size: 18px;
+  padding-left: 20px;
 }
 .markdown-edit > h4 {
   font-size: 16px;
