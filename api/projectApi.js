@@ -13,14 +13,24 @@ module.exports = function (router) {
             });
         })
         .put((req, res) => {
-            console.log(req.body)
-            let projId = req.body._id;
             let data = req.body;
+            console.log('PUT PROJECT CALLED');
+            console.log(req.body);
+
+            // If no createdBy, set it to the account owner
+            if (!data.createdBy) {
+                data.createdBy = req.authUser._id;
+            }
+
+            let projId = req.body._id;
             delete data._id;
-            Project.findByIdAndUpdate(projId, data, (err, done) => {
-                if (err) throw err;
-                return res.send('ok');
-            })
+
+            Project.findByIdAndUpdate(projId, data, { upsert: true, new: true, setDefaultsOnInsert: true },
+                (err, done) => {
+                    if (err) throw err;
+                    console.log(done)
+                    return res.send('ok');
+                })
         })
 
     router.get('/project/:id', (req, res) => {
