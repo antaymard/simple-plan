@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch, useParams, useLocation } from 'react-router-dom';
+import moment from 'moment';
 import './project.css';
 
-import useModal from '../modalPanel/useModal.js';
-import ModalPanel from '../modalPanel/ModalPanel.js';
-import JobProjectForm from '../forms/JobProjectForm.js';
+import useModal from '../edit/useModal.js';
+import ProjectEdit from '../edit/ProjectEdit.js';
 import queryString from 'query-string';
 
 function Project(props) {
@@ -35,11 +35,10 @@ function Project(props) {
                     <p>
                         {props.data.name}
                     </p>
+                    {props.data.dayNumber.indexOf(Number(moment().isoWeekday() - 1)) > -1 ? <div className="is-today-pill" /> : null}
                 </div>
             </Link>
-            <ModalPanel isOpen={isOpen}>
-                <JobProjectForm hide={toggle} data={props.data} formType="project" />
-            </ModalPanel>
+            <ProjectEdit isOpen={isOpen} data={props.data} hide={toggle} />
         </>
     )
 };

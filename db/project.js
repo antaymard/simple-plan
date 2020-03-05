@@ -14,7 +14,9 @@ var projectSchema = new Schema({
     }
   ],
   deadline: { type: Date, default: null },
-  status: { type: String, default: "active" } // active, completed, stopped, deleted
+  status: { type: String, default: "active" }, // active, completed, paused, deleted, abandoned
+  dayNumber: [{ type: Number, default: [] }],
+
 })
 
 var Project = mongoose.model('Project', projectSchema);

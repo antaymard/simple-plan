@@ -10,6 +10,8 @@ import Moment from 'react-moment';
 import TextareaAutosize from 'react-autosize-textarea';
 
 import './edit.css';
+import './jobEdit.css';
+
 import { updateJob, newJob, deleteJob } from '../../actions/jobActions';
 
 import Type from '../type/Type.js';
@@ -108,7 +110,7 @@ const Edit = (props) => {
     }
 
     const changeWeekNumber = (val) => {
-        // si déjà dans array, le retire, sinon l'ajoute !
+        // If already in array, delete it, if not add it
         let _weeknb = formData.weekNumber;
         if (_weeknb.indexOf(val) > -1) {
             _weeknb = _weeknb.filter((e) => e !== val);
@@ -154,7 +156,6 @@ const Edit = (props) => {
                     {/* NAME INPUT */}
                     {nameIsInput ?
                         <input autoFocus
-                            id="jobNameInput"
                             onBlur={() => setNameIsInput(false)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
@@ -171,7 +172,8 @@ const Edit = (props) => {
                             className={formData.name ? null : "is-empty"}
                             onClick={() => { setNameIsInput(true) }}>
                             {formData.name}
-                        </h1>}
+                        </h1>
+                    }
 
 
                     {/* MASTER PROJECT SELECTION */}

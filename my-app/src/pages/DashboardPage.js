@@ -13,12 +13,20 @@ const DashboardPage = (props) => {
 
     const location = useLocation();
     const [weekNumber, setWeeknumber] = useState(Number(moment().format('W')));
+    const [dayNumber, setDayNumber] = useState(Number(moment().isoWeekday() - 1))
     const [selectedProjectId, setSelectedProjectId] = useState();
+
+    let dayList = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         if (searchParams.get('weekNumber')) {
-            setWeeknumber(Number(searchParams.get("weekNumber")))
+            setWeeknumber(Number(searchParams.get("weekNumber")));
+        }
+        if (searchParams.get('dayNumber')) {
+            setDayNumber(Number(searchParams.get('dayNumber')));
+            console.log("there is");
+            console.log(dayList[dayNumber - 1])
         }
 
         let id = location.pathname;
@@ -50,17 +58,26 @@ const DashboardPage = (props) => {
                             <Link to={'/dashboard'}>
                                 <h1>Dashboard</h1>
                             </Link>
-                            <h2>
+                            <div className="time-selector-section">
+                                <Link to={"?weekNumber=" + (weekNumber - 1)}>
+                                    🡠
+                                </Link>
                                 <Link to={"?weekNumber=" + moment().format("W")} >
                                     Semaine {weekNumber}
                                 </Link>
-                                <Link to={"?weekNumber=" + (weekNumber - 1)}>
-                                    🡠
-                        </Link>
                                 <Link to={"?weekNumber=" + (weekNumber + 1)}>
                                     🡢
-                        </Link>
-                            </h2>
+                                </Link>
+                                {/* <Link to={"?dayNumber=" + (dayNumber - 1)} style={{ marginLeft: "20px" }}>
+                                    🡠
+                                </Link>
+                                <Link to={"?dayNumber=" + Number(moment().isoWeekday() - 1)} >
+                                    {dayList[dayNumber]}
+                                </Link>
+                                <Link to={"?dayNumber=" + (dayNumber + 1)}>
+                                    🡢
+                                </Link> */}
+                            </div>
                         </div>
                         {selectedProjectId ? null :
                             <Link
