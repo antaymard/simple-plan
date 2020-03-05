@@ -9,9 +9,6 @@ import { updateJob } from '../../actions/jobActions';
 import Type from '../type/Type.js';
 import ProgressBar from '../progressBar/ProgressBar.js';
 import WeekNumbers from './WeekNumbers.js';
-import useModal from '../modalPanel/useModal.js';
-import ModalPanel from '../modalPanel/ModalPanel.js';
-import JobProjectForm from '../forms/JobProjectForm.js';
 // Icons
 import CurvedArrow from '../icons/CurvedArrow.js';
 import DeadlineFlag from '../icons/DeadlineFlag.js';
@@ -19,7 +16,6 @@ import DeadlineFlag from '../icons/DeadlineFlag.js';
 
 function Job(props) {
 
-    const { isOpen, toggle } = useModal();
     const dispatch = useDispatch();
     const { url } = useRouteMatch();
 
@@ -107,9 +103,6 @@ function Job(props) {
                     DONE
                 </button>
             </div>
-            <ModalPanel isOpen={isOpen}>
-                <JobProjectForm hide={toggle} data={props.data} formType="job" />
-            </ModalPanel>
         </div >
     )
 };

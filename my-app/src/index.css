@@ -12,8 +12,8 @@ body {
   /* background: linear-gradient(to bottom right, #F9E3EC 0%, #E9DEF4 50%, #D5D8FF 100%); */
   /* background: linear-gradient(to bottom right, #F5D4E2 0%, #BFC4FF 100%); */
   /* background: linear-gradient(180deg, #476F94 0%, #3B82C4 100%); */
-  /* background-color: var(--backgroundColor); */
-  background: url("./res/circles-light.png");
+  background-color: var(--backgroundColor);
+  /* background: url("./res/circles-light.png"); */
   overflow: hidden;
 }
 

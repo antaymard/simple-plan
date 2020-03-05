@@ -11,10 +11,20 @@
   cursor: pointer;
   transition: 0.2s;
   color: var(--blueTheme);
+  justify-content: space-between;
+  padding-right: 5px;
+  width: 100%;
 }
 .project-card-selected {
   color: var(--orangeTheme);
   font-weight: bold;
+}
+
+.is-today-pill {
+  height: 10px;
+  width: 12px;
+  border-radius: 50px;
+  background: var(--orangeGradient);
 }
 
 .project-card p {

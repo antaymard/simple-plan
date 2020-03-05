@@ -6,9 +6,9 @@ import { getProjects } from '../../actions/projectActions';
 import "./projectsContainer.css";
 
 import Project from '../project/Project.js';
-import ModalPanel from '../modalPanel/ModalPanel.js';
-import useModal from '../modalPanel/useModal.js';
-import JobProjectForm from '../forms/JobProjectForm.js';
+// import ModalPanel from '../modalPanel/ModalPanel.js';
+import useModal from '../edit/useModal.js';
+import ProjectEdit from '../edit/ProjectEdit.js';
 
 const ProjectsContainer = (props) => {
 
@@ -44,7 +44,7 @@ const ProjectsContainer = (props) => {
 
     // Change filter
     const onFilterClick = () => {
-        let a = ["active", 'completed', "stopped", "deleted", "all"];
+        let a = ["active", 'completed', "paused", "abandoned", "all"];
         let i = a.indexOf(filter);
         if (i < a.length - 1) {
             i++;
@@ -68,9 +68,7 @@ const ProjectsContainer = (props) => {
             <div className="projectsList-section">
                 {renderProjectsList(filter)}
             </div>
-            <ModalPanel isOpen={isOpen}>
-                <JobProjectForm hide={toggle} formType="project" />
-            </ModalPanel>
+            <ProjectEdit isOpen={isOpen} hide={toggle} />
         </>
     )
 

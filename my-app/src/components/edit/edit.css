@@ -16,10 +16,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
-.edit-section-header .job-type {
-  margin-right: 20px;
-}
+
 .close-panel-button {
   border: none;
   background-color: transparent;
@@ -52,9 +51,9 @@
   width: 300px;
 }
 
-.edit-section-content input#jobNameInput,
-.edit-section-content h1#name {
-  margin-top: 30px;
+/* NAME */
+.edit-section input[name="name"],
+.edit-section h1#name {
   font-size: 18px;
   color: var(--blueTheme);
   font-weight: bold;
@@ -63,28 +62,17 @@
   outline: none;
   border: none;
   border-radius: 5px;
+  width: 100%;
 }
 input[name="name"] {
   padding-left: 7px;
 }
-.edit-section-content textarea[name="description"],
-.edit-section-content p#description {
-  font-size: 16px;
-  color: black;
-  border-radius: 5px;
-  outline: none;
-  background-color: white;
-  min-height: 100px;
-  padding: 20px 15px 90px 15px;
-  width: 100%;
-}
 
-/* NAME */
-h1#name.is-empty {
-  color: var(--lightGrey);
-}
-h1#name.is-empty::after {
-  content: "Click to add a title";
+.edit-label-name {
+  color: var(--blueTheme);
+  font-size: 13px;
+  margin-top: 25px;
+  margin-bottom: 5px;
 }
 
 /* DESCRIPTION */
@@ -101,40 +89,6 @@ h1#name.is-empty::after {
 .description.is-empty::after {
   content: "Click to add a description";
   padding-left: 15px;
-}
-
-/* MARKDOWN */
-.markdown-edit h1,
-h2,
-h3,
-h4 {
-  font-weight: bold;
-}
-.markdown-edit > h1 {
-  font-size: 22px;
-  color: var(--greyText);
-  font-size: 24px;
-  color: var(--blueTheme);
-}
-.markdown-edit > h2 {
-  color: var(--greyText);
-  font-size: 20px;
-  color: var(--blueTheme);
-  padding-left: 10px;
-}
-.markdown-edit > h3 {
-  font-size: 28px;
-  color: #b1b1b1;
-  font-size: 18px;
-  padding-left: 20px;
-}
-.markdown-edit > h4 {
-  font-size: 16px;
-  margin-bottom: 0px;
-  color: var(--greyText);
-}
-.markdown-edit > p {
-  color: var(--greyText);
 }
 
 /* CALENDAR AND SHIT */
@@ -175,77 +129,4 @@ h4 {
 .sub-calendar-section button:hover {
   background-color: var(--lighterGrey);
   transition: 0.2s;
-}
-
-.delete-job-button {
-  border: none;
-  background: var(--redGradient);
-  color: white;
-  border-radius: 5px;
-  height: 35px;
-}
-.delete-job-button:hover {
-  transition: 0.2s;
-  box-shadow: var(--redShadow);
-}
-.confirm-delete-popup {
-  position: absolute;
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  /* border: 1px solid red; */
-  box-shadow: var(--redShadow);
-}
-.confirm-delete-popup p {
-  margin-bottom: 0;
-}
-.confirm-delete-popup > div > button {
-  border: none;
-  height: 22px;
-  width: 22px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  padding: auto;
-  border-radius: 5px;
-  background-color: transparent;
-}
-.confirm-delete-popup > div > button:hover {
-  background-color: var(--lighterGrey);
-  transition: 0.2s;
-}
-
-.save-job-button {
-  border: none;
-  background: var(--greenGradient);
-  color: white;
-  border-radius: 5px;
-  height: 35px;
-  margin-top: 40px;
-}
-.save-job-button:hover {
-  transition: 0.2s;
-  box-shadow: var(--greenShadow);
-}
-
-.edit-label-name {
-  color: var(--blueTheme);
-  font-size: 13px;
-  margin-top: 25px;
-  margin-bottom: 5px;
-}
-
-select[name="projectId"] {
-  color: var(--orangeTheme);
-  padding: 5px 10px 5px 35px;
-  border-radius: 5px;
-  border: none;
-  background: url("../../res/bottom-arrow.png") no-repeat 15px #fff;
-  background-size: 10px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  /* background-image: url(...); Add custom arrow */
 }

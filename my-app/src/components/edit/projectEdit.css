@@ -1,0 +1,64 @@
+#input-project-name {
+  width: calc(100% - 360px);
+}
+
+#display-coverImage {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px 0px 0px 5px;
+  object-fit: cover;
+}
+#input-coverImage {
+  font-size: 18px;
+  color: var(--blueTheme);
+  font-weight: bold;
+  margin-bottom: 0;
+  height: 50px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding-left: 15px;
+  width: 100%;
+  font-weight: normal;
+}
+
+#dayNumber-section {
+  background-color: white;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+}
+#dayNumber-section .dayNumber-item {
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: var(--orangeTheme);
+  border: 1px solid var(--orangeTheme);
+}
+#dayNumber-section .dayNumber-item-isSelected {
+  background: var(--orangeGradient);
+  color: white;
+}
+
+select[name="status"] {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 5px;
+}
+
+#save-project-button {
+  border: none;
+  background: var(--greenGradient);
+  color: white;
+  border-radius: 5px;
+  height: 35px;
+  margin-top: 40px;
+}
+#save-project-button:hover {
+  transition: 0.2s;
+  box-shadow: var(--greenShadow);
+}

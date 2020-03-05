@@ -37,16 +37,26 @@
   font-size: 30px;
   color: var(--blueTheme);
   text-transform: uppercase;
-  margin-bottom: -20px;
+  margin-bottom: 0;
 }
-.viewport-right-header h2,
-.viewport-right-header a {
+
+.time-selector-section a {
   font-size: 20px;
   color: var(--blueTheme);
   text-transform: uppercase;
   margin-right: 10px;
-  margin-bottom: 25px;
   font-weight: normal;
+  padding: 5px 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.11),
+    -2px -2px 4px rgba(255, 255, 255, 0.51);
+  border-radius: 5px;
+}
+.time-selector-section a:hover {
+  text-decoration: none;
+}
+.time-selector-section {
+  margin-top: 10px;
+  margin-bottom: 25px;
 }
 
 .viewport-right-header #add-job-button {
