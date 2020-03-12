@@ -1,60 +1,10 @@
-/* .jobs-subheader {
-  width: 100%;
-  background-color: white;
-  border-radius: 25px;
-  margin-bottom: 30px;
-  margin-top: 10px;
-}
-.jobs-subheader .header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 15px 30px 0 30px;
-}
-.jobs-subheader .header h3 {
-  color: var(--blueTheme);
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
-  margin-right: 5px;
-}
-.jobs-subheader .header span {
-  color: var(--greyText);
-  font-size: 16px;
-}
-.jobs-subheader .body {
-  padding: 0 30px;
-}
-
-.jobs-subheader .footer {
-  padding-left: 30px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.jobs-subheader .footer .addJob-button,
-.addJob-button {
-  color: white;
-  background: var(--orangeGradient);
-  border: none;
-  border-radius: 25px;
-  font-size: 14px;
-  padding: 10px 18px;
-  margin: 0;
-}
-.jobs-subheader .footer a {
-  color: var(--orangeTheme);
-  font-size: 16px;
-  margin-bottom: 5px;
-} */
-
 .jobsList-section {
   overflow-y: auto;
   overflow-x: hidden;
   /* height : 500px; */
   position: relative;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 .jobsList-section::-webkit-scrollbar {
   display: none;
