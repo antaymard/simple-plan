@@ -8,7 +8,7 @@ const WeekNumbers = (props) => {
         if (props.weeknb) {
             return props.weeknb.map((item, i) => {
                 return (
-                    <div className={"weekNumbers " + (Number(item) === Number(nowWeek) ? "weekNumbers-now" : "weekNumbers-future")} key={i}>
+                    <div className={"weekNumbers " + (Number(item) === Number(nowWeek) ? "weekNumbers-now" : (Number(item) < Number(nowWeek) ? "weekNumbers-past" : "weekNumbers-future"))} key={i}>
                         {item}
                     </div>
                 )
