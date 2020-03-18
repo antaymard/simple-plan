@@ -1,5 +1,4 @@
-import React from 'react';
-import Moment from 'react-moment';
+import React, { useState } from 'react';
 import './job.css';
 
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
@@ -12,7 +11,9 @@ import WeekNumbers from './WeekNumbers.js';
 import JobDates from './JobDates.js';
 // Icons
 import CurvedArrow from '../icons/CurvedArrow.js';
-import DeadlineFlag from '../icons/DeadlineFlag.js';
+import PlayIcon from '../icons/PlayIcon.js';
+import StraightArrow from '../icons/StraightArrow.js';
+import DoneIcon from '../icons/DoneIcon.js';
 
 
 function Job(props) {
@@ -21,6 +22,8 @@ function Job(props) {
     const { url } = useRouteMatch();
 
     let location = useLocation();
+
+    const [isPanelOpen, setIsPanelOpen] = useState(false);
 
     // TO MERGE AND ONLY UPDATE ONE PROP
 
@@ -53,8 +56,8 @@ function Job(props) {
     }
 
     return (
-        <div className="col-4">
-            <div className={"job-card " + (props.data.isInProgress ? "job-card-inProgress" : null)}>
+        <div className="col-4" style={isPanelOpen ? { zIndex: "1" } : {}}>
+            <div className={"job-card " + (props.data.isInProgress ? "job-card-inProgress" : "")}>
                 <div style={{ width: '100%' }}>
                     <div className="job-header">
                         <div className='d-flex flex-row'>
@@ -67,12 +70,7 @@ function Job(props) {
                             </div>
                         </div>
                         <div>
-                            <button className="inProgress-button"
-                                onClick={setToActive}
-                            >
-                                {props.data.isInProgress ? '◼' : '▶️'}
-                            </button>
-                            {/* <button className="more-button" onClick={toggle}>•••</button> */}
+                            <button className="more-button" onClick={() => setIsPanelOpen(!isPanelOpen)}>•••</button>
                         </div>
                     </div>
                     <div className="job-content">
@@ -98,20 +96,31 @@ function Job(props) {
                         <div className="job-dates-container">
                             <JobDates date={props.data.deadline} type="deadline" />
                         </div>
-                        {/* {props.data.deadline ? <div className="deadline-section">
-                            <div className="deadline-icon">
-                                <DeadlineFlag />
-                            </div>
-                            <span><Moment fromNow>{props.data.deadline}</Moment></span>
-                        </div> : null} */}
                     </div>
                 </div>
                 <ProgressBar progress={props.data.progress}
                     color={props.data.type}
                 />
-                {/* <button onClick={() => changeStatus("completed")}>
-                    DONE
-                </button> */}
+
+                <div className="job-side-panel"
+                    style={isPanelOpen ? { right: "-50px" } : { boxShadow: 'none' }}
+                    onBlur={() => setIsPanelOpen(false)}
+                >
+                    <div>
+                        <button className='job-panel-button' onClick={setToActive}>
+                            {props.data.isInProgress ? '◼' : <PlayIcon />}
+                        </button>
+                        <button className='job-panel-button'>
+                            <StraightArrow />
+                        </button>
+                    </div>
+                    <div>
+                        <button className='job-panel-button' onClick={() => changeStatus("completed")}>
+                            <DoneIcon />
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div >
     )

@@ -55,6 +55,7 @@
   overflow-x: hidden;
   /* height : 500px; */
   position: relative;
+  padding: 0 50px 0 30px;
 }
 .jobsList-section::-webkit-scrollbar {
   display: none;
