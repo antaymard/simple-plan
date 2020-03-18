@@ -3,8 +3,7 @@
   overflow-x: hidden;
   /* height : 500px; */
   position: relative;
-  margin-left: 30px;
-  margin-right: 30px;
+  padding: 0 50px 0 30px;
 }
 .jobsList-section::-webkit-scrollbar {
   display: none;

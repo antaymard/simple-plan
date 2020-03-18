@@ -1,0 +1,27 @@
+.job-card-date-display {
+  background-color: var(--lighterGrey);
+  border-radius: 5px;
+  color: var(--greyText);
+  display: flex;
+  flex-direction: row;
+  padding: 5px 10px;
+  align-items: center;
+}
+
+.job-card-date-display.is-late {
+  background-color: #ffd1d1;
+}
+
+.job-card-date-display > .date-pill {
+  margin-right: 10px;
+  border-radius: 50%;
+  height: 9px;
+  width: 9px;
+}
+
+.job-card-date-display > .date-pill-start {
+  background-color: var(--greenTheme);
+}
+.job-card-date-display > .date-pill-deadline {
+  background-color: #f25c5c;
+}

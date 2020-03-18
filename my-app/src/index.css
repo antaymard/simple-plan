@@ -1,4 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+/* @import url("https://fonts.googleapis.com/css?family=Poppins&display=swap"); */
+@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,700&display=swap");
+/* @import url("https://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,700&display=swap"); */
 
 html {
   padding: 0;
@@ -6,7 +8,9 @@ html {
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
+  font-family: "Red Hat Display", sans-serif;
+  /* font-family: "Averia Sans Libre", cursive; */
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   /* background: linear-gradient(to bottom right, #F9E3EC 0%, #E9DEF4 50%, #D5D8FF 100%); */
@@ -39,8 +43,11 @@ body {
   --greenGradient: linear-gradient(to right top, #3bdd68, #a1ebb6);
   --greenShadow: 0px 4px 15px #a1ebb6;
   --greyText: #5e5e5e;
+  --lighterGrey: #efefef;
   --lightGrey: #c5c5c5;
-  --greenTheme: #3bdd68;
+  --middleGrey: #c4c4c4;
+  --greenTheme: #71d78d;
+  --redTheme: #f25c5c;
   --blackShadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-  --lighterGrey: #f0f0f0;
+  --darkThemeColor: #4f575b;
 }

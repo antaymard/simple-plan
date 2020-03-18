@@ -4,13 +4,13 @@ import './progressBar.css';
 function ProgressBar(props) {
     return (
         <div className="progressBar">
-            <div className="d-flex flex-row-reverse">
+            {/* <div className="d-flex flex-row-reverse">
                 <p className="progress-number">{props.progress}%</p>
-            </div>
+            </div> */}
             <div className="progressBar-background"></div>
-            <div 
+            <div
                 className={"progressBar-progress progressColor-" + props.color}
-                style={{ width : props.progress + "%" }}>    
+                style={{ width: props.progress + "%" }}>
             </div>
         </div>
     )
