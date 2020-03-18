@@ -7,6 +7,7 @@ import queryString from 'query-string';
 import Calendar from 'react-calendar';
 import WeekNumber from '../job/WeekNumbers.js';
 import Moment from 'react-moment';
+import moment from "moment";
 import TextareaAutosize from 'react-autosize-textarea';
 
 import './edit.css';
@@ -106,7 +107,8 @@ const Edit = (props) => {
 
     // CALENDAR
     const changeDeadline = (val) => {
-        setFormData({ ...formData, deadline: val.toISOString() })
+        // Change default hour to 23:59
+        setFormData({ ...formData, deadline: moment(val).endOf('day').toString() });
     }
 
     const changeWeekNumber = (val) => {
@@ -250,10 +252,8 @@ const Edit = (props) => {
 
                             {
                                 formData.deadline ?
-                                    <Moment format="DD/MM/YYYY">
-                                        {formData.deadline}
-                                    </Moment> :
-                                    <p><i>Pas de deadline</i></p>
+                                    moment(formData.deadline).utcOffset(0).format("DD MMMM YYYY")
+                                    : < p ><i>Pas de deadline</i></p>
                             }
                             <button onClick={() => setFormData({ ...formData, deadline: null })}>✕</button>
                         </div>
