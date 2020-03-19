@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from 'r
 import './App.css';
 
 import Sidebar from './components/sidebar/Sidebar.js';
-import Login from './components/login/Login.js';
 import DashboardPage from './pages/DashboardPage';
 import Modal from './components/modal/Modal.js';
 import JobEdit from './components/edit/JobEdit.js';
@@ -40,10 +39,10 @@ moment.locale('fr');
 createStore('jobFilterStore', {});
 createStore('jobsListStore', []);
 createStore('projectsListStore', []);
-createStore('logStatusStore', false);
+createStore('logStatusStore', null);
 
 toast.configure({
-  autoClose: 8000,
+  autoClose: 2000,
   draggable: false
 });
 
@@ -57,6 +56,8 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setLogStatus(true);
+    } else {
+      setLogStatus(false);
     }
     console.log(logStatus)
   })
@@ -71,21 +72,12 @@ function App() {
         <Route path='/dashboard/p'>
           <DashboardPage />
         </Route>
-        {/* <Route path="/dashboard/p/:id">
-            <DashboardPage />
-          </Route> */}
-        <Route path='/dashboard/j'>
+        <Route path='/dashboard/j/:id'>
           {/* TODO : Add job view full screen */}
-          <p>LOL</p>
-        </Route>
-        {/* <Route path="/dashboard/j/:id">
-            <DashboardPage />
-          </Route> */}
-        <Route path='/login'>
-          <Login />
+          <JobEdit selectedProject={projectId} />
         </Route>
         <Route path='/'>
-          {logStatus ? <Redirect to='/dashboard/p/' /> : <Login />}
+          {logStatus === true ? <Redirect to='/dashboard/p/' /> : logStatus === false ? <Redirect to='/login' /> : null}
         </Route>
       </Switch>
       {background && <Route path='/dashboard/j/:id' children={

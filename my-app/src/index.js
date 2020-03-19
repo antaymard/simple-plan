@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Login from './pages/Login.js';
+import Signup from './pages/Signup.js';
 
 
 // REDUX MANAGEMENT
@@ -23,7 +25,17 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <App />
+            <Switch>
+                <Route exact path='/login'>
+                    <Login />
+                </Route>
+                <Route exact path='/signup'>
+                    <Signup />
+                </Route>
+                <Route path='/'>
+                    <App />
+                </Route>
+            </Switch>
         </Router>
     </Provider>,
     document.getElementById('root')
