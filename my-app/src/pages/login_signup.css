@@ -1,0 +1,86 @@
+.sign-body {
+  background-color: var(--backgroundColor);
+  height: 100vh;
+  width: 100vw;
+}
+
+.sign-body .left-section {
+  background-color: var(--darkThemeColor);
+  padding: 100px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.sign-body .left-section h1 {
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 48px;
+  margin-bottom: 70px;
+}
+.sign-body .left-section p {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.sign-body .right-section {
+  color: var(--greyText);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.sign-body .right-section .sign-form-section {
+  width: 550px;
+}
+.sign-body .right-section .sign-form-section .sign-input-group {
+  margin-bottom: 50px;
+  width: 100%;
+}
+.sign-body .right-section .sign-form-section p.sign-input-label {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+.sign-body .right-section .sign-form-section button {
+  width: 100%;
+  background-color: white;
+  height: 55px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 20px;
+  font-size: 18px;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+}
+.sign-body .right-section .sign-form-section button:hover {
+  border: 1px solid var(--orangeTheme);
+}
+.sign-body .right-section .sign-form-section button.selected {
+  border: 1px solid var(--orangeTheme);
+}
+.sign-body .right-section .sign-form-section button:last-child {
+  margin-left: 20px;
+}
+.sign-body .right-section .sign-form-section input {
+  width: 100%;
+  height: 55px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 20px;
+  font-size: 18px;
+}
+.sign-body .right-section .sign-form-section .sign-form-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.sign-body .right-section .sign-form-section .sign-form-footer button {
+  background: var(--orangeGradient);
+  color: white;
+  width: auto;
+}
