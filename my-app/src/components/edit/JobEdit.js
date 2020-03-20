@@ -47,9 +47,10 @@ const Edit = (props) => {
     }
 
     // Render selectMasterProject options
-    const renderOptions = () => {
+    const renderMasterProjects = () => {
         // sort alphabetically
-        projects.sort((a, b) => {
+        let _projects = [...projects]
+        _projects.sort((a, b) => {
             if (a.name > b.name) {
                 return 1;
             }
@@ -59,7 +60,7 @@ const Edit = (props) => {
             return 0;
         });
 
-        return projects.map((item, i) => {
+        return _projects.map((item, i) => {
             return <option key={i} value={item._id}>{item.name}</option>
         })
     }
@@ -182,7 +183,7 @@ const Edit = (props) => {
                     <p className="edit-label-name">Projet</p>
                     <select onChange={handleChange} name="projectId" value={typeof formData.projectId === 'string' ? formData.projectId : formData.projectId._id ? formData.projectId._id : null}>
                         <option value="">Sélectionner un projet</option>
-                        {renderOptions()}
+                        {renderMasterProjects()}
                     </select>
 
 

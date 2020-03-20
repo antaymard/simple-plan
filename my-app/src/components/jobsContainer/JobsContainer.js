@@ -31,22 +31,20 @@ const JobsContainer = () => {
             filters.projectId = id;
             setSelectedProjectId(id);
         }
-
         dispatch(getJobs(filters));
     }, [location])
 
-    const renderJobsList = (option) => {
-        if (option === "inProgress") {
-            return jobs.map((item, i) => {
-                if (item.isInProgress) {
-                    return <Job key={i} data={item} />
-                }
+    const renderJobsList = (displayOption) => {
+        if (displayOption === "inProgress") {
+            return [...jobs].filter(i => i.isInProgress).map((item, i) => {
+                return <Job key={i} data={item} />
             })
         } else {
-            return jobs.map((item, i) => {
-                if (item.isInProgress === false && item.status === option) {
-                    return <Job key={i} data={item} />
-                }
+            let _jobsWithNoDeadline = [...jobs].filter(i => !i.isInProgress && !i.deadline);
+            let _jobsWithDeadline = [...jobs].filter(i => !i.isInProgress && i.deadline).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            let _jobs = _jobsWithDeadline.concat(_jobsWithNoDeadline);
+            return _jobs.filter(i => !i.isInProgress && i.status === displayOption).map((item, i) => {
+                return <Job key={i} data={item} />
             })
         }
     }
@@ -54,16 +52,13 @@ const JobsContainer = () => {
     return (
         <>
             <JobsSubheader selectedProjectId={selectedProjectId} />
+            {console.log(jobs)}
             <div className='jobsList-section'>
                 <h3>En cours ({jobs.filter(i => i.isInProgress).length})</h3>
                 <div className="row">
-                    {jobs.map(function (item, i) {
-                        if (item.isInProgress) {
-                            return <Job key={i} data={item} />
-                        }
-                    })}
+                    {renderJobsList("inProgress")}
                 </div>
-                <h3>A faire ({jobs.filter(i => i.status === "active").length})</h3>
+                <h3>A faire ({jobs.filter(i => i.status === "active" && !i.isInProgress).length})</h3>
                 <div className="row">
                     {renderJobsList("active")}
                 </div>
