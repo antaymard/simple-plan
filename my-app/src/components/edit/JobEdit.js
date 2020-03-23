@@ -6,9 +6,10 @@ import { ObjectId } from 'bson';
 import queryString from 'query-string';
 import Calendar from 'react-calendar';
 import WeekNumber from '../job/WeekNumbers.js';
-import Moment from 'react-moment';
 import moment from "moment";
 import TextareaAutosize from 'react-autosize-textarea';
+import axios from "axios";
+
 
 import './edit.css';
 import './jobEdit.css';
@@ -17,6 +18,10 @@ import { updateJob, newJob, deleteJob } from '../../actions/jobActions';
 
 import Type from '../type/Type.js';
 import ResourcesList from '../resourcesList/ResourcesList.js';
+
+var autosave = null;
+let updateData = {};
+let id = "";
 
 const Edit = (props) => {
 
@@ -27,10 +32,16 @@ const Edit = (props) => {
         progress: 0,
         weekNumber: []
     });
+    // Data that are updated
+    // const [updateData, setUpdateData] = useState({});
+
+    // Input / popup UI control
     const [nameIsInput, setNameIsInput] = useState(false);
     const [descIsInput, setDescIsInput] = useState(false);
     const [confirmDeletePop, setConfirmDeletePopup] = useState(false);
-    const [id, setId] = useState('');
+    const [isJobCreation, setIsJobCreation] = useState(props.isJobCreation);
+
+    // const [id, setId] = useState('');
     const location = useLocation();
 
     // REACT REDUX
@@ -38,13 +49,98 @@ const Edit = (props) => {
     const projects = useSelector(state => state.projects);
     const dispatch = useDispatch();
 
+    // onMount
+    useEffect(() => {
+        // If a project was open, set it as default in masterProject select
+        console.log(props.selectedProject) // Got through the router state from the + new job link/button
+        if (props.selectedProject) {
+            setFormData({
+                ...formData, projectId: props.selectedProject
+            })
+        }
+
+        // Get job id from URL
+        let _path = location.pathname;
+        _path = _path.split('/');
+        let _index = _path.indexOf('j');
+        id = _path[_index + 1];
+
+        // FILL WITH DATA
+        // If redux store exists, get the job from the state
+        if (jobs.filter(i => i._id === id)[0]) {
+            setFormData(jobs.filter(i => i._id === id)[0]);
+        }
+        // If not redux state (copy/paste the job url), get the info with a call
+        else {
+            axios.get('/api/job/' + id, {
+                headers: {
+                    "x-access-token": localStorage.getItem('token')
+                }
+            })
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data) {
+                        setFormData(res.data)
+                    }
+                })
+        }
+
+        // On mount listen for ESC keydown
+        document.addEventListener("keydown", handleEsc, false);
+        // On unmount, clean the listener
+        return () => {
+            document.removeEventListener("keydown", handleEsc, false);
+        }
+    }, [])
+
+    const handleEsc = (e) => {
+        if (e.keyCode === 27) {
+            props.close();
+        }
+    }
+
     // Handle form changes and update the state
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        updateData = { ...updateData, [e.target.name]: e.target.value };
+        if (e.target.name === "projectId" || e.target.name === "progress") {
+            save();
+        }
     }
     const handleTypeChange = (type) => {
         setFormData({ ...formData, type: type });
+        updateData = { ...updateData, type: type };
+        save();
     }
+    // CALENDAR
+    const changeDeadline = (val) => {
+        if (val) {
+            // Change default hour to 23:59 & update the states
+            setFormData({ ...formData, deadline: moment(val).endOf('day').toString() });
+            updateData = { ...updateData, deadline: moment(val).endOf('day').toString() };
+            // Begin save timeout
+        } else {
+            setFormData({ ...formData, deadline: null });
+            updateData = { ...updateData, deadline: null };
+        }
+        save();
+    }
+    const changeWeekNumber = (val) => {
+        // If already in array, delete it, if not add it
+        let _weeknb = [...formData.weekNumber];
+        if (_weeknb.indexOf(val) > -1) {
+            _weeknb = _weeknb.filter((e) => e !== val);
+        } else {
+            _weeknb.push(val);
+        }
+        _weeknb.sort((a, b) => a - b);
+        // update the states
+        setFormData({ ...formData, weekNumber: _weeknb });
+        updateData = { ...updateData, weekNumber: _weeknb };
+        // Begin save timeout
+        save();
+    }
+
 
     // Render selectMasterProject options
     const renderMasterProjects = () => {
@@ -65,40 +161,26 @@ const Edit = (props) => {
         })
     }
 
-    // onMount
-    useEffect(() => {
-        // If a project was open, set it as default in masterProject select
-        console.log(props.selectedProject) // Got through the router state from the +new job link/button
-        if (props.selectedProject) {
-            setFormData({
-                ...formData, projectId: props.selectedProject
-            })
+
+    const save = () => {
+        // If not a creation, 
+        // and if the update object contains at least one prop
+        if (!isJobCreation && Object.keys(updateData).length > 0) {
+            clearTimeout(autosave);
+            autosave = setTimeout(() => {
+                console.log("===== SAVED FIRED");
+                console.log(updateData);
+                dispatch(updateJob({ ...updateData, _id: id }));
+            }, 500);
         }
 
-        // Get job id from URL
-        let id = location.pathname;
-        id = id.split('/');
-        let index = id.indexOf('j');
-        id = id[index + 1];
-        setId(id);
-        // Get job data from redux store, using the id
-        if (jobs.filter(i => i._id === id)[0]) {
-            setFormData(jobs.filter(i => i._id === id)[0]);
-        }
-    }, [])
+    }
 
-    const submitFormData = () => {
+    const createNewJob = () => {
         // action call here
-        if (id === 'new') {
-            setFormData({
-                ...formData,
-                _id: new ObjectId().toString()
-            })
-            dispatch(newJob(formData));
-        } else {
-            dispatch(updateJob(formData));
+        if (isJobCreation) {
+            dispatch(newJob({ ...formData, _id: id }))
         }
-        props.close()
     }
 
     const deleteThisJob = () => {
@@ -106,178 +188,167 @@ const Edit = (props) => {
         props.close();
     }
 
-    // CALENDAR
-    const changeDeadline = (val) => {
-        // Change default hour to 23:59
-        setFormData({ ...formData, deadline: moment(val).endOf('day').toString() });
+    // WIP
+    var progressStyle = {
+        background: "linear_gradient(to right, #71d78d 0%, #71d78d " + formData.progress + ", white " + formData.progress + 1 + ", white 100%"
     }
-
-    const changeWeekNumber = (val) => {
-        // If already in array, delete it, if not add it
-        let _weeknb = formData.weekNumber;
-        if (_weeknb.indexOf(val) > -1) {
-            _weeknb = _weeknb.filter((e) => e !== val);
-        } else {
-            _weeknb.push(val);
-        }
-        _weeknb.sort((a, b) => a - b)
-        setFormData({ ...formData, weekNumber: _weeknb })
-    }
-
-    const getResourcesChange = (d) => {
-        setFormData({
-            ...formData, resources: d
-        })
-    }
-
-
 
     return (
-        < div className="edit-section" >
-            {console.log(formData)}
-            <div className='edit-section-header'>
-                <div className="d-flex flex-row justify-content-between">
-                    <div onClick={() => handleTypeChange('learn')}>
-                        <Type type="learn" size='big'
-                            selected={formData.type == 'learn' ? 'selected' : 'unselected'} />
+        <>
+            <div className="edit-section" >
+                {console.log(formData)}
+                <div className='edit-section-header'>
+                    <div className="d-flex flex-row justify-content-between">
+                        <div onClick={() => handleTypeChange('learn')}>
+                            <Type type="learn" size='big'
+                                selected={formData.type == 'learn' ? 'selected' : 'unselected'} />
+                        </div>
+                        <div onClick={() => handleTypeChange('build')}>
+                            <Type type="build" size='big' selected={formData.type == 'build' ? 'selected' : 'unselected'} />
+                        </div>
+                        <div onClick={() => handleTypeChange('check')}>
+                            <Type type="check" size='big' selected={formData.type == 'check' ? 'selected' : 'unselected'} />
+                        </div>
+                        <div onClick={() => handleTypeChange('todo')}>
+                            <Type type="todo" size='big' selected={formData.type == 'todo' ? 'selected' : 'unselected'} />
+                        </div>
                     </div>
-                    <div onClick={() => handleTypeChange('build')}>
-                        <Type type="build" size='big' selected={formData.type == 'build' ? 'selected' : 'unselected'} />
-                    </div>
-                    <div onClick={() => handleTypeChange('check')}>
-                        <Type type="check" size='big' selected={formData.type == 'check' ? 'selected' : 'unselected'} />
-                    </div>
-                    <div onClick={() => handleTypeChange('todo')}>
-                        <Type type="todo" size='big' selected={formData.type == 'todo' ? 'selected' : 'unselected'} />
-                    </div>
+                    <button className="close-panel-button" onClick={props.close}>✕</button>
                 </div>
-                <button className="close-panel-button" onClick={props.close}>✕</button>
-            </div>
-            <div className="edit-section-content">
-                <div className="edit-left-section">
+                {/* NAME INPUT */}
+                {nameIsInput ?
+                    <input autoFocus
+                        onBlur={() => { setNameIsInput(false); save() }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                setNameIsInput(false)
+                            }
+                        }}
+                        type='text'
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        autoComplete="off" /> :
+                    <h1 id="name"
+                        className={formData.name ? null : "is-empty"}
+                        onClick={() => setNameIsInput(true)}>
+                        {formData.name}
+                    </h1>
+                }
+                <div className="edit-section-content">
+                    <div className="edit-left-section">
 
-                    {/* NAME INPUT */}
-                    {nameIsInput ?
-                        <input autoFocus
-                            onBlur={() => setNameIsInput(false)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    setNameIsInput(false)
-                                    submitFormData()
+                        {/* MASTER PROJECT SELECTION */}
+                        <p className="edit-label-name">Projet</p>
+                        <select onChange={handleChange} name="projectId" value={typeof formData.projectId === 'string' ? formData.projectId : formData.projectId._id ? formData.projectId._id : null}>
+                            <option value="">Sélectionner un projet</option>
+                            {renderMasterProjects()}
+                        </select>
+
+
+                        {/* DESCRIPTION TEXTAREA */}
+                        <p className="edit-label-name">Description</p>
+                        {descIsInput ?
+                            <>
+                                <TextareaAutosize
+                                    autoFocus
+                                    name='description'
+                                    value={formData.description}
+                                    onChange={handleChange}
+                                    onBlur={() => { setDescIsInput(false); save() }} >
+
+                                </TextareaAutosize>
+                            </> :
+                            formData.description ?
+                                <div onClick={() => setDescIsInput(true)}>
+                                    <ReactMarkdown
+                                        source={formData.description}
+                                        className={"description markdown-edit" + (formData.description ? "" : " is-empty")}
+                                    />
+                                </div> :
+                                <p onClick={() => setDescIsInput(true)}
+                                    className={"description" + (formData.description ? "" : " is-empty")}>
+                                    {formData.description}
+                                </p>
+                        }
+                        <hr />
+                        <p className="low-level-info">Créé le {moment(formData.createdOn).format("DD MMMM YYYY")}</p>
+                    </div>
+
+                    {/* RIGHT SECTION */}
+                    <div className='edit-right-section'>
+
+                        {/* CALENDAR */}
+                        <p className='edit-label-name'>Calendrier</p>
+                        <Calendar
+                            value={new Date()}
+                            formatShortWeekday={(locale, value) => ['D', 'L', 'M', 'M', 'J', 'V', 'S'][value.getDay()]}
+                            formatMonth={(local, value) => ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jui', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'][value.getMonth()]}
+                            next2Label={null}
+                            prev2Label={null}
+                            showWeekNumbers
+                            onClickWeekNumber={changeWeekNumber}
+                            onChange={changeDeadline}
+                        />
+                        <div className="sub-calendar-section">
+                            <p>Semaines</p>
+                            <div className="d-flex align-items-center justify-content-between">
+                                {
+                                    formData.weekNumber.length > 0 ? <WeekNumber weeknb={formData.weekNumber} /> :
+                                        <p><i>Pas de semaine allouée</i></p>
                                 }
-                            }}
-                            type='text'
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            autoComplete="off" /> :
-                        <h1 id="name"
-                            className={formData.name ? null : "is-empty"}
-                            onClick={() => { setNameIsInput(true) }}>
-                            {formData.name}
-                        </h1>
-                    }
-
-
-                    {/* MASTER PROJECT SELECTION */}
-                    <p className="edit-label-name">Projet</p>
-                    <select onChange={handleChange} name="projectId" value={typeof formData.projectId === 'string' ? formData.projectId : formData.projectId._id ? formData.projectId._id : null}>
-                        <option value="">Sélectionner un projet</option>
-                        {renderMasterProjects()}
-                    </select>
-
-
-                    {/* DESCRIPTION TEXTAREA */}
-                    <p className="edit-label-name">Description</p>
-                    {descIsInput ?
-                        <>
-                            <TextareaAutosize
-                                autoFocus
-                                name='description'
-                                value={formData.description}
-                                onChange={handleChange}
-                                onBlur={() => setDescIsInput(false)} >
-
-                            </TextareaAutosize>
-                        </> :
-                        formData.description ?
-                            <div onClick={() => setDescIsInput(true)}>
-                                <ReactMarkdown
-                                    source={formData.description}
-                                    className={"description markdown-edit" + (formData.description ? "" : " is-empty")}
-                                />
-                            </div> :
-                            <p onClick={() => setDescIsInput(true)}
-                                className={"description" + (formData.description ? "" : " is-empty")}>
-                                {formData.description}
-                            </p>
-                    }
-
-
-                    {/* PROGRESSBAR */}
-                    <p className="edit-label-name">Avancement</p>
-                    <input type="range" min={0} max={100} step={1} name="progress" value={formData.progress} onChange={handleChange}></input>
-
-
-                    <button className="save-job-button" onClick={submitFormData}>SAVE</button>
-                </div>
-
-                {/* RIGHT SECTION */}
-                <div className='edit-right-section'>
-
-                    {/* CALENDAR */}
-                    <p className='edit-label-name'>Calendrier</p>
-                    <Calendar
-                        value={new Date()}
-                        formatShortWeekday={(locale, value) => ['D', 'L', 'M', 'M', 'J', 'V', 'S'][value.getDay()]}
-                        formatMonth={(local, value) => ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jui', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'][value.getMonth()]}
-                        next2Label={null}
-                        prev2Label={null}
-                        showWeekNumbers
-                        onClickWeekNumber={changeWeekNumber}
-                        onChange={changeDeadline}
-                    />
-                    <div className="sub-calendar-section">
-                        <p>Semaines</p>
-                        <div className="d-flex align-items-center justify-content-between">
-                            {
-                                formData.weekNumber.length > 0 ? <WeekNumber weeknb={formData.weekNumber} /> :
-                                    <p><i>Pas de semaine allouée</i></p>
-                            }
-                            <button onClick={() => setFormData({ ...formData, weekNumber: [] })}>✕</button>
-                        </div>
-                    </div>
-                    <div className="sub-calendar-section">
-                        <p>Deadline</p>
-                        <div className="d-flex align-items-center justify-content-between">
-
-                            {
-                                formData.deadline ?
-                                    moment(formData.deadline).utcOffset(0).format("DD MMMM YYYY")
-                                    : < p ><i>Pas de deadline</i></p>
-                            }
-                            <button onClick={() => setFormData({ ...formData, deadline: null })}>✕</button>
-                        </div>
-                    </div>
-
-                    {/* Resources list */}
-                    <p className="edit-label-name">Ressources du projet</p>
-                    {/* {console.log(formData.resources)} */}
-                    {/* <ResourcesList sendChange={getResourcesChange} resourcesArray={formData.resources} /> */}
-
-                    <div style={{ position: "relative", width: "100%" }}>
-                        <button className="delete-job-button" style={{ marginTop: "50px" }} onClick={() => setConfirmDeletePopup(true)}>Delete Job</button>
-                        {confirmDeletePop ? <div className="confirm-delete-popup">
-                            <div className="d-flex align-items-center justify-content-between" style={{ marginBottom: "7px" }}>
-                                <p>Are you sure ?</p>
-                                <button onClick={() => setConfirmDeletePopup(false)}>X</button>
+                                <button onClick={() => changeWeekNumber([])}>✕</button>
                             </div>
-                            <button className="delete-job-button" onClick={deleteThisJob}>Yes delete this job</button>
-                        </div> : null}
+                        </div>
+                        <div className="sub-calendar-section">
+                            <p>Deadline</p>
+                            <div className="d-flex align-items-center justify-content-between">
+
+                                {
+                                    formData.deadline ?
+                                        moment(formData.deadline).utcOffset(0).format("DD MMMM YYYY")
+                                        : < p ><i>Pas de deadline</i></p>
+                                }
+                                <button onClick={() => changeDeadline(null)}>✕</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+            </div >
+            <div className="job-edit-footer">
+                <div className='progress-section'>
+                    {/* PROGRESSBAR */}
+                    <p className="edit-label-name" style={{ color: "white", marginTop: 0 }}>Avancement</p>
+                    <input type="range" min={0} max={100} step={1} name="progress"
+                        value={formData.progress}
+                        onChange={handleChange}
+                        style={progressStyle}
+                    />
+                </div>
+                {isJobCreation ?
+                    <div className="edit-button-section">
+                        <p onClick={() => props.close()}>Annuler</p>
+                        <button className="save-job-button" onClick={() => createNewJob()}>SAVE</button>
+                    </div>
+                    : <div className="edit-button-section">
+                        <div style={{ position: "relative" }}>
+                            <button onClick={() => setConfirmDeletePopup(true)}>X</button>
+                            {confirmDeletePop ? <div className="confirm-delete-popup">
+                                <div className="d-flex align-items-center justify-content-between" style={{ marginBottom: "7px" }} onBlur={() => setConfirmDeletePopup(false)}>
+                                    <p>Are you sure ?</p>
+                                    <button onClick={() => setConfirmDeletePopup(false)}>X</button>
+                                </div>
+                                <button className="delete-job-button" style={{ width: "100%" }} onClick={deleteThisJob}>Yes delete this job</button>
+                            </div> : null}
+                        </div>
+                        <button>LOL</button>
+                        <button>LOL</button>
+                        <button>LOL</button>
+                        <button style={{ width: "70px", marginRight: "0px" }}>Status</button>
+                    </div>}
             </div>
-        </div >
+        </>
     )
 }
 

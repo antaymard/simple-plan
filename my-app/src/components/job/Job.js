@@ -57,7 +57,8 @@ function Job(props) {
 
     return (
         <div className="col-4" style={isPanelOpen ? { zIndex: "1" } : {}}>
-            <div className={"job-card " + (props.data.isInProgress ? "job-card-inProgress" : "")}>
+            <div className={"job-card " + (props.data.isInProgress ? "job-card-inProgress" : "")} onBlur={() => setIsPanelOpen(false)}
+            >
                 <div style={{ width: '100%' }}>
                     <div className="job-header">
                         <div className='d-flex flex-row'>
@@ -104,7 +105,6 @@ function Job(props) {
 
                 <div className="job-side-panel"
                     style={isPanelOpen ? { right: "-50px" } : { boxShadow: 'none' }}
-                    onBlur={() => setIsPanelOpen(false)}
                 >
                     <div>
                         <button className='job-panel-button' onClick={setToActive}>

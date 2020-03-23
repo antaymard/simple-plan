@@ -3,12 +3,23 @@
   background-color: var(--backgroundColor);
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 50px 34px 0 50px;
   box-shadow: var(--blackShadow);
   width: 80vw;
-  max-width: 1300px;
+  max-width: 1000px;
   max-height: calc(100vh - 60px);
-  overflow-y: auto;
+  overflow-y: scroll;
+}
+
+/* light text like created on date */
+.edit-section .low-level-info {
+  color: var(--greyText);
+  opacity: 0.5;
+}
+.edit-section hr {
+  border: 0.5px solid var(--lightGrey);
+  width: 100%;
+  opacity: 0.5;
 }
 
 /* HEADER */
@@ -58,11 +69,12 @@
   color: var(--blueTheme);
   font-weight: bold;
   margin-bottom: 0;
-  height: 30px;
+  padding: 5px 10px 5px 5px;
   outline: none;
   border: none;
   border-radius: 5px;
   width: 100%;
+  height: 32px;
 }
 input[name="name"] {
   padding-left: 7px;

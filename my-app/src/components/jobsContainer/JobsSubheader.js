@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from "moment";
+import { ObjectId } from 'bson';
+
 
 import WeekNumbers from '../job/WeekNumbers.js';
 
@@ -31,8 +33,8 @@ const JobsSubheader = (props) => {
                     <Link
                         key={p.name}
                         to={{
-                            pathname: "/dashboard/j/new",
-                            state: { background: location, projectId: props.selectedProjectId }
+                            pathname: "/dashboard/j/" + new ObjectId().toString(),
+                            state: { background: location, projectId: props.selectedProjectId, isJobCreation: true }
                         }}>
                         + new job
                     </Link>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import queryString from 'query-string';
+import { toast } from "react-toastify";
 
 let headers = {
     "x-access-token": localStorage.getItem('token')
@@ -34,24 +35,32 @@ export const updateJob = (newData) => {
         // const { jobs } = getState();
         console.log(newData)
         // Local here
-        axios.put('/api/job',
+        axios.patch('/api/job',
             newData,
             {
                 headers: headers,
 
             })
             .then(res => {
-                if (res.data === "ok") {
-                    console.log(res.data)
+                if (res.data.success) {
+                    console.log(res.data.data)
+                    toast('Job mis à jour',
+                        { type: toast.TYPE.SUCCESS }
+                    )
                     dispatch({
                         type: "UPDATE_JOB",
-                        payload: newData
+                        payload: res.data.data
                     })
+                } else if (!res.data.success) {
+                    toast('Erreur lors de la mise à jour : ' + JSON.stringify(res.data.error),
+                        { type: toast.TYPE.ERROR }
+                    )
                 }
             })
     }
 }
 
+// Create a new job
 export const newJob = (newJobData) => {
     console.log("NEW JOB FIRED");
     console.log(newJobData)
@@ -62,11 +71,16 @@ export const newJob = (newJobData) => {
                 headers: headers
             })
             .then(res => {
-                console.log(res.data)
-                dispatch({
-                    type: "UPDATE_JOB",
-                    payload: newJobData
-                })
+                console.log(res.data.data)
+                if (res.data.success) {
+                    toast('Job créé avec succès',
+                        { type: toast.TYPE.SUCCESS }
+                    )
+                    dispatch({
+                        type: "ADD_JOB",
+                        payload: res.data.data
+                    })
+                }
             })
     }
 }
@@ -77,8 +91,11 @@ export const deleteJob = (jobId) => {
             { headers: headers }
         ).then(res => {
             if (res.data === "ok") {
+                toast('Job supprimé',
+                    { type: toast.TYPE.SUCCESS }
+                )
                 dispatch({
-                    type: 'REMOVE_JOB',
+                    type: 'UPDATE_JOB',
                     payload: {
                         idToRemove: jobId
                     }
@@ -87,35 +104,3 @@ export const deleteJob = (jobId) => {
         })
     }
 }
-
-// TO REMOVE
-// export const addBlankJob = (tempData) => {
-//     return (dispatch) => {
-//         console.log(tempData);
-//         // create id
-//         let id = new ObjectId();
-//         tempData._id = id.toHexString();
-//         tempData = {
-//             createdOn: "2020-01-02T14:48:10.935Z",
-//             name: "OMG",
-//             description: "",
-//             projectId: {
-//                 _id: 2
-//             },
-//             progress: 0,
-//             type: "build",
-//             resLink: [],
-//             weekNumber: [],
-//             deadline: "2020-02-20T23:00:00.000Z",
-//             status: "active",
-//             isInProgress: true,
-//             isNow: false
-//         }
-//         // push in the array
-//         console.log(tempData)
-//         dispatch({
-//             type: "ADD_JOB",
-//             payload: tempData,
-//         })
-//     }
-// }

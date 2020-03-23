@@ -52,6 +52,7 @@ function App() {
   let location = useLocation();
   let background = location.state && location.state.background;
   let projectId = location.state && location.state.projectId;
+  let isJobCreation = location.state && location.state.isJobCreation;
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -74,14 +75,14 @@ function App() {
         </Route>
         <Route path='/dashboard/j/:id'>
           {/* TODO : Add job view full screen */}
-          <JobEdit selectedProject={projectId} />
+          <JobEdit selectedProject={projectId} isJobCreation={isJobCreation} />
         </Route>
         <Route path='/'>
           {logStatus === true ? <Redirect to='/dashboard/p/' /> : logStatus === false ? <Redirect to='/login' /> : null}
         </Route>
       </Switch>
       {background && <Route path='/dashboard/j/:id' children={
-        <Modal children={<JobEdit selectedProject={projectId} />} />
+        <Modal children={<JobEdit selectedProject={projectId} isJobCreation={isJobCreation} />} />
       } />}
     </div>
   )
