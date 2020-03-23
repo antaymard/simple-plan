@@ -13,6 +13,7 @@ const jobReducer = (state = [], { type, payload }) => {
             return payload;
         case "UPDATE_JOB":
             // update array with new job
+            console.log(payload)
             return state.map(item => {
                 if (item._id === payload._id) {
                     return payload;

@@ -59,6 +59,9 @@ const Edit = (props) => {
             })
         }
 
+        // Clean update data
+        updateData = {};
+
         // Get job id from URL
         let _path = location.pathname;
         _path = _path.split('/');
@@ -171,6 +174,8 @@ const Edit = (props) => {
                 console.log("===== SAVED FIRED");
                 console.log(updateData);
                 dispatch(updateJob({ ...updateData, _id: id }));
+                // Should be callback
+                updateData = {};
             }, 500);
         }
 

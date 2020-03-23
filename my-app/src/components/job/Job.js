@@ -56,8 +56,8 @@ function Job(props) {
     }
 
     return (
-        <div className="col-4" style={isPanelOpen ? { zIndex: "1" } : {}}>
-            <div className={"job-card " + (props.data.isInProgress ? "job-card-inProgress" : "")} onBlur={() => setIsPanelOpen(false)}
+        <div className="col-4" style={isPanelOpen ? { zIndex: "1" } : {}} onMouseLeave={() => setIsPanelOpen(false)} >
+            <div className={"job-card " + (props.data.isInProgress ? "job-card-inProgress" : "")}
             >
                 <div style={{ width: '100%' }}>
                     <div className="job-header">
@@ -103,6 +103,7 @@ function Job(props) {
                     color={props.data.type}
                 />
 
+                {/* SIDE PANEL */}
                 <div className="job-side-panel"
                     style={isPanelOpen ? { right: "-50px" } : { boxShadow: 'none' }}
                 >
