@@ -11,13 +11,9 @@
   position: relative;
 }
 
-/* BACKBROUND ANIMATION */
-
 .job-card-inProgress {
   box-shadow: var(--blackShadow);
 }
-
-/* END OF BACKGROUND ANIMATION */
 
 .job-header {
   width: 100%;

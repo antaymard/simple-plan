@@ -1,5 +1,6 @@
 const jobReducer = (state = [], { type, payload }) => {
     switch (type) {
+        // DEP
         case "ADD_JOB":
             // Add the job in the state array
             console.log(payload)

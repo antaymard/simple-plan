@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import moment from "moment";
+import { ObjectId } from 'bson';
+
 import '../myCalendar.css';
 
 // import queryString from 'query-string';
@@ -84,8 +86,8 @@ const DashboardPage = (props) => {
                                 key={1}
                                 id="add-job-button"
                                 to={{
-                                    pathname: "/dashboard/j/new",
-                                    state: { background: location }
+                                    pathname: "/dashboard/j/" + new ObjectId().toString(),
+                                    state: { background: location, isJobCreation: true }
                                 }}>
                                 + new job
                         </Link>
