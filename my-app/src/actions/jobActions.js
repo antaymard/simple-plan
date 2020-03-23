@@ -47,6 +47,8 @@ export const updateJob = (newData) => {
                     toast('Job mis à jour',
                         { type: toast.TYPE.SUCCESS }
                     )
+                    console.log(newData)
+                    console.log(res.data.data);
                     dispatch({
                         type: "UPDATE_JOB",
                         payload: res.data.data

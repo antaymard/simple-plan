@@ -32,7 +32,7 @@ module.exports = function (router) {
             console.log("UPDATING JOB");
             console.log(jobId);
             console.log(data);
-            Job.findByIdAndUpdate(jobId, data,
+            Job.findByIdAndUpdate(jobId, data, { new: true },
                 //  { upsert: true, new: true, setDefaultsOnInsert: true },
                 (err, job) => {
                     if (err) {
@@ -41,13 +41,14 @@ module.exports = function (router) {
                             error: err
                         })
                         throw err
-                    };
-                    console.log(job);
-                    res.status(200).send({
-                        success: true,
-                        data: job
-                    });
-                })
+                    } else if (job) {
+                        console.log(job);
+                        res.status(200).send({
+                            success: true,
+                            data: job
+                        });
+                    }
+                }).populate(" projectId ")
         })
 
     // Récupère un job
