@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { ObjectId } from 'bson';
-import queryString from 'query-string';
 import Calendar from 'react-calendar';
 import WeekNumber from '../job/WeekNumbers.js';
 import moment from "moment";
 import TextareaAutosize from 'react-autosize-textarea';
 import axios from "axios";
-
+import breaks from 'remark-breaks';
 
 import './edit.css';
 import './jobEdit.css';
@@ -86,19 +84,25 @@ const Edit = (props) => {
                         setFormData(res.data)
                     }
                 })
+
         }
 
         // On mount listen for ESC keydown
-        document.addEventListener("keydown", handleEsc, false);
+        document.addEventListener("keydown", handleKeyboardAction, false);
         // On unmount, clean the listener
         return () => {
-            document.removeEventListener("keydown", handleEsc, false);
+            document.removeEventListener("keydown", handleKeyboardAction, false);
         }
-    }, [])
+    }, []);
 
-    const handleEsc = (e) => {
+    const handleKeyboardAction = (e) => {
         if (e.keyCode === 27) {
             props.close();
+        }
+
+        if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) {
+            setDescIsInput(false);
+            save();
         }
     }
 
@@ -184,7 +188,8 @@ const Edit = (props) => {
     const createNewJob = () => {
         // action call here
         if (isJobCreation) {
-            dispatch(newJob({ ...formData, _id: id }))
+            dispatch(newJob({ ...formData, _id: id }));
+            props.close();
         }
     }
 
@@ -226,7 +231,8 @@ const Edit = (props) => {
                         onBlur={() => { setNameIsInput(false); save() }}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                setNameIsInput(false)
+                                setNameIsInput(false);
+                                save();
                             }
                         }}
                         type='text'
@@ -261,14 +267,15 @@ const Edit = (props) => {
                                     value={formData.description}
                                     onChange={handleChange}
                                     onBlur={() => { setDescIsInput(false); save() }} >
-
                                 </TextareaAutosize>
                             </> :
                             formData.description ?
                                 <div onClick={() => setDescIsInput(true)}>
                                     <ReactMarkdown
+                                        linkTarget="_blank"
+                                        plugins={[breaks]}
                                         source={formData.description}
-                                        className={"description markdown-edit" + (formData.description ? "" : " is-empty")}
+                                        className={"description markdown-description" + (formData.description ? "" : " is-empty")}
                                     />
                                 </div> :
                                 <p onClick={() => setDescIsInput(true)}
