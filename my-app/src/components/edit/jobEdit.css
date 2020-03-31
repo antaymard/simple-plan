@@ -59,6 +59,9 @@ h4 {
 .markdown-description > p {
   color: var(--greyText);
 }
+.markdown-description input[type="checkbox"] {
+  margin-right: 7px;
+}
 
 .delete-job-button {
   border: none;
@@ -73,15 +76,13 @@ h4 {
 }
 .confirm-delete-popup {
   position: absolute;
-  top: -130px;
+  top: -110px;
+  right: 0;
   width: 250px;
   background-color: white;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: var(--redShadow);
-}
-.confirm-delete-popup p {
-  margin-bottom: 0;
+  box-shadow: var(--blackShadow);
 }
 .confirm-delete-popup > div > button {
   border: none;
@@ -94,7 +95,6 @@ h4 {
   padding: auto;
   border-radius: 5px;
   background-color: var(--lightGrey);
-  color: blue;
 }
 .confirm-delete-popup > div > button:hover {
   background-color: var(--lighterGrey);
@@ -145,11 +145,20 @@ select[name="projectId"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 5px;
   width: 40px;
   height: 40px;
   margin-right: 10px;
+  transition: 0.2s;
+}
+.job-edit-footer .edit-button-section button:hover {
+  border: 1px solid white;
+}
+
+.job-edit-footer .edit-button-section button.isToggled {
+  border: 2px solid white;
+  background-color: transparent;
 }
 
 .job-edit-footer .edit-button-section p {
@@ -191,4 +200,10 @@ select[name="projectId"] {
   background: var(--orangeGradient);
   cursor: pointer;
   box-shadow: var(--blackShadow);
+}
+.confirm-delete-popup p.hintText {
+  margin-bottom: 0;
+  color: var(--greyText);
+  text-decoration: none;
+  padding: 0;
 }

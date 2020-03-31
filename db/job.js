@@ -18,7 +18,9 @@ var jobSchema = new Schema({
   }],
   weekNumber: [{ type: Number, default: null }],
   deadline: { type: Date, default: null },
-  status: { type: String, default: "active" }, // active, completed, stopped, deleted
+  // DEP
+  // status: { type: String, default: "active" }, // active, completed, stopped, deleted
+  isCompleted: { type: Boolean, default: false },
   isInProgress: { type: Boolean, default: false },
   isNow: { type: Boolean, default: false }
 })
