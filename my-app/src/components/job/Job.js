@@ -29,29 +29,24 @@ function Job(props) {
 
     const setToActive = () => {
         let d = props.data;
-        if (d.status !== "active") {
-            d.status = 'active'
+        if (d.isCompleted) {
+            d.isCompleted = false;
         }
         d.isInProgress = !d.isInProgress;
         dispatch(updateJob(d));
     }
 
-    const changeStatus = (status) => {
+    const changeStatus = () => {
         let d = props.data;
-        // if completed, turn active
-        if (props.data.status === "completed") {
-            d.status = 'active'
-        }
-        // if active, turn completed
-        else {
+        if (!d.isCompleted) {
             // if was in progress, remove it
             if (d.isInProgress) {
                 d.isInProgress = false;
             }
             d.progress = 100;
-            d.status = "completed"
         }
-        console.log(d)
+        d.isCompleted = !d.isCompleted;
+        console.log(d);
         dispatch(updateJob(d));
     }
 
@@ -116,7 +111,7 @@ function Job(props) {
                         </button>
                     </div>
                     <div>
-                        <button className='job-panel-button' onClick={() => changeStatus("completed")}>
+                        <button className='job-panel-button' onClick={changeStatus}>
                             <DoneIcon />
                         </button>
                     </div>

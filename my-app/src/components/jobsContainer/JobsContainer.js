@@ -34,8 +34,8 @@ const JobsContainer = () => {
         dispatch(getJobs(filters));
     }, [location])
 
-    const renderJobsList = (displayOption) => {
-        if (displayOption === "inProgress") {
+    const renderJobsList = (inProgress, isCompleted) => {
+        if (inProgress) {
             return [...jobs].filter(i => i.isInProgress).map((item, i) => {
                 return <Job key={i} data={item} />
             })
@@ -43,7 +43,8 @@ const JobsContainer = () => {
             let _jobsWithNoDeadline = [...jobs].filter(i => !i.isInProgress && !i.deadline);
             let _jobsWithDeadline = [...jobs].filter(i => !i.isInProgress && i.deadline).sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
             let _jobs = _jobsWithDeadline.concat(_jobsWithNoDeadline);
-            return _jobs.filter(i => !i.isInProgress && i.status === displayOption).map((item, i) => {
+
+            return _jobs.filter(i => i.isInProgress === inProgress && i.isCompleted === isCompleted).map((item, i) => {
                 return <Job key={i} data={item} />
             })
         }
@@ -56,19 +57,19 @@ const JobsContainer = () => {
             <div className='jobsList-section'>
                 <h3>En cours ({jobs.filter(i => i.isInProgress).length})</h3>
                 <div className="row">
-                    {renderJobsList("inProgress")}
+                    {renderJobsList(true, false)}
                 </div>
-                <h3>A faire ({jobs.filter(i => i.status === "active" && !i.isInProgress).length})</h3>
+                <h3>A faire ({jobs.filter(i => !i.isCompleted && !i.isInProgress).length})</h3>
                 <div className="row">
-                    {renderJobsList("active")}
+                    {renderJobsList(false, false)}
                 </div>
                 <h3 onClick={() => setShowCompleted(!showCompleted)} style={{ cursor: 'pointer' }}>
-                    Terminées ({jobs.filter(i => i.status === "completed").length})
+                    Terminées ({jobs.filter(i => i.isCompleted).length})
                     </h3>
                 {
                     showCompleted ?
                         <div className="row">
-                            {renderJobsList("completed")}
+                            {renderJobsList(false, true)}
                         </div> : null
                 }
             </div>

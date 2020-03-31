@@ -9,6 +9,12 @@ import TextareaAutosize from 'react-autosize-textarea';
 import axios from "axios";
 import breaks from 'remark-breaks';
 
+import TrashIcon from '../icons/TrashIcon.js';
+import PlayIcon from '../icons/PlayIcon.js';
+import DoneIcon from '../icons/DoneIcon.js';
+import PlusIcon from '../icons/PlusIcon.js';
+
+
 import './edit.css';
 import './jobEdit.css';
 
@@ -309,7 +315,11 @@ const Edit = (props) => {
                                     formData.weekNumber.length > 0 ? <WeekNumber weeknb={formData.weekNumber} /> :
                                         <p><i>Pas de semaine allouée</i></p>
                                 }
-                                <button onClick={() => changeWeekNumber([])}>✕</button>
+                                <button onClick={() => {
+                                    setFormData({ ...formData, weekNumber: [] });
+                                    updateData = { ...updateData, weekNumber: [] };
+                                    save();
+                                }}>✕</button>
                             </div>
                         </div>
                         <div className="sub-calendar-section">
@@ -344,20 +354,48 @@ const Edit = (props) => {
                         <button className="save-job-button" onClick={() => createNewJob()}>SAVE</button>
                     </div>
                     : <div className="edit-button-section">
+
+                        {/* INPROGRESS BUTTON */}
+                        <button
+                            className={formData.isInProgress ? "isToggled" : ""}
+                            onClick={() => {
+                                if (formData.isCompleted) {
+                                    setFormData({ ...formData, isCompleted: false, isInProgress: true });
+                                    updateData = { ...updateData, isCompleted: false, isInProgress: true };
+                                } else {
+                                    setFormData({ ...formData, isInProgress: !formData.isInProgress });
+                                    updateData = { ...updateData, isInProgress: !formData.isInProgress };
+                                }
+                                save();
+                            }}
+                        ><PlayIcon /></button>
+
+                        {/* DEEPWORK BUTTON */}
+                        <button><PlusIcon /></button>
+
+                        {/* SUPPRESS BUTTON */}
                         <div style={{ position: "relative" }}>
-                            <button onClick={() => setConfirmDeletePopup(true)}>X</button>
-                            {confirmDeletePop ? <div className="confirm-delete-popup">
-                                <div className="d-flex align-items-center justify-content-between" style={{ marginBottom: "7px" }} onBlur={() => setConfirmDeletePopup(false)}>
-                                    <p>Are you sure ?</p>
-                                    <button onClick={() => setConfirmDeletePopup(false)}>X</button>
-                                </div>
+                            <button onClick={() => setConfirmDeletePopup(!confirmDeletePop)}><TrashIcon /></button>
+                            {confirmDeletePop ? <div className="confirm-delete-popup" onMouseLeave={() => setConfirmDeletePopup(false)}>
+                                <p className="hintText">Are you sure ?</p>
                                 <button className="delete-job-button" style={{ width: "100%" }} onClick={deleteThisJob}>Yes delete this job</button>
                             </div> : null}
                         </div>
-                        <button>LOL</button>
-                        <button>LOL</button>
-                        <button>LOL</button>
-                        <button style={{ width: "70px", marginRight: "0px" }}>Status</button>
+
+                        {/* COMPLETE BUTTON */}
+                        <button
+                            className={formData.isCompleted ? "isToggled" : ""}
+                            onClick={() => {
+                                if (formData.isCompleted) {
+                                    setFormData({ ...formData, isCompleted: false, isInProgress: false });
+                                    updateData = { ...updateData, isCompleted: false, isInProgress: false };
+                                } else {
+                                    setFormData({ ...formData, isCompleted: true, isInProgress: false, progress: 100 });
+                                    updateData = { ...updateData, isCompleted: true, isInProgress: false, progress: 100 };
+                                }
+                                save();
+                            }}
+                        ><DoneIcon /></button>
                     </div>}
             </div>
         </>
