@@ -34,9 +34,12 @@ body {
   --buildGradient: linear-gradient(to right top, #40b5d7, #66cfee);
   --todoShadow: 0px 4px 15px #cbcbdb;
   --todoGradient: linear-gradient(to right top, #b4b4c0, #cbcbdb);
+  --thinkGradient: linear-gradient(63.85deg, #c240d7 0%, #ee66e0 100%);
+  --thinkShadow: 0px 4px 15px #ee66e0;
   --blueTheme: #2d466a;
   --orangeGradient: linear-gradient(to right top, #fd7746, #ff956d);
   --orangeTheme: #fc7948;
+  --purpleColor: #ee66e0;
   --backgroundColor: #f0f1f5;
   --redGradient: linear-gradient(to right top, #ee7070, #f0a0a0);
   --redShadow: 0px 4px 15px #f0a0a0;

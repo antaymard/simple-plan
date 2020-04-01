@@ -256,6 +256,10 @@ const Edit = (props) => {
                             <Type type="learn" size='big'
                                 selected={formData.type == 'learn' ? 'selected' : 'unselected'} />
                         </div>
+                        <div onClick={() => handleTypeChange('think')}>
+                            <Type type="think" size='big'
+                                selected={formData.type == 'think' ? 'selected' : 'unselected'} />
+                        </div>
                         <div onClick={() => handleTypeChange('build')}>
                             <Type type="build" size='big' selected={formData.type == 'build' ? 'selected' : 'unselected'} />
                         </div>

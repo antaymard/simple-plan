@@ -29,6 +29,11 @@
   box-shadow: var(--todoShadow);
   color: white;
 }
+.job-type.typeColor-selected-think {
+  background: var(--thinkGradient);
+  box-shadow: var(--thinkShadow);
+  color: white;
+}
 
 .job-type.typeColor-unselected-learn {
   color: #ff93bc;
@@ -45,4 +50,8 @@
 .job-type.typeColor-unselected-todo {
   color: #cbcbdb;
   border: 1px solid #cbcbdb;
+}
+.job-type.typeColor-unselected-think {
+  color: #ee66e0;
+  border: 1px solid #ee66e0;
 }
