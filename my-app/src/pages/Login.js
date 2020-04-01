@@ -75,7 +75,12 @@ const Login = () => {
                     </div>
                     <div className="sign-input-group">
                         <p className='sign-input-label'>Mot de passe</p>
-                        <input type="password" placeholder="*****" name="password" onChange={handleLoginChange} />
+                        <input type="password" placeholder="*****" name="password" onChange={handleLoginChange}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    login();
+                                }
+                            }} />
                     </div>
                     <div className="sign-form-footer">
                         <a href='/signup'>Créer un compte</a>
