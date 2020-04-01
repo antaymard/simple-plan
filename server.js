@@ -1,6 +1,6 @@
 var express = require("express");
 var app = express();
-var bodyParser  = require('body-parser');
+var bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios');
 
@@ -9,12 +9,13 @@ app.use(bodyParser.json());
 
 // BOOTING
 require('./db/setup.js');
+
 // Make the server auto ping to avoid heroku idle
 function selfPing() {
   axios.get("https://simple-plan.herokuapp.com");
   console.log("pinging !!");
 }
-setInterval(selfPing, 1000*60*20);
+setInterval(selfPing, 1000 * 60 * 20);
 
 // USER IS LOGGING IN OR CREATE ACCOUNT ============================================
 // Loging In
@@ -28,7 +29,7 @@ app.post('/signup', createUser);
 // Middleware de décodage du token user ; next vers les requêtes api
 const userFromTokenMiddleware = require("./middlewares/userFromToken.js"); // maybe no ()
 var userFromTokenRouter = express.Router();
-userFromTokenRouter.use('/', userFromTokenMiddleware); 
+userFromTokenRouter.use('/', userFromTokenMiddleware);
 app.use("/api", userFromTokenRouter); // checker si je mets / et /api au dessus
 
 // PRIVATE API ROUTES =============================================================
@@ -45,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'my-app/build')));
 
 // Other requests that triggers the index display
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/my-app/build/index.html'));
+  res.sendFile(path.join(__dirname + '/my-app/build/index.html'));
 });
 
 var port = process.env.PORT || 8080;

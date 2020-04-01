@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Calendar from 'react-calendar';
 import WeekNumber from '../job/WeekNumbers.js';
 import moment from "moment";
+import momentDurationFormatSetup from "moment-duration-format";
 import TextareaAutosize from 'react-autosize-textarea';
 import axios from "axios";
 import breaks from 'remark-breaks';
@@ -27,6 +28,8 @@ var autosave = null;
 let updateData = {};
 let id = "";
 
+momentDurationFormatSetup(moment);
+
 const Edit = (props) => {
 
     const [formData, setFormData] = useState({
@@ -34,7 +37,7 @@ const Edit = (props) => {
         description: "",
         projectId: "",
         progress: 0,
-        weekNumber: []
+        weekNumber: [],
     });
     // Data that are updated
     // const [updateData, setUpdateData] = useState({});
@@ -101,6 +104,54 @@ const Edit = (props) => {
         }
     }, []);
 
+    // Render selectMasterProject options
+    const renderMasterProjects = () => {
+        // sort alphabetically
+        let _projects = [...projects]
+        _projects.sort((a, b) => {
+            if (a.name > b.name) {
+                return 1;
+            }
+            if (a.name < b.name) {
+                return -1
+            }
+            return 0;
+        });
+
+        return _projects.map((item, i) => {
+            return <option key={i} value={item._id}>{item.name}</option>
+        })
+    }
+
+    const renderPomodoros = () => {
+        let pomoArray = [];
+        for (let i = 0; i < formData.pomodoro; i++) {
+            pomoArray.push('work');
+            if (i < formData.pomodoro - 1) {
+                if (i !== 0 && (i + 1) % 4 === 0) {
+                    pomoArray.push('break-big')
+                } else {
+                    pomoArray.push("break-small");
+                }
+            }
+        }
+        return pomoArray.map((item, i) => {
+            if (item === "work") {
+                return (
+                    <div className="pomodoro-work-session-pill" />
+                )
+            } else if (item === "break-small") {
+                return (
+                    <div className="pomodoro-small-break-pill" />
+                )
+            } else if (item === "break-big") {
+                return (
+                    <div className="pomodoro-big-break-pill" />
+                )
+            }
+        })
+    }
+
     const handleKeyboardAction = (e) => {
         if (e.keyCode === 27) {
             props.close();
@@ -154,26 +205,17 @@ const Edit = (props) => {
         save();
     }
 
-
-    // Render selectMasterProject options
-    const renderMasterProjects = () => {
-        // sort alphabetically
-        let _projects = [...projects]
-        _projects.sort((a, b) => {
-            if (a.name > b.name) {
-                return 1;
-            }
-            if (a.name < b.name) {
-                return -1
-            }
-            return 0;
-        });
-
-        return _projects.map((item, i) => {
-            return <option key={i} value={item._id}>{item.name}</option>
-        })
+    const changePomodoro = (action) => {
+        if (action === "increment" && formData.pomodoro < 6) {
+            setFormData({ ...formData, pomodoro: formData.pomodoro + 1 });
+            updateData = { ...updateData, pomodoro: formData.pomodoro + 1 };
+            save();
+        } else if (action === "decrement" && formData.pomodoro >= 1) {
+            setFormData({ ...formData, pomodoro: formData.pomodoro - 1 });
+            updateData = { ...updateData, pomodoro: formData.pomodoro - 1 };
+            save();
+        }
     }
-
 
     const save = () => {
         // If not a creation, 
@@ -186,7 +228,7 @@ const Edit = (props) => {
                 dispatch(updateJob({ ...updateData, _id: id }));
                 // Should be callback
                 updateData = {};
-            }, 500);
+            }, 650);
         }
 
     }
@@ -202,11 +244,6 @@ const Edit = (props) => {
     const deleteThisJob = () => {
         dispatch(deleteJob(id));
         props.close();
-    }
-
-    // WIP
-    var progressStyle = {
-        background: "linear_gradient(to right, #71d78d 0%, #71d78d " + formData.progress + ", white " + formData.progress + 1 + ", white 100%"
     }
 
     return (
@@ -335,6 +372,21 @@ const Edit = (props) => {
                             </div>
                         </div>
 
+                        {/* POMODORO */}
+                        <div className="d-flex flex-row align-items-center justify-content-between">
+                            <p className='edit-label-name'>Pomodoro</p>
+                            <p className='edit-label-name'>{
+                                moment.duration(Math.max((formData.pomodoro * 25 + (formData.pomodoro - 1) * 5 + Math.floor((formData.pomodoro - 1) / 4) * 20 - Math.floor((formData.pomodoro - 1) / 4) * 5) / 60, 0), "minutes").format()
+                            }</p>
+                        </div>
+                        <div className="pomodoro-section">
+                            <div className='d-flex flex-row align-items-center'>
+                                <button onClick={() => changePomodoro('decrement')}>-</button>
+                                {renderPomodoros()}
+                            </div>
+                            <button onClick={() => changePomodoro('increment')}>+</button>
+                        </div>
+
                     </div>
                 </div>
             </div >
@@ -345,7 +397,6 @@ const Edit = (props) => {
                     <input type="range" min={0} max={100} step={1} name="progress"
                         value={formData.progress}
                         onChange={handleChange}
-                        style={progressStyle}
                     />
                 </div>
                 {isJobCreation ?
@@ -386,12 +437,15 @@ const Edit = (props) => {
                         <button
                             className={formData.isCompleted ? "isToggled" : ""}
                             onClick={() => {
+                                // Turn into uncompleted
                                 if (formData.isCompleted) {
                                     setFormData({ ...formData, isCompleted: false, isInProgress: false });
                                     updateData = { ...updateData, isCompleted: false, isInProgress: false };
-                                } else {
-                                    setFormData({ ...formData, isCompleted: true, isInProgress: false, progress: 100 });
-                                    updateData = { ...updateData, isCompleted: true, isInProgress: false, progress: 100 };
+                                }
+                                // Turn into completed
+                                else if (!formData.isCompleted) {
+                                    setFormData({ ...formData, isCompleted: true, isInProgress: false, progress: 100, completedOn: new Date() });
+                                    updateData = { ...updateData, isCompleted: true, isInProgress: false, progress: 100, completedOnOn: new Date() };
                                 }
                                 save();
                             }}

@@ -9,6 +9,22 @@ var jobSchema = new Schema({
   projectId: { type: mongoose.Schema.Types.ObjectId, ref: "Project", default: null }, // peut appartenir à 1 Project
   progress: { type: Number, min: 0, max: 100, default: 0 },
   type: { type: String, default: "learn" },
+
+  // Time management
+  weekNumber: [{ type: Number, default: null }],
+  deadline: { type: Date, default: null },
+  completedOn: { type: Date, default: null },
+  startedOn: { type: Date, default: null },
+
+  // Doing management
+  isCompleted: { type: Boolean, default: false },
+  isInProgress: { type: Boolean, default: false },
+  isNow: { type: Boolean, default: false },
+
+  // Pomodoros
+  pomodoro: { type: Number, default: 0 },
+
+  // Resources
   resLink: [{ type: String, default: null }],
   resources: [{
     isFavorite: Boolean,
@@ -16,13 +32,6 @@ var jobSchema = new Schema({
     name: String,
     service: String
   }],
-  weekNumber: [{ type: Number, default: null }],
-  deadline: { type: Date, default: null },
-  // DEP
-  // status: { type: String, default: "active" }, // active, completed, stopped, deleted
-  isCompleted: { type: Boolean, default: false },
-  isInProgress: { type: Boolean, default: false },
-  isNow: { type: Boolean, default: false }
 })
 
 var Job = mongoose.model('Job', jobSchema);

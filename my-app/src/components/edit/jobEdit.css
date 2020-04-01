@@ -18,6 +18,35 @@
   width: 100%;
 }
 
+.edit-section .pomodoro-section {
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+}
+.edit-section .pomodoro-section button {
+  border: none;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  line-height: 0;
+  padding: auto;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: 0.2s;
+  color: var(--greyText);
+}
+.edit-section .pomodoro-section button:hover {
+  background-color: var(--lighterGrey);
+}
+
 /* NAME */
 h1#name.is-empty {
   color: var(--lightGrey);
@@ -206,4 +235,27 @@ select[name="projectId"] {
   color: var(--greyText);
   text-decoration: none;
   padding: 0;
+}
+
+/* POMODORO VISUALISATION might need to be moved */
+.pomodoro-work-session-pill {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  background: var(--orangeGradient);
+  margin-right: 5px;
+}
+.pomodoro-small-break-pill {
+  border-radius: 50%;
+  height: 7px;
+  width: 7px;
+  background: var(--darkThemeColor);
+  margin-right: 5px;
+}
+.pomodoro-big-break-pill {
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  background: var(--darkThemeColor);
+  margin-right: 5px;
 }
