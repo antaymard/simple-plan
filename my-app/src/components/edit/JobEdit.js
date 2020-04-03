@@ -9,6 +9,7 @@ import momentDurationFormatSetup from "moment-duration-format";
 import TextareaAutosize from 'react-autosize-textarea';
 import axios from "axios";
 import breaks from 'remark-breaks';
+import { toast } from "react-toastify";
 
 import TrashIcon from '../icons/TrashIcon.js';
 import PlayIcon from '../icons/PlayIcon.js';
@@ -66,6 +67,14 @@ const Edit = (props) => {
                 ...formData, projectId: props.selectedProject
             })
         }
+        // Else if no project open, set the first one as project 
+        else {
+            if (projects[0]) {
+                setFormData({
+                    ...formData, projectId: projects[0]._id
+                })
+            }
+        }
 
         // Clean update data
         updateData = {};
@@ -82,7 +91,7 @@ const Edit = (props) => {
             setFormData(jobs.filter(i => i._id === id)[0]);
         }
         // If not redux state (copy/paste the job url), get the info with a call
-        else {
+        else if (!isJobCreation) {
             axios.get('/api/job/' + id, {
                 headers: {
                     "x-access-token": localStorage.getItem('token')
@@ -222,23 +231,42 @@ const Edit = (props) => {
         // If not a creation, 
         // and if the update object contains at least one prop
         if (!isJobCreation && Object.keys(updateData).length > 0) {
-            clearTimeout(autosave);
-            autosave = setTimeout(() => {
-                console.log("===== SAVED FIRED");
-                console.log(updateData);
-                dispatch(updateJob({ ...updateData, _id: id }));
-                // Should be callback
-                updateData = {};
-            }, 650);
+            if (validate(updateData)) {
+                clearTimeout(autosave);
+                autosave = setTimeout(() => {
+                    console.log("===== SAVED FIRED");
+                    console.log(updateData);
+                    dispatch(updateJob({ ...updateData, _id: id }));
+                    // Should be callback
+                    updateData = {};
+                }, 650);
+            }
         }
+    }
 
+    const validate = () => {
+        if (!formData.name) {
+            toast('Enregistrement interrompu : Veuillez renseigner un titre',
+                { type: toast.TYPE.ERROR }
+            );
+            return false
+        }
+        if (!formData.projectId) {
+            toast('Enregistrement interrompu : Veuillez renseigner un projet parent',
+                { type: toast.TYPE.ERROR }
+            );
+            return false
+        }
+        return true;
     }
 
     const createNewJob = () => {
-        // action call here
-        if (isJobCreation) {
-            dispatch(newJob({ ...formData, _id: id }));
-            props.close();
+        if (validate(formData)) {
+            // action call here
+            if (isJobCreation) {
+                dispatch(newJob({ ...formData, _id: id }));
+                props.close();
+            }
         }
     }
 
@@ -300,7 +328,7 @@ const Edit = (props) => {
                         {/* MASTER PROJECT SELECTION */}
                         <p className="edit-label-name">Projet</p>
                         <select onChange={handleChange} name="projectId" value={typeof formData.projectId === 'string' ? formData.projectId : formData.projectId._id ? formData.projectId._id : null}>
-                            <option value="">Sélectionner un projet</option>
+                            {/* <option value="">Sélectionner un projet</option> */}
                             {renderMasterProjects()}
                         </select>
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Calendar from 'react-calendar';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import moment from "moment";
@@ -17,6 +18,8 @@ const DashboardPage = (props) => {
     const [weekNumber, setWeeknumber] = useState(Number(moment().format('W')));
     const [dayNumber, setDayNumber] = useState(Number(moment().isoWeekday() - 1))
     const [selectedProjectId, setSelectedProjectId] = useState();
+
+    const projects = useSelector(state => state.projects);
 
     let dayList = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
@@ -82,14 +85,15 @@ const DashboardPage = (props) => {
                             </div>
                         </div>
                         {selectedProjectId ? null :
-                            <Link
-                                key={1}
-                                id="add-job-button"
-                                to={{
-                                    pathname: "/dashboard/j/" + new ObjectId().toString(),
-                                    state: { background: location, isJobCreation: true }
-                                }}>
-                                + new job
+                            projects.length === 0 ? 'Veuillez créer un projet pour créer une tâche' :
+                                <Link
+                                    key={1}
+                                    id="add-job-button"
+                                    to={{
+                                        pathname: "/dashboard/j/" + new ObjectId().toString(),
+                                        state: { background: location, isJobCreation: true }
+                                    }}>
+                                    + new job
                         </Link>
                         }
                     </div>

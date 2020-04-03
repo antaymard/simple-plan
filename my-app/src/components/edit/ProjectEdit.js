@@ -12,6 +12,7 @@ import ReactMarkdown from 'react-markdown';
 
 import './edit.css';
 import './projectEdit.css';
+import axios from 'axios';
 
 const ProjectEdit = (props) => {
 
@@ -27,9 +28,10 @@ const ProjectEdit = (props) => {
     }
 
     const [formData, setFormData] = useState(props.data || defaultValues);
+    const [sharedResults, setSharedResults] = useState([]);
     const [nameIsInput, setNameIsInput] = useState(false);
     const [descIsInput, setDescIsInput] = useState(false);
-    const [confirmDeletePop, setConfirmDeletePopup] = useState(false);
+    // const [confirmDeletePop, setConfirmDeletePopup] = useState(false);
     const confirmAction = props.data ? "EDIT" : "NEW";
     const dispatch = useDispatch();
 
@@ -63,6 +65,16 @@ const ProjectEdit = (props) => {
         setFormData({ ...formData, dayNumber: _daynb })
     }
 
+    const handleSharedChange = (e) => {
+        axios.get('/api/users?email=' + e.target.value, {
+            headers: {
+                "x-access-token": localStorage.getItem('token')
+            }
+        }).then((res) => {
+            setSharedResults(res.data.data);
+        })
+    }
+
     const renderDays = () => {
         let dayList = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
         return dayList.map((item, i) => {
@@ -71,6 +83,12 @@ const ProjectEdit = (props) => {
                     onClick={() => handleDayNumber(i)}>{item}
                 </div>
             )
+        })
+    }
+
+    const renderSharedUser = () => {
+        return formData.sharedWith.map((item, i) => {
+            return <div key={i * 2.3} >{item.fName}</div>
         })
     }
 
@@ -186,6 +204,13 @@ const ProjectEdit = (props) => {
                                     <button onClick={() => setFormData({ ...formData, deadline: null })}>✕</button>
                                 </div>
                             </div>
+                            {/* Share with user */}
+                            <p className='edit-label-name'>Partager avec un utilisateur</p>
+                            <input type="text"
+                                onChange={handleSharedChange}
+                                autoComplete="off" />
+
+                            {/* Status */}
                             <p className='edit-label-name'>Status</p>
                             <select name="status" value={formData.status} onChange={handleChange}>
                                 <option value="active">Actif</option>
