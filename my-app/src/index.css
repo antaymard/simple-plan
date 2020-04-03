@@ -26,20 +26,24 @@ body {
 }
 
 :root {
-  --learnShadow: 0px 4px 15px #ff93bc;
+  --learnShadow: 0px 4px 15px #f16d9f;
+  --pinkColor: #f16d9f;
   --learnGradient: linear-gradient(to right top, #f16d9f, #ff93bc);
-  --checkShadow: 0px 4px 15px #c7a897;
+  --checkShadow: 0px 4px 15px #c58c6d;
   --checkGradient: linear-gradient(to right top, #c58c6d, #c7a897);
+  --brownColor: #c58c6d;
   --buildShadow: 0px 4px 15px #66cfee;
+  --blueColor: #66cfee;
   --buildGradient: linear-gradient(to right top, #40b5d7, #66cfee);
   --todoShadow: 0px 4px 15px #cbcbdb;
+  --greyColor: #cbcbdb;
   --todoGradient: linear-gradient(to right top, #b4b4c0, #cbcbdb);
-  --thinkGradient: linear-gradient(to right top, #e354fb 0%, #fc87ef 100%);
-  --thinkShadow: 0px 4px 15px #fc87ef;
+  --thinkGradient: linear-gradient(to right top, #c786d1 0%, #ec99e2 100%);
+  --thinkShadow: 0px 4px 15px #c786d1;
+  --purpleColor: #c786d1;
   --blueTheme: #2d466a;
   --orangeGradient: linear-gradient(to right top, #fd7746, #ff956d);
   --orangeTheme: #fc7948;
-  --purpleColor: #fc87ef;
   --backgroundColor: #f0f1f5;
   --redGradient: linear-gradient(to right top, #ee7070, #f0a0a0);
   --redShadow: 0px 4px 15px #f0a0a0;

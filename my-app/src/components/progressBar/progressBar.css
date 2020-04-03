@@ -28,17 +28,17 @@
 }
 
 .progressColor-learn {
-  background-color: #ff93bc;
+  background-color: var(--pinkColor);
 }
 .progressColor-check {
-  background-color: #c7a897;
+  background-color: var(--brownColor);
 }
 .progressColor-build {
-  background-color: #66cfee;
+  background-color: var(--blueColor);
 }
 .progressColor-todo {
-  background-color: #cbcbdb;
+  background-color: var(--greyColor);
 }
 .progressColor-think {
-  background-color: #fc87ef;
+  background-color: var(--purpleColor);
 }

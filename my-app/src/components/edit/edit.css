@@ -3,7 +3,7 @@
   background-color: var(--backgroundColor);
   display: flex;
   flex-direction: column;
-  padding: 50px 34px 0 50px;
+  padding: 40px 14px 0 30px;
   box-shadow: var(--blackShadow);
   width: 80vw;
   max-width: 1000px;

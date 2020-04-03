@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import TextareaAutosize from 'react-autosize-textarea';
 import Calendar from 'react-calendar';
 import Moment from 'react-moment';
-
+import breaks from 'remark-breaks';
+import ReactMarkdown from 'react-markdown';
 
 import './edit.css';
 import './projectEdit.css';
@@ -132,10 +133,14 @@ const ProjectEdit = (props) => {
                                     </TextareaAutosize>
                                 </> :
                                 formData.description ?
-                                    <p onClick={() => setDescIsInput(true)}>
-                                        {/* className={"description markdown-edit" + (formData.description ? "" : " is-empty")} */}
-                                        {formData.description}
-                                    </p> :
+                                    <div onClick={() => setDescIsInput(true)}>
+                                        <ReactMarkdown
+                                            linkTarget="_blank"
+                                            plugins={[breaks]}
+                                            source={formData.description}
+                                            className={"description markdown-description" + (formData.description ? "" : " is-empty")}
+                                        />
+                                    </div> :
                                     <p onClick={() => setDescIsInput(true)}
                                         className={"description" + (formData.description ? "" : " is-empty")}>
                                         {formData.description}
