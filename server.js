@@ -39,6 +39,9 @@ projectApi(userFromTokenRouter);
 // Job endpoints
 const jobApi = require('./api/jobApi.js');
 jobApi(userFromTokenRouter);
+// User endpoints
+const userApi = require('./api/userApi.js');
+userApi(userFromTokenRouter);
 
 // SERVER RUNNING
 // Serve static files from React app

@@ -24,8 +24,13 @@ const JobsSubheader = (props) => {
                     <div className="jobs-subheader-info-section">
                         <h3>{p.name}</h3>
                         <div className='d-flex flex-row align-items-center'>
-                            <WeekNumbers weeknb={[moment(p.deadline).format('W')]} />
-                            <p>Deadline : le {moment(p.deadline).format("DD-MM-YYYY")}</p>
+                            {p.deadline ?
+                                <>
+                                    <WeekNumbers weeknb={[moment(p.deadline).format('W')]} />
+                                    <p>Deadline : le {moment(p.deadline).format("DD-MM-YYYY")}</p>
+                                </>
+                                : null
+                            }
                         </div>
                     </div>
                 </div>

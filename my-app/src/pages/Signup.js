@@ -8,17 +8,12 @@ import './login_signup.css';
 const Signup = () => {
 
     const [loginData, setLoginData] = useState({ email: '', password: "" });
-    const [signData, setSignData] = useState({
-        fName: "",
-        lName: "",
-        email: "",
-        password: ""
-    });
+    const [signData, setSignData] = useState({});
 
     const handleSignChange = (e) => {
-        let obj = signData;
-        obj[e.target.name] = e.target.value;
-        setSignData({ ...signData, ...obj });
+        // let obj = signData;
+        // obj[e.target.name] = e.target.value;
+        setSignData({ ...signData, [e.target.name]: e.target.value });
     }
 
     const sign = () => {
@@ -39,6 +34,7 @@ const Signup = () => {
 
     return (
         <div className="sign-body row">
+            {console.log(signData)}
             <div className='left-section col-4'>
                 <p>FOCUS</p>
                 <div>
