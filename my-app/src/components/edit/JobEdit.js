@@ -38,6 +38,7 @@ const Edit = (props) => {
         projectId: "",
         progress: 0,
         weekNumber: [],
+        pomodoro: 0
     });
     // Data that are updated
     // const [updateData, setUpdateData] = useState({});

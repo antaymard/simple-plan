@@ -52,6 +52,6 @@
   border: 1px solid #cbcbdb;
 }
 .job-type.typeColor-unselected-think {
-  color: #ee66e0;
-  border: 1px solid #ee66e0;
+  color: var(--purpleColor);
+  border: 1px solid var(--purpleColor);
 }

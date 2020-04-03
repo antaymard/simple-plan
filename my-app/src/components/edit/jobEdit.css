@@ -92,6 +92,27 @@ h4 {
   margin-right: 7px;
 }
 
+/* Table in markdown */
+.markdown-description table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.markdown-description table,
+.markdown-description th,
+.markdown-description td {
+  border: 1px solid var(--lightGrey);
+}
+.markdown-description th,
+.markdown-description td {
+  padding: 3px 7px;
+}
+.markdown-description th {
+  background-color: var(--lighterGrey);
+}
+.markdown-description td {
+  background-color: white;
+}
+
 .delete-job-button {
   border: none;
   background: var(--redGradient);
