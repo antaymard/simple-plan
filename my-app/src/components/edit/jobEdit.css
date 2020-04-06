@@ -91,6 +91,9 @@ h4 {
 .markdown-description input[type="checkbox"] {
   margin-right: 7px;
 }
+.markdown-description img {
+  width: 100%;
+}
 
 /* Table in markdown */
 .markdown-description table {
